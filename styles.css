@@ -1,0 +1,26 @@
+/* 🌍 Global Style */
+:root {
+  /* 🎨 Colors*/
+  --primary-color: white;
+  --secondy-color: #f9f9f9;
+  --green-button: #00bb55;
+  --red-button: #ee2200;
+
+  /* 🖼️ General formats */
+  --border-raduis: 10px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+main {
+  border-radius: var(--border-raduis);
+  background-color: var(--primary-color);
+}

@@ -2,10 +2,10 @@
 :root {
   /* 🎨 Colors*/
   --primary-color: white;
-  --secondy-color: #f9f9f9;
-  --green-button: #00bb55;
-  --red-button: #ee2200;
-  --accent-color: #158aef;
+  --secondy-color: #f7fbfc;
+  --green-button: #34c66c;
+  --red-button: #e54c3c;
+  --accent-color: #3894df;
 
   /* 🖼️ General formats */
   --border-raduis: 10px;
@@ -23,12 +23,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(135deg, #677ce7, #724da4)
 }
 
 main {
   border-radius: var(--border-raduis);
   background-color: var(--primary-color);
   text-align: center;
+  padding: 1em;
 }
 
 header h1 {

@@ -19,17 +19,27 @@
 
 body {
   font-family: sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 main {
   border-radius: var(--border-raduis);
   background-color: var(--primary-color);
+  text-align: center;
 }
 
 header h1 {
   color: var(--accent-color);
+  font-size: 2.5em;
 }
 
 svg path {
   stroke: var(--accent-color);
+}
+
+header p {
+  color: #808080;
 }

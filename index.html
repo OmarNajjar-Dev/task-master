@@ -23,44 +23,28 @@
         </h1>
       </header>
 
-        <section id="search">
-        <div class="field">
-          <input type="search" placeholder="Search tasks..." />
-          <select id="select" name="status">
-            <option>📋All Tasks</option>
-            <option>✅Completed</option>
-            <option>⏳Pending</option>
-          </select>
-          <button id="clear">Clear All</button>
-        </div>
+      <section id="search">
+        <input type="search" placeholder="Search tasks..." />
+        <select id="select" name="status">
+          <option>📋All Tasks</option>
+          <option>✅Completed</option>
+          <option>⏳Pending</option>
+        </select>
+        <button id="clear">Clear All</button>
       </section>
-      
+
       <section id="add-task">
-        <div class="top-controls">
-          <input type="text" id="task-input" placeholder="What need to be done?"/>
-          <button id="add-task-btn">Add Task</button>
-        </div>
-      </section>
- 
-      <section>
-        <ul id="task-list">
-
-        </ul>
+        <input type="text" placeholder="What needs to be done?" />
+        <button id="add">Add Task</button>
       </section>
 
-    <section id="footer">
-      <div class="footer">
-        <span id="Task-count">0 items left</span>
-        <div class="filter-buttons">
-          <button class="filter-all">All</button>
-          <button class="filter-active">Active</button>
-          <button class="filter-completed">Completed</button>
-        </div>
-      </div>
-    </section>
-     
+      <section id="task-list">
+        <div>📝</div>
+        <p>No tasks found. Add some tasks to get started!</p>
+      </section>
+
+      <hr />
     </main>
     <script src="script.js"></script>
   </body>
-</html> 
-
+</html>

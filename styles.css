@@ -5,6 +5,7 @@
   --secondy-color: #f9f9f9;
   --green-button: #00bb55;
   --red-button: #ee2200;
+  --accent-color: #158aef;
 
   /* 🖼️ General formats */
   --border-raduis: 10px;
@@ -23,4 +24,12 @@ body {
 main {
   border-radius: var(--border-raduis);
   background-color: var(--primary-color);
+}
+
+header h1 {
+  color: var(--accent-color);
+}
+
+svg path {
+  stroke: var(--accent-color);
 }

@@ -23,7 +23,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #677ce7, #724da4)
+  background: linear-gradient(135deg, #677ce7, #724da4);
 }
 
 main {
@@ -43,5 +43,5 @@ svg path {
 }
 
 header p {
-  color: #808080;
+  color: gray;
 }

@@ -23,6 +23,28 @@
         </h1>
         <p>Organize your tasks efficiently</p>
       </header>
+
+      <section id="search">
+        <input type="search" placeholder="Search tasks..." />
+        <select id="select" name="status">
+          <option>📋All Tasks</option>
+          <option>✅Completed</option>
+          <option>⏳Pending</option>
+        </select>
+        <button id="clear">Clear All</button>
+      </section>
+
+      <section id="add-task">
+        <input type="text" placeholder="What needs to be done?" />
+        <button id="add">Add Task</button>
+      </section>
+
+      <section id="task-list">
+        <div>📝</div>
+        <p>No tasks found. Add some tasks to get started!</p>
+      </section>
+
+      <hr />
     </main>
     <script src="script.js"></script>
   </body>

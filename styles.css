@@ -57,13 +57,13 @@ header p {
 }
 
 /* 🔍 Search Section */
-#search input, #search select {
+#search input,
+#search select {
   padding: 0.75em;
 }
 
 #search button {
   padding: 0.75em 1.5em;
-
 }
 
 /* 📝 Add Task Section */
@@ -113,6 +113,7 @@ select {
 /* 📋 6. Task List Section */
 #task-list {
   text-align: center;
+  flex-direction: column;
 }
 
 #task-list div {

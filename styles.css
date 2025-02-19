@@ -105,7 +105,6 @@ select {
 
 /* 🗑 Fix Trash Icon Color */
 .clear::before {
-  content: "🗑";
   color: initial; /* Makes the emoji its natural color */
   margin-right: 5px;
 }

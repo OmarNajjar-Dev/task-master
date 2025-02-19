@@ -22,7 +22,45 @@
           Task Master
         </h1>
       </header>
+
+        <section id="search">
+        <div class="field">
+          <input type="search" placeholder="Search tasks" />
+          <select>
+            <option>all Tasks</option>
+            <option>completed</option>
+            <option>pending</option>
+          </select>
+          <button id="clear">clear all</button>
+        </div>
+      </section>
+      
+      <section id="add-task">
+        <div class="top-controls">
+          <input type="text" id="task-input" placeholder="What need to be done?"/>
+          <button id="add-task-btn">Add Task</button>
+        </div>
+      </section>
+ 
+      <section>
+        <ul id="task-list">
+
+        </ul>
+      </section>
+
+    <section id="footer">
+      <div class="footer">
+        <span id="Task-count">0 items left</span>
+        <div class="filter-buttons">
+          <button class="filter-all">All</button>
+          <button class="filter-active">Active</button>
+          <button class="filter-completed">Completed</button>
+        </div>
+      </div>
+    </section>
+     
     </main>
     <script src="script.js"></script>
   </body>
-</html>
+</html> 
+

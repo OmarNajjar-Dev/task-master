@@ -6,9 +6,6 @@
   --green-button: #34c66c;
   --red-button: #e54c3c;
   --accent-color: #3894df;
-
-  /* 🖼️ General formats */
-  --border-raduis: 10px;
 }
 
 * {
@@ -27,10 +24,13 @@ body {
 }
 
 main {
-  border-radius: var(--border-raduis);
+  border-radius: 10px;
   background-color: var(--primary-color);
   text-align: center;
   padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
 }
 
 header h1 {
@@ -44,4 +44,14 @@ svg path {
 
 header p {
   color: #808080;
+}
+
+input, button, select {
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+button {
+  color: var(--primary-color);
 }

@@ -1,6 +1,6 @@
-/* 🌍 Global Style */
+/* 🌍 1. Global Style */
 :root {
-  /* 🎨 Colors*/
+  /* 🎨 Colors */
   --primary-color: white;
   --secondy-color: #f7fbfc;
   --green-button: #34c66c;
@@ -14,6 +14,7 @@
   box-sizing: border-box;
 }
 
+/* 📄 2. General Page Layout */
 body {
   font-family: sans-serif;
   height: 100vh;
@@ -30,15 +31,16 @@ main {
   padding: 1em;
   display: flex;
   flex-direction: column;
-  gap: 1.5em;
+  gap: 2em;
 }
 
+/* 🔹 3. Header Section */
 header h1 {
   color: var(--accent-color);
   font-size: 2.5em;
 }
 
-svg path {
+header path {
   stroke: var(--accent-color);
 }
 
@@ -46,12 +48,73 @@ header p {
   color: #808080;
 }
 
-input, button, select {
-  border: 1px solid gray;
-  border-radius: 5px;
-  padding: 10px;
+/* 📌 4. Task Search & Add Task Sections */
+#search,
+#add-task,
+#task-list {
+  display: flex;
+  gap: 1em;
 }
 
-button {
-  color: var(--primary-color);
+/* 🔍 Search Section */
+#search input, #search select {
+  padding: 0.75em;
+}
+
+#search button {
+  padding: 0.75em 1.5em;
+
+}
+
+/* 📝 Add Task Section */
+#add-task {
+  justify-content: space-between;
+}
+
+#add-task input {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+#add-task input,
+#add-task button {
+  padding: 1em;
+}
+
+/* ✏️ Form Elements (Inputs, Buttons, Select) */
+input,
+button,
+select {
+  border-radius: 8px;
+  border: 1px solid gray;
+}
+
+/* ✅ 5. Buttons Styling */
+.add {
+  background-color: var(--green-button);
+  color: white;
+  border: none;
+}
+
+.clear {
+  background-color: var(--red-button);
+  color: white;
+  border: none;
+  padding: 1em 1.5em;
+}
+
+/* 🗑 Fix Trash Icon Color */
+.clear::before {
+  content: "🗑";
+  color: initial; /* Makes the emoji its natural color */
+  margin-right: 5px;
+}
+
+/* 📋 6. Task List Section */
+#task-list {
+  text-align: center;
+}
+
+#task-list div {
+  font-size: 40px;
 }

@@ -6,6 +6,7 @@
   --green-button: #34c66c;
   --red-button: #e54c3c;
   --accent-color: #3894df;
+  --border-radius: 7px;
 }
 
 * {
@@ -61,22 +62,34 @@ header p {
   color: #808080;
 }
 
-/* 📌 4. Task Search & Add Task Sections */
-
+/* 📌 4. Task Search, Add Task & List Task Sections */
 #search,
-#add-task,
-#task-list {
+#add-task {
   display: flex;
   flex-wrap: wrap;
-  gap: 1em;
+  gap: 0.8em;
 }
 
-/* 🔍 Search Section */
-#search input,
-#search select {
-  padding: 0.75em 1em;
-  border: 1px solid #ccc;
-  transition: 0.3s ease-in-out;
+/* 🔍 4.1 Search Section */
+.input-container {
+  display: flex;
+  align-items: center;
+}
+
+#search .icon {
+  position: absolute;
+  transform: translateY(-15%);
+  margin-left: 0.7em;
+}
+
+.input-container input {
+  padding: 1em;
+  padding-left: 2.8em;
+  transition: 0.1s ease-in-out;
+}
+
+#select {
+  padding: 1em;
 }
 
 #clear {
@@ -96,13 +109,9 @@ header p {
   box-shadow: -1px -1px 4px rgb(75, 82, 145), 4px 4px 4px rgb(75, 82, 145);
 }
 
-/* 📝 Add Task Section */
-#add-task {
-  gap: 0.7em;
-}
-
+/* 📝 4.2 Add Task Section */
 #add-task input {
-  min-width: 80%;
+  min-width: 78%;
   transition: 0.1s ease-in-out;
 }
 
@@ -111,19 +120,22 @@ header p {
   padding: 1em;
 }
 
-/* ✏️ Form Elements (Inputs, Buttons, Select) */
+/* ✏️ 5. Form Elements Styling (Inputs, Buttons, Select) */
 input,
 button,
 select {
-  border-radius: 7px;
-  border: 1px solid gray;
+  border-radius: var(--border-radius);
+  border: 1px solid #ccc;
 }
 
-input:focus {
-  box-shadow: 0 0 15px var(--accent-color);
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 10px var(--accent-color);
 }
 
-/* ✅ 5. Buttons Styling */
+/* ✅ 6. Buttons Styling */
 #add {
   background-color: #a4e5ba;
 }
@@ -135,19 +147,27 @@ input:focus {
   transition: 0.3s ease-in-out;
 }
 
-/* 📋 6. Task List Section */
+/* 📋 7. Task List Section */
 #task-list {
-  flex-direction: column;
   background-color: var(--secondy-color);
-  height: 13em;
-  padding: 1.5em;
+  border-radius: var(--border-radius);
+  overflow-y: auto;
+  height: 15em;
+  padding: 0.7em;
+  padding-top: 14%;
+  gap: 0.5em;
 }
 
-#task-list div {
+#task-list span {
   font-size: 40px;
 }
 
-/* 📱 Responsive Design */
+#task-list p {
+  color: gray;
+  margin-top: 25px;
+}
+
+/* 📱 8. Responsive Design */
 @media screen and (max-width: 516px) {
   #search,
   #add-task {

@@ -8,24 +8,29 @@
   </head>
   <body>
     <main>
+      <!-- 🔹 Header Section -->
       <header>
         <h1>
           <svg
-            width="40"
-            height="40"
+            width="30"
+            height="30"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
             style="vertical-align: middle"
           >
-            <path d="M20 6L9 17l-5-5" stroke-width="3" fill="none" />
+            <path d="M20 6L9 17l-5-5" stroke-width="4" fill="none" />
           </svg>
           Task Master
         </h1>
         <p>Organize your tasks efficiently</p>
       </header>
 
+      <!-- 🔍 Search Section -->
       <section id="search">
-        <input type="search" placeholder="🔍 Search tasks..." />
+        <div class="input-container">
+          <span class="icon">🔍</span>
+          <input type="search" placeholder="Search tasks..." />
+        </div>
         <select id="select" name="status">
           <option>📋All Tasks</option>
           <option>✅Completed</option>
@@ -34,17 +39,17 @@
         <button id="clear" class="clear">🗑️ Clear All</button>
       </section>
 
+      <!-- 📝 Add Task Section -->
       <section id="add-task">
         <input type="text" placeholder="What needs to be done?" />
         <button id="add" class="add">Add Task</button>
       </section>
 
+      <!-- 📋 Task List Section -->
       <section id="task-list">
-        <div>📝</div>
+        <span>📝</span>
         <p>No tasks found. Add some tasks to get started!</p>
       </section>
-
-      <hr />
     </main>
     <script src="script.js"></script>
   </body>

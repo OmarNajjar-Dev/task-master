@@ -16,7 +16,7 @@
 
 /* 📄 2. General Page Layout */
 body {
-  font-family: sans-serif;
+  font-family: 'Poppins', sans-serif;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -28,16 +28,18 @@ main {
   border-radius: 10px;
   background-color: var(--primary-color);
   text-align: center;
-  padding: 1em;
+  padding: 1.5em;
   display: flex;
   flex-direction: column;
   gap: 2em;
 }
-
 /* 🔹 3. Header Section */
 header h1 {
   color: var(--accent-color);
   font-size: 2.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 header path {
@@ -46,35 +48,71 @@ header path {
 
 header p {
   color: #808080;
+  margin-top: 0.3em;
+  font-size: 1em;
 }
 
 /* 📌 4. Task Search & Add Task Sections */
-#search,
+#search {
+  display: flex;
+  gap: 1.3em;
+  margin-bottom: 0.3em;
+}
+
+#search
 #add-task,
 #task-list {
   display: flex;
-  gap: 1em;
+  justify-content: space-between;
+
 }
+
 
 /* 🔍 Search Section */
 #search input,
 #search select {
-  padding: 0.75em;
+  padding: 1em ;
+  border: 6px;
+  border: 1px solid #ccc;
+  transition: 0.3s ease-in-out;
 }
 
-#search button {
-  padding: 0.75em 1.5em;
+#search input:hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 5px var(--accent-color);
+}
+
+#clear {
+  background-color: var(--red-button);
+  color: white;
+  border: none;
+  transition: 0.3s ease-in-out;
+  padding: 1em 1.5em;
+}
+
+.clear:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(229, 76, 60, 0.4);
 }
 
 /* 📝 Add Task Section */
 #add-task {
-  justify-content: space-between;
+  display: flex;
+  gap: 0.7em;
 }
 
 #add-task input {
-  flex-grow: 1;
-  min-width: 0;
+  flex:1;
+  border: 1px solid #ccc;
+  transition: 0.3s ease-in-out;
 }
+
+#add-task input:hover {
+  border-color: var(--accent-color) ;
+  box-shadow: 0 0 5px var(--accent-color);
+}
+
 
 #add-task input,
 #add-task button {
@@ -94,13 +132,18 @@ select {
   background-color: var(--green-button);
   color: white;
   border: none;
+  transition: 0.3s ease-in-out;
 }
 
-.clear {
-  background-color: var(--red-button);
-  color: white;
-  border: none;
-  padding: 1em 1.5em;
+.add:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(52, 198,100, 0.5);
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 /* 🗑 Fix Trash Icon Color */
@@ -111,10 +154,35 @@ select {
 
 /* 📋 6. Task List Section */
 #task-list {
+ display: flex;
+ flex-direction: column;
+ align-items:center ;
+ justify-content: center;
   text-align: center;
   flex-direction: column;
+  background-color: var(--secondy-color);
+ min-height: 13em;
+  padding: 1.5em;
 }
 
 #task-list div {
   font-size: 40px;
+
+}
+
+/* 📱 Responsive Design */
+@media screen and (max-width:760px) {
+
+  main{
+    width: 100%;
+    padding: 1.5em;
+  }
+ #search, #add-task {
+  flex-direction: column;
+  gap: 0.8em;
+ }  
+
+ #add-task input {
+  padding: 1.3em ;
+ }
 }

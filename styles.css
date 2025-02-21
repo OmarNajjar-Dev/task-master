@@ -1,21 +1,22 @@
-/* 🌍 1. Global Style */
+/* 🌍 1. Global Styles */
 :root {
-  /* 🎨 Colors */
+  /* 🎨 Color Variables */
   --primary-color: white;
-  --secondy-color: #f7fbfc;
+  --secondary-color: #f7fbfc;
   --green-button: #34c66c;
   --red-button: #e54c3c;
   --accent-color: #3894df;
   --border-radius: 7px;
 }
 
+/* 🛠️ 2. Reset Default Styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* 📄 2. General Page Layout */
+/* 📄 3. General Page Layout */
 body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
@@ -23,6 +24,7 @@ body {
   justify-content: center;
   align-items: center;
   background: linear-gradient(135deg, #677ce7, #724da4);
+  
 }
 
 main {
@@ -33,14 +35,29 @@ main {
   display: flex;
   flex-direction: column;
   gap: 2em;
-  margin-top: 50px;
 }
 
-section * {
+section *,
+header * {
   flex-grow: 1;
 }
 
-/* 🔹 3. Header Section */
+/* ✏️ 4. Form Elements Styling (Inputs, Buttons, Select) */
+input,
+button,
+select {
+  border-radius: var(--border-radius);
+  border: 1px solid #ccc;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 10px var(--accent-color);
+}
+
+/* 🔹 5. Header Section */
 header {
   display: flex;
   flex-direction: column;
@@ -62,15 +79,7 @@ header p {
   color: #808080;
 }
 
-/* 📌 4. Task Search, Add Task & List Task Sections */
-#search,
-#add-task {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8em;
-}
-
-/* 🔍 4.1 Search Section */
+/* 🔍 6.1 Search Section */
 .input-container {
   display: flex;
   align-items: center;
@@ -83,21 +92,22 @@ header p {
 }
 
 .input-container input {
-  padding: 1em;
+  padding: 0.75em;
   padding-left: 2.8em;
   transition: 0.1s ease-in-out;
 }
 
 #select {
-  padding: 1em;
+  padding: 0.75em;
 }
 
-#clear {
+.clear {
   background-color: var(--red-button);
-  color: white;
+  color: var(--primary-color);
   border: none;
   transition: 0.3s ease-in-out;
-  padding: 1em 1.5em;
+  padding: 0.75em 1.5em;
+  order: 4;
 }
 
 .clear:hover {
@@ -109,7 +119,7 @@ header p {
   box-shadow: -1px -1px 4px rgb(75, 82, 145), 4px 4px 4px rgb(75, 82, 145);
 }
 
-/* 📝 4.2 Add Task Section */
+/* 📝 6.2 Add Task Section */
 #add-task input {
   min-width: 78%;
   transition: 0.1s ease-in-out;
@@ -120,39 +130,32 @@ header p {
   padding: 1em;
 }
 
-/* ✏️ 5. Form Elements Styling (Inputs, Buttons, Select) */
-input,
-button,
-select {
-  border-radius: var(--border-radius);
-  border: 1px solid #ccc;
-}
-
-input:focus,
-select:focus {
-  outline: none;
-  border-color: var(--accent-color);
-  box-shadow: 0 0 10px var(--accent-color);
-}
-
-/* ✅ 6. Buttons Styling */
+/* ✅ 7. Buttons Styling */
 #add {
   background-color: #a4e5ba;
 }
 
 .add {
   background-color: var(--green-button);
-  color: white;
+  color: var(--primary-color);
   border: none;
   transition: 0.3s ease-in-out;
 }
 
-/* 📋 7. Task List Section */
+/* 📌 8. Task Search & Add Task Sections */
+#search,
+#add-task {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8em;
+}
+
+/* 📋 9. Task List Section */
 #task-list {
-  background-color: var(--secondy-color);
+  background-color: var(--secondary-color);
   border-radius: var(--border-radius);
   overflow-y: auto;
-  height: 15em;
+  height: 13em;
   padding: 0.7em;
   padding-top: 14%;
   gap: 0.5em;
@@ -167,14 +170,13 @@ select:focus {
   margin-top: 25px;
 }
 
-/* 📱 8. Responsive Design */
-@media screen and (max-width: 516px) {
+/* 📱 10. Responsive Design */
+@media screen and (max-width: 528px) {
   #search,
   #add-task {
     flex-direction: column;
   }
 
-  #search button,
   #add-task button {
     padding: 0.75em;
   }

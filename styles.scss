@@ -1,5 +1,11 @@
-@charset "UTF-8";
 /* 🌍 1. Global Variables */
+$primary-color: white;
+$secondary-color: #f7fbfc;
+$green-button: #34c66c;
+$red-button: #e54c3c;
+$accent-color: #3894df;
+$border-radius: 7px;
+
 /* 🛠️ 2. Reset Default Styles */
 * {
   margin: 0;
@@ -20,7 +26,7 @@ body {
 
 main {
   border-radius: 10px;
-  background-color: white;
+  background-color: $primary-color;
   text-align: center;
   padding: 1.5em;
   display: flex;
@@ -40,38 +46,42 @@ header {
   align-items: center;
   justify-content: center;
   gap: 0.4em;
-}
 
-header h1 {
-  color: #3894df;
-  font-size: 2.5em;
-}
+  h1 {
+    color: $accent-color;
+    font-size: 2.5em;
+  }
 
-header path {
-  stroke: #3894df;
-}
+  path {
+    stroke: $accent-color;
+  }
 
-header p {
-  color: #808080;
+  p {
+    color: #808080;
+  }
 }
 
 /* ✏️ 5. Form Elements Styling */
+@mixin rounded-border {
+  border-radius: $border-radius;
+  border: 1px solid #ccc;
+}
+
 input,
 button,
 select {
-  border-radius: 7px;
-  border: 1px solid #ccc;
+  @include rounded-border;
 }
 
 input:focus,
 select:focus {
   outline: none;
-  border-color: #3894df;
-  box-shadow: 0 0 10px #3894df;
+  border-color: $accent-color;
+  box-shadow: 0 0 10px $accent-color;
 }
 
 /* 🔍 6.1 Search Section */
-#search, #add-task {
+#search {
   display: flex;
   flex-wrap: wrap;
   gap: 0.8em;
@@ -82,7 +92,7 @@ select:focus {
   align-items: center;
 }
 
-#search .icon, #add-task .icon {
+#search .icon {
   position: absolute;
   transform: translateY(-15%);
   margin-left: 0.7em;
@@ -103,27 +113,33 @@ select:focus {
   box-shadow: -1px -1px 4px rgb(75, 82, 145), 4px 4px 4px rgb(75, 82, 145);
 }
 
-.name {
-  background-color: #e54c3c;
-  color: white;
-  border: none;
-  transition: 0.3s ease-in-out;
-  padding: 0.75em 1.5em;
-  order: 4;
-}
+$buttons: (
+  clear: $red-button,
+  add: $green-button,
+);
 
-.name {
-  background-color: #34c66c;
-  color: white;
-  border: none;
-  transition: 0.3s ease-in-out;
+@each $name, $color in $buttons {
+  .#{name} {
+    background-color: $color;
+    color: $primary-color;
+    border: none;
+    transition: 0.3s ease-in-out;
+
+    @if $name == clear {
+      padding: 0.75em 1.5em;
+      order: 4;
+    }
+  }
 }
 
 .clear:hover {
   background-color: #e65344;
 }
-
 /* 📝 6.2 Add Task Section */
+#add-task {
+  @extend #search;
+}
+
 #add-task input {
   min-width: 78%;
   transition: 0.1s ease-in-out;
@@ -172,9 +188,8 @@ select:focus {
   #add-task {
     flex-direction: column;
   }
+
   #add-task button {
     padding: 0.75em;
   }
 }
-
-/*# sourceMappingURL=styles.css.map */

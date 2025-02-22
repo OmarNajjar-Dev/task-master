@@ -1,13 +1,14 @@
 @charset "UTF-8";
 /* 🌍 1. Global Variables */
-/* 🛠️ 2. Reset Default Styles */
+/* 🛠️ 2. Mixins */
+/* 🔹 3. Reset Default Styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* 📄 3. General Page Layout */
+/* 📄 4. General Page Layout */
 body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
@@ -33,7 +34,7 @@ header * {
   flex-grow: 1;
 }
 
-/* 🔹 4. Header Section */
+/* 🔹 5. Header Section */
 header {
   display: flex;
   flex-direction: column;
@@ -41,21 +42,18 @@ header {
   justify-content: center;
   gap: 0.4em;
 }
-
 header h1 {
   color: #3894df;
   font-size: 2.5em;
 }
-
 header path {
   stroke: #3894df;
 }
-
 header p {
   color: #808080;
 }
 
-/* ✏️ 5. Form Elements Styling */
+/* ✏️ 6. Form Elements Styling */
 input,
 button,
 select {
@@ -70,8 +68,8 @@ select:focus {
   box-shadow: 0 0 10px #3894df;
 }
 
-/* 🔍 6.1 Search Section */
-#search, #add-task {
+/* 🔍 7. Search Section */
+#search {
   display: flex;
   flex-wrap: wrap;
   gap: 0.8em;
@@ -82,7 +80,7 @@ select:focus {
   align-items: center;
 }
 
-#search .icon, #add-task .icon {
+#search .icon {
   position: absolute;
   transform: translateY(-15%);
   margin-left: 0.7em;
@@ -103,7 +101,9 @@ select:focus {
   box-shadow: -1px -1px 4px rgb(75, 82, 145), 4px 4px 4px rgb(75, 82, 145);
 }
 
-.name {
+/* ✅ 8. Buttons Styling Using SCSS Map */
+.clear,
+#clear {
   background-color: #e54c3c;
   color: white;
   border: none;
@@ -112,18 +112,29 @@ select:focus {
   order: 4;
 }
 
-.name {
+.add,
+#add {
   background-color: #34c66c;
   color: white;
   border: none;
   transition: 0.3s ease-in-out;
 }
 
+#add {
+  background-color: #a4e5ba;
+}
+
 .clear:hover {
   background-color: #e65344;
 }
 
-/* 📝 6.2 Add Task Section */
+/* 📝 9. Add Task Section */
+#add-task {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8em;
+}
+
 #add-task input {
   min-width: 78%;
   transition: 0.1s ease-in-out;
@@ -134,44 +145,45 @@ select:focus {
   padding: 1em;
 }
 
-/* ✅ 7. Buttons Styling */
-#add {
-  background-color: #a4e5ba;
-}
-
-.add {
-  background-color: var(--green-button);
-  color: var(--primary-color);
-  border: none;
-  transition: 0.3s ease-in-out;
-}
-
-/* 📋 8. Task List Section */
+/* 📋 10. Task List Section */
 #task-list {
-  background-color: var(--secondary-color);
-  border-radius: var(--border-radius);
+  background-color: #f7fbfc;
+  border-radius: 7px;
   overflow-y: auto;
   height: 13em;
   padding: 0.7em;
   padding-top: 14%;
   gap: 0.5em;
 }
-
-#task-list span {
+#task-list .icon {
   font-size: 40px;
 }
-
-#task-list p {
+#task-list .empty-message {
   color: gray;
   margin-top: 25px;
 }
+#task-list div {
+  display: flex;
+  gap: 1em;
+}
+#task-list .task.done {
+  opacity: 0.5;
+}
+#task-list .task span {
+  font-size: 10px;
+  color: white;
+  padding: 2px 6px;
+  cursor: pointer;
+}
 
-/* 📱 9. Responsive Design */
-@media screen and (max-width: 528px) {
+/* 📱 11. Responsive Design */
+@media screen and (max-width: 400px) {
   #search,
   #add-task {
     flex-direction: column;
   }
+}
+@media screen and (max-width: 528px) {
   #add-task button {
     padding: 0.75em;
   }

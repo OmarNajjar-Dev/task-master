@@ -6,14 +6,26 @@ $red-button: #e54c3c;
 $accent-color: #3894df;
 $border-radius: 7px;
 
-/* 🛠️ 2. Reset Default Styles */
+/* 🛠️ 2. Mixins */
+@mixin flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8em;
+}
+
+@mixin rounded-border {
+  border-radius: $border-radius;
+  border: 1px solid #ccc;
+}
+
+/* 🔹 3. Reset Default Styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* 📄 3. General Page Layout */
+/* 📄 4. General Page Layout */
 body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
@@ -39,7 +51,7 @@ header * {
   flex-grow: 1;
 }
 
-/* 🔹 4. Header Section */
+/* 🔹 5. Header Section */
 header {
   display: flex;
   flex-direction: column;
@@ -61,12 +73,7 @@ header {
   }
 }
 
-/* ✏️ 5. Form Elements Styling */
-@mixin rounded-border {
-  border-radius: $border-radius;
-  border: 1px solid #ccc;
-}
-
+/* ✏️ 6. Form Elements Styling */
 input,
 button,
 select {
@@ -80,11 +87,9 @@ select:focus {
   box-shadow: 0 0 10px $accent-color;
 }
 
-/* 🔍 6.1 Search Section */
+/* 🔍 7. Search Section */
 #search {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8em;
+  @include flex-container;
 }
 
 .input-container {
@@ -113,13 +118,15 @@ select:focus {
   box-shadow: -1px -1px 4px rgb(75, 82, 145), 4px 4px 4px rgb(75, 82, 145);
 }
 
+/* ✅ 8. Buttons Styling Using SCSS Map */
 $buttons: (
   clear: $red-button,
   add: $green-button,
 );
 
 @each $name, $color in $buttons {
-  .#{name} {
+  .#{$name},
+  ##{$name} {
     background-color: $color;
     color: $primary-color;
     border: none;
@@ -132,12 +139,17 @@ $buttons: (
   }
 }
 
+#add {
+  background-color: #a4e5ba;
+}
+
 .clear:hover {
   background-color: #e65344;
 }
-/* 📝 6.2 Add Task Section */
+
+/* 📝 9. Add Task Section */
 #add-task {
-  @extend #search;
+  @include flex-container;
 }
 
 #add-task input {
@@ -150,45 +162,53 @@ $buttons: (
   padding: 1em;
 }
 
-/* ✅ 7. Buttons Styling */
-#add {
-  background-color: #a4e5ba;
-}
-
-.add {
-  background-color: var(--green-button);
-  color: var(--primary-color);
-  border: none;
-  transition: 0.3s ease-in-out;
-}
-
-/* 📋 8. Task List Section */
+/* 📋 10. Task List Section */
 #task-list {
-  background-color: var(--secondary-color);
-  border-radius: var(--border-radius);
+  background-color: $secondary-color;
+  border-radius: $border-radius;
   overflow-y: auto;
   height: 13em;
   padding: 0.7em;
   padding-top: 14%;
   gap: 0.5em;
+
+  .icon {
+    font-size: 40px;
+  }
+
+  .empty-message {
+    color: gray;
+    margin-top: 25px;
+  }
+
+  div {
+    display: flex;
+    gap: 1em;
+  }
+
+  .task {
+    &.done {
+      opacity: 0.5;
+    }
+
+    span {
+      font-size: 10px;
+      color: white;
+      padding: 2px 6px;
+      cursor: pointer;
+    }
+  }
 }
 
-#task-list span {
-  font-size: 40px;
-}
-
-#task-list p {
-  color: gray;
-  margin-top: 25px;
-}
-
-/* 📱 9. Responsive Design */
-@media screen and (max-width: 528px) {
+/* 📱 11. Responsive Design */
+@media screen and (max-width: 400px) {
   #search,
   #add-task {
     flex-direction: column;
   }
+}
 
+@media screen and (max-width: 528px) {
   #add-task button {
     padding: 0.75em;
   }

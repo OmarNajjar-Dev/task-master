@@ -165,13 +165,14 @@ $buttons: (
   padding: 0.8em;
   gap: 0.5em;
 
-  .icon {
+  span.icon {
     font-size: 40px;
+    margin-top: 40px;
   }
 
   .empty-message {
     color: gray;
-    margin-top: 25px;
+    margin-top: 20px;
   }
 
   .task {
@@ -183,7 +184,7 @@ $buttons: (
     padding: 0.75em;
 
     .left-side,
-    .right-side{
+    .right-side {
       display: flex;
       gap: 0.5em;
 

@@ -2,6 +2,7 @@
 const inputField = document.getElementById("task-text");
 const taskContainer = document.getElementById("task-list");
 const addButton = document.getElementById("add");
+const clearButton = document.getElementById("clear");
 
 // SVG Icons for task buttons
 const icons = {
@@ -24,154 +25,170 @@ const colors = {
   inactive: "#a4e5ba",
 };
 
-// Store tasks array
-let taskList = [];
+// Array for storing the tasks
+var taskList = [];
 
-// Update add button color based on input value
+// Retrieve data from local storage
+getDataFromLocalStorage();
+
+// Initialize all event listeners
+addButton.addEventListener("click", () => addTaskToArray(inputField.value));
+inputField.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") addTaskToArray(inputField.value);
+});
+inputField.addEventListener("input", updateAddButtonColor);
+inputField.addEventListener("input", search);
+clearButton.addEventListener("click", clearAllTasks);
+
+// Handle click events on task elements
+taskContainer.addEventListener("click", (e) => {
+  // Find the closest task element
+  const taskElement = e.target.closest(".task");
+  if (e.target.closest(".clear")) {
+    // Remove the task from the page
+    taskElement.remove();
+    // Remove the task from local storage
+    deleteTaskWith(taskElement.getAttribute("data-id"));
+  }
+
+  if (e.target.type === "checkbox") {
+    // Toggle done class
+    e.target.parentElement.parentElement.classList.toggle("done");
+
+    // Toggle completed for the task
+    toggleTaskStatusWith(
+      e.target.parentElement.parentElement.getAttribute("data-id")
+    );
+  }
+});
+
+// Function to update the add button color
 function updateAddButtonColor() {
-  addButton.style.backgroundColor = inputField.value.trim()
+  addButton.style.backgroundColor = inputField.value
     ? colors.active
     : colors.inactive;
 }
 
-// Load tasks from storage
-function loadTasks() {
-  const data = window.localStorage.getItem("tasks");
-  if (data) {
-    taskList = JSON.parse(data);
-    renderTasks();
-  }
-}
-
-// Save tasks to storage
-function saveTasks() {
-  window.localStorage.setItem("tasks", JSON.stringify(taskList));
-}
-
-// Add new task
-function addTask(taskText) {
+// Function to add a task to the initial array
+function addTaskToArray(input) {
   const task = {
     id: Date.now(),
-    title: taskText,
+    title: input,
     completed: false,
   };
-  taskList.push(task);
-  renderTasks();
-  saveTasks();
 
-  // Clear input and update button color
+  // Clear the input field
   inputField.value = "";
+
+  // Push the task into the array
+  taskList.push(task);
+
+  // Update the color of the add button
   updateAddButtonColor();
+
+  // Display tasks on the page
+  addElementsToPageFrom(taskList);
+
+  // Add the task to local storage
+  addDataToLocalStorageFrom(taskList);
 }
 
-// Remove task
-function removeTask(taskId) {
-  taskList = taskList.filter((task) => task.id != taskId);
-  saveTasks();
-}
-
-// Toggle task completion
-function toggleTask(taskId) {
-  taskList = taskList.map((task) => {
-    if (task.id == taskId) {
-      task.completed = !task.completed;
-    }
-    return task;
-  });
-  saveTasks();
-}
-
-// Render tasks
-function renderTasks() {
-  // Clear container
+function addElementsToPageFrom(taskList) {
+  // Empty the task container to avoid duplication
   taskContainer.innerHTML = "";
 
-  // Show empty state if no tasks
+  // Display an empty state if there are no tasks
   if (taskList.length === 0) {
     taskContainer.innerHTML = `
-      <span class="icon">📝</span>
-      <p class="empty-message">
-        No tasks found. Add some tasks to get started!
-      </p>
-    `;
+        <span class="icon">📝</span>
+        <p class="empty-message">
+          No tasks found. Add some tasks to get started!
+        </p>
+      `;
     return;
   }
 
-  // Render each task
   taskList.forEach((task) => {
-    const taskElement = document.createElement("div");
-    taskElement.className = task.completed ? "task done" : "task";
-    taskElement.setAttribute("data-id", task.id);
+    // Initialize the main div
+    const div = document.createElement("div");
+    div.setAttribute("data-id", task.id);
+    div.className = "task";
+    if (task.completed) div.classList.add("done");
 
-    // Left side (checkbox & text)
+    // The left side contains the checkbox and task title
     const leftSide = document.createElement("span");
     leftSide.className = "left-side";
 
+    // Initialize the checkbox
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
-    checkbox.className = "checkbox";
     checkbox.checked = task.completed;
 
-    const text = document.createElement("span");
-    text.className = "text";
-    text.textContent = task.title;
+    // Initialize a span for the task title
+    const span = document.createElement("span");
+    span.innerHTML = task.title;
+    span.className = "text";
 
-    leftSide.append(checkbox, text);
+    // Add the checkbox and the title to the left side span
+    leftSide.append(checkbox, span);
 
-    // Right side (buttons)
+    // The right side contains the edit and delete buttons
     const rightSide = document.createElement("span");
     rightSide.className = "right-side";
 
-    const editBtn = document.createElement("button");
-    editBtn.className = "edit";
-    editBtn.innerHTML = icons.edit;
+    // Initialize the edit button
+    const editButton = document.createElement("button");
+    editButton.className = "edit";
+    editButton.innerHTML = icons.edit;
 
-    const deleteBtn = document.createElement("button");
-    deleteBtn.className = "clear";
-    deleteBtn.innerHTML = icons.clear;
+    // Initialize the delete button
+    const removeButton = document.createElement("button");
+    removeButton.className = "clear";
+    removeButton.innerHTML = icons.clear;
 
-    rightSide.append(editBtn, deleteBtn);
+    // Add the edit and delete buttons to the right side span
+    rightSide.append(editButton, removeButton);
 
-    // Add everything to task element
-    taskElement.append(leftSide, rightSide);
-    taskContainer.appendChild(taskElement);
+    // Add the left and right sides to the main div
+    div.append(leftSide, rightSide);
+
+    // Finally, append the main div to the task container
+    taskContainer.appendChild(div);
   });
 }
 
-// Event Listeners
-inputField.addEventListener("input", updateAddButtonColor);
+// Function to store tasks in local storage
+function addDataToLocalStorageFrom(taskList) {
+  window.localStorage.setItem("tasks", JSON.stringify(taskList));
+}
 
-addButton.addEventListener("click", () => {
-  const value = inputField.value.trim();
-  if (value) {
-    addTask(value);
+// Function to retrieve tasks from local storage
+function getDataFromLocalStorage() {
+  const data = window.localStorage.getItem("tasks");
+  if (data) {
+    taskList = JSON.parse(data);
+    addElementsToPageFrom(taskList);
   }
-});
+}
 
-inputField.addEventListener("keydown", (e) => {
-  if (e.key === "Enter" && inputField.value.trim()) {
-    addTask(inputField.value);
+function deleteTaskWith(taskId) {
+  taskList = taskList.filter((task) => task.id !== Number(taskId));
+  addDataToLocalStorageFrom(taskList);
+  addElementsToPageFrom(taskList);
+}
+
+function toggleTaskStatusWith(taskId) {
+  for (let i = 0; i < taskList.length; i++) {
+    if (taskList[i].id === Number(taskId)) {
+      taskList[i].completed = !taskList[i].completed;
+    }
   }
-});
+  addDataToLocalStorageFrom(taskList);
+}
 
-taskContainer.addEventListener("click", (e) => {
-  const taskElement = e.target.closest(".task");
-  if (!taskElement) return;
-
-  const taskId = taskElement.getAttribute("data-id");
-
-  // Handle delete button click
-  if (e.target.closest(".clear")) {
-    removeTask(taskId);
-    renderTasks();
-  }
-
-  // Handle checkbox click
-  if (e.target.classList.contains("checkbox")) {
-    toggleTask(taskId);
-    renderTasks();
-  }
-});
-
-// Initialize app
-loadTasks();
+function clearAllTasks() {
+  taskList = [];
+  taskContainer.innerHTML = "";
+  window.localStorage.removeItem("tasks");
+  addElementsToPageFrom(taskList);
+}

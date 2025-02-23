@@ -138,12 +138,13 @@ button:hover {
   padding: 0.8em;
   gap: 0.5em;
 }
-#task-list .icon {
+#task-list span.icon {
   font-size: 40px;
+  margin-top: 40px;
 }
 #task-list .empty-message {
   color: gray;
-  margin-top: 25px;
+  margin-top: 20px;
 }
 #task-list .task {
   display: flex;

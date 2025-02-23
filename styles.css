@@ -29,8 +29,8 @@ main {
   gap: 2em;
 }
 
-section *,
-header * {
+#search *,
+#add-task * {
   flex-grow: 1;
 }
 
@@ -82,7 +82,6 @@ select:focus {
 
 #search .icon {
   position: absolute;
-  transform: translateY(-15%);
   margin-left: 0.7em;
 }
 
@@ -147,12 +146,13 @@ select:focus {
 
 /* 📋 10. Task List Section */
 #task-list {
+  display: flex;
+  flex-direction: column;
   background-color: #f7fbfc;
   border-radius: 7px;
   overflow-y: auto;
   height: 13em;
-  padding: 0.7em;
-  padding-top: 14%;
+  padding: 0.8em;
   gap: 0.5em;
 }
 #task-list .icon {
@@ -162,18 +162,55 @@ select:focus {
   color: gray;
   margin-top: 25px;
 }
-#task-list div {
+#task-list .task {
   display: flex;
-  gap: 1em;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 7px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  gap: 0.5em;
+  padding: 0.5em;
 }
 #task-list .task.done {
-  opacity: 0.5;
+  color: #888;
+  opacity: 0.7;
 }
-#task-list .task span {
-  font-size: 10px;
-  color: white;
-  padding: 2px 6px;
+#task-list .task.done span {
+  text-decoration: line-through;
+}
+#task-list .task svg {
+  border-radius: 7px;
   cursor: pointer;
+}
+#task-list .task .edit {
+  background-color: rgb(239, 149, 3);
+}
+#task-list .task .edit:hover {
+  background-color: #e0a800;
+}
+#task-list .task input[type=checkbox] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  appearance: none;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  display: inline-block;
+  position: relative;
+}
+#task-list .task input[type=checkbox]:checked {
+  background-color: #34c66c;
+  border-color: #34c66c;
+}
+#task-list .task input[type=checkbox]:checked::after {
+  content: "✔";
+  color: white;
+  font-size: 16px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
 }
 
 /* 📱 11. Responsive Design */
@@ -185,7 +222,7 @@ select:focus {
 }
 @media screen and (max-width: 528px) {
   #add-task button {
-    padding: 0.75em;
+    padding: 0.75em 1.5em;
   }
 }
 

@@ -1,10 +1,11 @@
 /* 🌍 1. Global Variables */
 $primary-color: white;
 $secondary-color: #f7fbfc;
-$green-button: #34c66c;
-$red-button: #e54c3c;
+$add-button: #34c66c;
+$clear-button: #e54c3c;
+$edit-button: #f5c00d;
 $accent-color: #3894df;
-$border-radius: 7px;
+$border-radius: 0.5em;
 
 /* 🛠️ 2. Mixins */
 @mixin flex-container {
@@ -46,7 +47,7 @@ main {
   gap: 2em;
 }
 
-#search *,
+#filter-tasks *,
 #add-task * {
   flex-grow: 1;
 }
@@ -77,59 +78,59 @@ header {
 input,
 button,
 select {
+  transition: 0.1s ease-in-out;
   @include rounded-border;
+
+  &:focus {
+    outline: none;
+    border-color: $accent-color;
+    box-shadow: 0 0 10px $accent-color;
+  }
 }
 
-input:focus,
-select:focus {
-  outline: none;
-  border-color: $accent-color;
-  box-shadow: 0 0 10px $accent-color;
+button {
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
 }
 
 /* 🔍 7. Search Section */
-#search {
+#filter-tasks {
   @include flex-container;
-}
 
-.input-container {
-  display: flex;
-  align-items: center;
-}
+  .icon {
+    position: absolute;
+    margin-left: 0.7em;
+  }
 
-#search .icon {
-  position: absolute;
-  margin-left: 0.7em;
-}
+  #select {
+    padding: 0.75em;
+  }
 
-.input-container input {
-  padding: 0.75em;
-  padding-left: 2.8em;
-  transition: 0.1s ease-in-out;
-}
+  .input-container {
+    display: flex;
+    align-items: center;
 
-#select {
-  padding: 0.75em;
-}
-
-#clear:active,
-#add:active {
-  box-shadow: -1px -1px 4px rgb(75, 82, 145), 4px 4px 4px rgb(75, 82, 145);
+    input {
+      padding: 0.75em;
+      padding-left: 2.8em;
+    }
+  }
 }
 
 /* ✅ 8. Buttons Styling Using SCSS Map */
 $buttons: (
-  clear: $red-button,
-  add: $green-button,
+  clear: $clear-button,
+  add: #a4e5ba,
 );
 
 @each $name, $color in $buttons {
-  .#{$name},
   ##{$name} {
     background-color: $color;
     color: $primary-color;
-    border: none;
-    transition: 0.3s ease-in-out;
 
     @if $name == clear {
       padding: 0.75em 1.5em;
@@ -138,27 +139,18 @@ $buttons: (
   }
 }
 
-#add {
-  background-color: #a4e5ba;
-}
-
-.clear:hover {
-  background-color: #e65344;
-}
-
 /* 📝 9. Add Task Section */
 #add-task {
   @include flex-container;
-}
 
-#add-task input {
-  min-width: 78%;
-  transition: 0.1s ease-in-out;
-}
+  input,
+  button {
+    padding: 1em;
+  }
 
-#add-task input,
-#add-task button {
-  padding: 1em;
+  input {
+    min-width: 78%;
+  }
 }
 
 /* 📋 10. Task List Section */
@@ -167,6 +159,7 @@ $buttons: (
   flex-direction: column;
   background-color: $secondary-color;
   border-radius: $border-radius;
+  scrollbar-width: none;
   overflow-y: auto;
   height: 13em;
   padding: 0.8em;
@@ -187,29 +180,42 @@ $buttons: (
     justify-content: space-between;
     border-radius: $border-radius;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    gap: 0.5em;
-    padding: 0.5em;
+    padding: 0.75em;
+
+    .left-side,
+    .right-side{
+      display: flex;
+      gap: 0.5em;
+
+      button {
+        width: 3.5em;
+      }
+    }
 
     &.done {
-      color: #888;
+      color: #aaa;
       opacity: 0.7;
 
-      span {
+      .text {
         text-decoration: line-through;
       }
     }
 
-    svg {
-      border-radius: $border-radius;
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
       cursor: pointer;
     }
 
-    .edit {
-      background-color: rgb(239, 149, 3);
+    .clear {
+      background-color: #e54c3c;
     }
 
-    .edit:hover {
-      background-color: #e0a800;
+    .edit {
+      background-color: #f5c00d;
     }
 
     input[type="checkbox"] {
@@ -217,14 +223,20 @@ $buttons: (
       height: 20px;
       cursor: pointer;
       appearance: none;
-      border: 2px solid #ccc;
-      border-radius: 5px;
+      background-color: #eeeeee;
+      border: none;
+      border-radius: 4px;
       display: inline-block;
       position: relative;
+      margin-right: 1.5em;
+
+      &:hover {
+        background-color: #ccc;
+      }
 
       &:checked {
-        background-color: $green-button;
-        border-color: $green-button;
+        background-color: $add-button;
+        border-color: $add-button;
 
         &::after {
           content: "✔";

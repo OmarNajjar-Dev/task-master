@@ -29,7 +29,7 @@ main {
   gap: 2em;
 }
 
-#search *,
+#filter-tasks *,
 #add-task * {
   flex-grow: 1;
 }
@@ -57,74 +57,59 @@ header p {
 input,
 button,
 select {
-  border-radius: 7px;
+  transition: 0.1s ease-in-out;
+  border-radius: 0.5em;
   border: 1px solid #ccc;
 }
-
 input:focus,
+button:focus,
 select:focus {
   outline: none;
   border-color: #3894df;
   box-shadow: 0 0 10px #3894df;
 }
 
+button {
+  border: none;
+  cursor: pointer;
+}
+button:hover {
+  opacity: 0.9;
+}
+
 /* 🔍 7. Search Section */
-#search {
+#filter-tasks {
   display: flex;
   flex-wrap: wrap;
   gap: 0.8em;
 }
-
-.input-container {
-  display: flex;
-  align-items: center;
-}
-
-#search .icon {
+#filter-tasks .icon {
   position: absolute;
   margin-left: 0.7em;
 }
-
-.input-container input {
+#filter-tasks #select {
+  padding: 0.75em;
+}
+#filter-tasks .input-container {
+  display: flex;
+  align-items: center;
+}
+#filter-tasks .input-container input {
   padding: 0.75em;
   padding-left: 2.8em;
-  transition: 0.1s ease-in-out;
-}
-
-#select {
-  padding: 0.75em;
-}
-
-#clear:active,
-#add:active {
-  box-shadow: -1px -1px 4px rgb(75, 82, 145), 4px 4px 4px rgb(75, 82, 145);
 }
 
 /* ✅ 8. Buttons Styling Using SCSS Map */
-.clear,
 #clear {
   background-color: #e54c3c;
   color: white;
-  border: none;
-  transition: 0.3s ease-in-out;
   padding: 0.75em 1.5em;
   order: 4;
 }
 
-.add,
-#add {
-  background-color: #34c66c;
-  color: white;
-  border: none;
-  transition: 0.3s ease-in-out;
-}
-
 #add {
   background-color: #a4e5ba;
-}
-
-.clear:hover {
-  background-color: #e65344;
+  color: white;
 }
 
 /* 📝 9. Add Task Section */
@@ -133,15 +118,12 @@ select:focus {
   flex-wrap: wrap;
   gap: 0.8em;
 }
-
-#add-task input {
-  min-width: 78%;
-  transition: 0.1s ease-in-out;
-}
-
 #add-task input,
 #add-task button {
   padding: 1em;
+}
+#add-task input {
+  min-width: 78%;
 }
 
 /* 📋 10. Task List Section */
@@ -149,7 +131,8 @@ select:focus {
   display: flex;
   flex-direction: column;
   background-color: #f7fbfc;
-  border-radius: 7px;
+  border-radius: 0.5em;
+  scrollbar-width: none;
   overflow-y: auto;
   height: 13em;
   padding: 0.8em;
@@ -166,37 +149,54 @@ select:focus {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 7px;
+  border-radius: 0.5em;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 0.75em;
+}
+#task-list .task .left-side,
+#task-list .task .right-side {
+  display: flex;
   gap: 0.5em;
-  padding: 0.5em;
+}
+#task-list .task .left-side button,
+#task-list .task .right-side button {
+  width: 3.5em;
 }
 #task-list .task.done {
-  color: #888;
+  color: #aaa;
   opacity: 0.7;
 }
-#task-list .task.done span {
+#task-list .task.done .text {
   text-decoration: line-through;
 }
-#task-list .task svg {
-  border-radius: 7px;
+#task-list .task button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
   cursor: pointer;
 }
-#task-list .task .edit {
-  background-color: rgb(239, 149, 3);
+#task-list .task .clear {
+  background-color: #e54c3c;
 }
-#task-list .task .edit:hover {
-  background-color: #e0a800;
+#task-list .task .edit {
+  background-color: #f5c00d;
 }
 #task-list .task input[type=checkbox] {
   width: 20px;
   height: 20px;
   cursor: pointer;
   appearance: none;
-  border: 2px solid #ccc;
-  border-radius: 5px;
+  background-color: #eeeeee;
+  border: none;
+  border-radius: 4px;
   display: inline-block;
   position: relative;
+  margin-right: 1.5em;
+}
+#task-list .task input[type=checkbox]:hover {
+  background-color: #ccc;
 }
 #task-list .task input[type=checkbox]:checked {
   background-color: #34c66c;

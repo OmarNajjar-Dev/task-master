@@ -3,6 +3,9 @@ const inputField = document.getElementById("task-text");
 const taskContainer = document.getElementById("task-list");
 const addButton = document.getElementById("add");
 const clearButton = document.getElementById("clear");
+const selectStatus = document.getElementById("select");
+const filterButtons = document.querySelectorAll("#filters button");
+const searchInput = document.getElementById("search");
 
 // SVG Icons for task buttons
 const icons = {
@@ -28,6 +31,11 @@ const colors = {
 // Array for storing the tasks
 var taskList = [];
 
+// Initialize the current status as all
+var currentFilter = "all";
+
+var debounceTimeout;
+
 // Retrieve data from local storage
 getDataFromLocalStorage();
 
@@ -39,6 +47,7 @@ inputField.addEventListener("keydown", (e) => {
 inputField.addEventListener("input", updateAddButtonColor);
 inputField.addEventListener("input", search);
 clearButton.addEventListener("click", clearAllTasks);
+searchInput.addEventListener("input", debounceFilterTasks);
 
 // Handle click events on task elements
 taskContainer.addEventListener("click", (e) => {
@@ -191,4 +200,41 @@ function clearAllTasks() {
   taskContainer.innerHTML = "";
   window.localStorage.removeItem("tasks");
   addElementsToPageFrom(taskList);
+}
+
+// 🔽 Select Filter Change
+selectStatus.addEventListener("change", () => {
+  currentFilter = selectStatus.value;
+  // Update filter buttons to match the select value
+  filterButtons.forEach((btn) => {
+    if (btn.dataset.filter === currentFilter) {
+      btn.classList.add("active");
+    } else {
+      btn.classList.remove("active");
+    }
+  });
+  filterTasks();
+});
+
+// 🔍 Filter Tasks
+function filterTasks() {
+  let filteredTasks = taskList;
+  if (currentFilter === "active") {
+    filteredTasks = filteredTasks.filter((task) => !task.completed);
+  } else if (currentFilter === "completed") {
+    filteredTasks = filteredTasks.filter((task) => task.completed);
+  }
+  const query = searchInput.value.trim().toLowerCase();
+  if (query !== "") {
+    filteredTasks = filteredTasks.filter((task) =>
+      task.title.toLowerCase().includes(query)
+    );
+  }
+  addElementsToPageFrom(filteredTasks);
+}
+
+// ⏳ Debounce Search Input
+function debounceFilterTasks() {
+  clearTimeout(debounceTimeout);
+  debounceTimeout = setTimeout(filterTasks, 300);
 }

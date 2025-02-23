@@ -47,7 +47,7 @@ main {
   gap: 2em;
 }
 
-#filter-tasks *,
+#search-tasks *,
 #add-task * {
   flex-grow: 1;
 }
@@ -98,7 +98,7 @@ button {
 }
 
 /* 🔍 7. Search Section */
-#filter-tasks {
+#search-tasks {
   @include flex-container;
 
   .icon {
@@ -254,9 +254,44 @@ $buttons: (
   }
 }
 
+hr {
+  margin: -1em 0;
+  background-color: #eeeeee;
+  border: none;
+  height: 1px;
+}
+
+#filter-tasks {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#filters {
+  
+  button {
+    padding: 0.7em 1.5em;
+    border: none;
+    background-color: white;
+    color: #666;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    &:hover {
+      background-color: $accent-color;
+    }
+
+    &.active {
+      background-color: $accent-color;
+      color: $primary-color;
+      outline: none;
+      box-shadow: 0 0 5px $accent-color;
+    }
+  }
+}
+
 /* 📱 11. Responsive Design */
 @media screen and (max-width: 400px) {
-  #search,
+  #search-tasks,
   #add-task {
     flex-direction: column;
   }

@@ -26,7 +26,7 @@
       </header>
 
       <!-- 🔍 Search Section -->
-      <section id="filter-tasks">
+      <section id="search-tasks">
         <div class="input-container">
           <span class="icon">🔍</span>
           <input type="search" id="search" placeholder="Search tasks..." />
@@ -56,6 +56,21 @@
           No tasks found. Add some tasks to get started!
         </p>
       </section>
+
+      <hr />
+
+      <!-- 🔘 Filters Section -->
+      <section id="filter-tasks">
+        <div class="items-count"></div>
+        <div id="filters">
+          <button id="filter-all" data-filter="all" class="active">All</button>
+          <button id="filter-active" data-filter="active">Active</button>
+          <button id="filter-completed" data-filter="completed">
+            Completed
+          </button>
+        </div>
+      </section>
+      
     </main>
     <script src="script.js"></script>
   </body>

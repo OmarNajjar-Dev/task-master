@@ -47,7 +47,33 @@ inputField.addEventListener("keydown", (e) => {
 inputField.addEventListener("input", updateAddButtonColor);
 inputField.addEventListener("input", search);
 clearButton.addEventListener("click", clearAllTasks);
-searchInput.addEventListener("input", debounceFilterTasks);
+searchInput.addEventListener("input", (e) => searchTasks(e.target.value));
+
+// 🔘 Filter Button Clicks
+filterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    filterButtons.forEach((btn) => btn.classList.remove("active"));
+    button.classList.add("active");
+    currentFilter = button.dataset.filter;
+    // Synchronize select element with the button filter
+    selectStatus.value = currentFilter;
+    filterTasks();
+  });
+});
+
+// 🔽 Select Filter Change
+selectStatus.addEventListener("change", () => {
+  currentFilter = selectStatus.value;
+  // Update filter buttons to match the select value
+  filterButtons.forEach((btn) => {
+    if (btn.dataset.filter === currentFilter) {
+      btn.classList.add("active");
+    } else {
+      btn.classList.remove("active");
+    }
+  });
+  filterTasks();
+});
 
 // Handle click events on task elements
 taskContainer.addEventListener("click", (e) => {
@@ -62,12 +88,14 @@ taskContainer.addEventListener("click", (e) => {
 
   if (e.target.type === "checkbox") {
     // Toggle done class
-    e.target.parentElement.parentElement.classList.toggle("done");
+    taskElement.classList.toggle("done");
 
     // Toggle completed for the task
-    toggleTaskStatusWith(
-      e.target.parentElement.parentElement.getAttribute("data-id")
-    );
+    toggleTaskStatusWith(taskElement.getAttribute("data-id"));
+  }
+
+  if (e.target.classList.contains("edit")) {
+    editTask(taskElement.getAttribute("data-id"));
   }
 });
 
@@ -131,6 +159,7 @@ function addElementsToPageFrom(taskList) {
     // Initialize the checkbox
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
+    checkbox.name = "task-completed";
     checkbox.checked = task.completed;
 
     // Initialize a span for the task title
@@ -202,19 +231,12 @@ function clearAllTasks() {
   addElementsToPageFrom(taskList);
 }
 
-// 🔽 Select Filter Change
-selectStatus.addEventListener("change", () => {
-  currentFilter = selectStatus.value;
-  // Update filter buttons to match the select value
-  filterButtons.forEach((btn) => {
-    if (btn.dataset.filter === currentFilter) {
-      btn.classList.add("active");
-    } else {
-      btn.classList.remove("active");
-    }
-  });
-  filterTasks();
-});
+function searchTasks(query) {
+  const filteredTasks = taskList.filter((task) =>
+    task.title.toLowerCase().includes(query.toLowerCase())
+  );
+  addElementsToPageFrom(filteredTasks);
+}
 
 // 🔍 Filter Tasks
 function filterTasks() {
@@ -237,4 +259,69 @@ function filterTasks() {
 function debounceFilterTasks() {
   clearTimeout(debounceTimeout);
   debounceTimeout = setTimeout(filterTasks, 300);
+}
+
+function editTask(taskId) {
+  const task = taskList.find((task) => task.id === Number(taskId));
+  if (!task) return;
+
+  const taskElement = document.querySelector(`[data-id="${taskId}"]`);
+  if (!taskElement) return;
+
+  const textSpan = taskElement.querySelector(".text");
+  if (!textSpan) return;
+
+  const checkbox = taskElement.querySelector('input[type="checkbox"]');
+  if (checkbox) checkbox.style.display = "none";
+
+  const input = document.createElement("input");
+  input.type = "text";
+  input.className = "edit-input";
+  input.value = textSpan.textContent;
+  
+  textSpan.replaceWith(input);
+
+  // Replace edit and delete buttons with save and cancel
+  const rightSide = taskElement.querySelector(".right-side");
+  const oldButtons = rightSide.querySelectorAll("button");
+  
+  const saveButton = document.createElement("button");
+  saveButton.className = "save";
+  saveButton.innerHTML = "Save";
+
+  const cancelButton = document.createElement("button");
+  cancelButton.className = "cancel";
+  cancelButton.innerHTML = "Cancel";
+
+  oldButtons.forEach(button => button.remove());
+  rightSide.append(saveButton, cancelButton);
+
+  function handleSave() {
+    const newTitle = input.value.trim();
+    if (newTitle) {
+      task.title = newTitle;
+      addDataToLocalStorageFrom(taskList);
+    }
+    if (checkbox) checkbox.style.display = "";
+    filterTasks();
+  }
+
+  function handleCancel() {
+    if (checkbox) checkbox.style.display = "";
+    filterTasks();
+  }
+
+  saveButton.addEventListener("click", handleSave);
+  cancelButton.addEventListener("click", handleCancel);
+
+  input.addEventListener("keyup", (e) => {
+    if (e.key === "Enter") {
+      handleSave();
+    } else if (e.key === "Escape") {
+      handleCancel();
+    }
+  });
+
+  input.focus();
+  input.select();
 }

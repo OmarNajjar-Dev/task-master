@@ -184,6 +184,19 @@ button:hover {
 #task-list .task .edit {
   background-color: #f5c00d;
 }
+#task-list .task .edit-input {
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  width: 15em;
+  margin-right: 0.5em;
+}
+#task-list .task .edit-input:focus {
+  outline: none;
+  border-color: #f5c00d;
+  box-shadow: 0 0 3px rgba(245, 192, 13, 0.5);
+}
 #task-list .task input[type=checkbox] {
   width: 20px;
   height: 20px;
@@ -226,8 +239,7 @@ hr {
   justify-content: space-between;
   align-items: center;
 }
-
-#filters button {
+#filter-tasks #filters button {
   padding: 0.7em 1.5em;
   border: none;
   background-color: white;
@@ -235,10 +247,10 @@ hr {
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
-#filters button:hover {
+#filter-tasks #filters button:hover {
   background-color: #3894df;
 }
-#filters button.active {
+#filter-tasks #filters button.active {
   background-color: #3894df;
   color: white;
   outline: none;

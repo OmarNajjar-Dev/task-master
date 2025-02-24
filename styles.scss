@@ -219,6 +219,22 @@ $buttons: (
       background-color: #f5c00d;
     }
 
+    .edit-input {
+      padding: 1em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1em;
+      width: 15em;
+      margin-right: 0.5em;
+      
+    
+      &:focus {
+        outline: none;
+        border-color: #f5c00d;
+        box-shadow: 0 0 3px rgba(245, 192, 13, 0.5);
+      }
+    }
+
     input[type="checkbox"] {
       width: 20px;
       height: 20px;
@@ -265,26 +281,27 @@ hr {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
 
-#filters {
-  
-  button {
-    padding: 0.7em 1.5em;
-    border: none;
-    background-color: white;
-    color: #666;
-    cursor: pointer;
-    transition: 0.2s ease-in-out;
-    &:hover {
-      background-color: $accent-color;
-    }
+  #filters {
 
-    &.active {
-      background-color: $accent-color;
-      color: $primary-color;
-      outline: none;
-      box-shadow: 0 0 5px $accent-color;
+    button {
+      padding: 0.7em 1.5em;
+      border: none;
+      background-color: white;
+      color: #666;
+      cursor: pointer;
+      transition: 0.2s ease-in-out;
+
+      &:hover {
+        background-color: $accent-color;
+      }
+
+      &.active {
+        background-color: $accent-color;
+        color: $primary-color;
+        outline: none;
+        box-shadow: 0 0 5px $accent-color;
+      }
     }
   }
 }

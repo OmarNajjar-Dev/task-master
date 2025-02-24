@@ -32,9 +32,9 @@
           <input type="search" id="search" placeholder="Search tasks..." />
         </div>
         <select id="select" name="status">
-          <option>📋All Tasks</option>
-          <option>✅Completed</option>
-          <option>⏳Pending</option>
+          <option value="all">📋All Tasks</option>
+          <option value="completed">✅Completed</option>
+          <option value="active">⏳Pending</option>
         </select>
         <button id="clear">🗑️ Clear All</button>
       </section>
@@ -63,14 +63,11 @@
       <section id="filter-tasks">
         <div class="items-count"></div>
         <div id="filters">
-          <button id="filter-all" data-filter="all" class="active">All</button>
-          <button id="filter-active" data-filter="active">Active</button>
-          <button id="filter-completed" data-filter="completed">
-            Completed
-          </button>
+          <button data-filter="all" class="active">All</button>
+          <button data-filter="active">Active</button>
+          <button data-filter="completed">Completed</button>
         </div>
       </section>
-      
     </main>
     <script src="script.js"></script>
   </body>

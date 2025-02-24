@@ -266,6 +266,8 @@ $buttons: (
     background-color: $primary-color;
     transition: background-color 0.3s ease;
     color: black;
+    flex-wrap: wrap;
+    gap: 0.5em;
 
     .dark-mode & {
       background-color: $dark-primary;
@@ -277,6 +279,7 @@ $buttons: (
     .right-side {
       display: flex;
       gap: 0.5em;
+      flex-wrap: wrap;
 
       button {
         width: 3.5em;
@@ -315,6 +318,7 @@ $buttons: (
     .cancel {
       box-sizing: content-box;
       padding: 0.5em 0.75em;
+      width: auto;
     }
 
     .save {
@@ -332,7 +336,7 @@ $buttons: (
       border: 1px solid #ccc;
       border-radius: $border-radius;
       font-size: 1em;
-      width: 15em;
+      width: 100%;
       margin-right: 0.5em;
 
       .dark-mode & {
@@ -396,12 +400,18 @@ hr {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 1em;
 
   .items-count {
     color: gray;
   }
 
   #filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+
     button {
       padding: 0.7em 1.5em;
       border: none;
@@ -455,7 +465,7 @@ hr {
   right: 1em;
 
   &:hover {
-     background-color: #555;
+    background-color: #555;
   }
 }
 
@@ -467,39 +477,14 @@ hr {
   }
 }
 
-@media screen and (max-width: 528px) {
-  #add-task button {
-    padding: 0.75em 1.5em;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  body {
-    /* Reduce vertical padding to free up space */
-    padding: 10% 5%;
-  }
-  main {
-    /* Allow main container to take full available width */
-    width: 100%;
-    padding: 1em;
-  }
-  header h1 {
-    /* Scale down the header font size */
-    font-size: 2em;
-  }
-}
-
-/* For very small devices */
-@media screen and (max-width: 400px) {
-  #search-tasks,
-  #add-task {
-    flex-direction: column;
-  }
-}
-
 /* For devices up to 528px */
 @media screen and (max-width: 528px) {
+  body {
+    height: auto;
+    min-height: 100vh;
+  }
+
   #add-task button {
     padding: 0.75em 1.5em;
- }
+  }
 }

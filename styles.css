@@ -218,6 +218,8 @@ button:hover {
   background-color: white;
   transition: background-color 0.3s ease;
   color: black;
+  flex-wrap: wrap;
+  gap: 0.5em;
 }
 .dark-mode #task-list .task {
   background-color: #121212;
@@ -228,6 +230,7 @@ button:hover {
 #task-list .task .right-side {
   display: flex;
   gap: 0.5em;
+  flex-wrap: wrap;
 }
 #task-list .task .left-side button,
 #task-list .task .right-side button {
@@ -260,6 +263,7 @@ button:hover {
 #task-list .task .cancel {
   box-sizing: content-box;
   padding: 0.5em 0.75em;
+  width: auto;
 }
 #task-list .task .save {
   background-color: #34c66c;
@@ -274,7 +278,7 @@ button:hover {
   border: 1px solid #ccc;
   border-radius: 0.5em;
   font-size: 1em;
-  width: 15em;
+  width: 100%;
   margin-right: 0.5em;
 }
 .dark-mode #task-list .task .edit-input {
@@ -329,9 +333,16 @@ hr {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 1em;
 }
 #filter-tasks .items-count {
   color: gray;
+}
+#filter-tasks #filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
 }
 #filter-tasks #filters button {
   padding: 0.7em 1.5em;
@@ -389,35 +400,12 @@ hr {
     flex-direction: column;
   }
 }
-@media screen and (max-width: 528px) {
-  #add-task button {
-    padding: 0.75em 1.5em;
-  }
-}
-@media screen and (max-width: 768px) {
-  body {
-    /* Reduce vertical padding to free up space */
-    padding: 10% 5%;
-  }
-  main {
-    /* Allow main container to take full available width */
-    width: 100%;
-    padding: 1em;
-  }
-  header h1 {
-    /* Scale down the header font size */
-    font-size: 2em;
-  }
-}
-/* For very small devices */
-@media screen and (max-width: 400px) {
-  #search-tasks,
-  #add-task {
-    flex-direction: column;
-  }
-}
 /* For devices up to 528px */
 @media screen and (max-width: 528px) {
+  body {
+    height: auto;
+    min-height: 100vh;
+  }
   #add-task button {
     padding: 0.75em 1.5em;
   }

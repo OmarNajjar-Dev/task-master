@@ -202,10 +202,6 @@ $buttons: (
       padding: 0.75em 1.5em;
       order: 4;
     }
-
-    .dark-mode & {
-      color: $dark-accent;
-    }
   }
 }
 
@@ -399,8 +395,13 @@ hr {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
+  .items-count {
+    color: gray;
+  }
 
   #filters {
+
     button {
       padding: 0.7em 1.5em;
       border: none;

@@ -18,6 +18,7 @@ const taskContainer = document.getElementById("task-list");
 const addButton = document.getElementById("add");
 const clearButton = document.getElementById("clear");
 const selectStatus = document.getElementById("select");
+const itemCount = document.querySelector(".items-count")
 const filterButtons = document.querySelectorAll("#filters button");
 const searchInput = document.getElementById("search");
 const darkMode = document.getElementById("dark-mode");
@@ -134,6 +135,7 @@ function addTaskToArray(input) {
   updateAddButtonColor();
   addElementsToPageFrom(taskList);
   addDataToLocalStorageFrom(taskList);
+  updateItemCount();
 }
 
 // 🔄 Render Tasks to Page
@@ -163,6 +165,7 @@ function createTaskElement(task) {
 // 💾 Local Storage Operations
 function addDataToLocalStorageFrom(tasks) {
   localStorage.setItem("tasks", JSON.stringify(tasks));
+  updateItemCount();
 }
 
 function getDataFromLocalStorage() {
@@ -170,6 +173,7 @@ function getDataFromLocalStorage() {
   if (data) {
     taskList = JSON.parse(data);
     addElementsToPageFrom(taskList);
+    updateItemCount();
   }
   
   if (localStorage.getItem("darkMode") === "enabled") {
@@ -183,6 +187,7 @@ function deleteTaskWith(taskId) {
   taskList = taskList.filter(task => task.id !== Number(taskId));
   addDataToLocalStorageFrom(taskList);
   addElementsToPageFrom(taskList);
+  updateItemCount();
 }
 
 // ✅ Toggle Task Status
@@ -191,6 +196,7 @@ function toggleTaskStatusWith(taskId) {
   if (task) {
     task.completed = !task.completed;
     addDataToLocalStorageFrom(taskList);
+    updateItemCount();
   }
 }
 
@@ -199,6 +205,7 @@ function clearAllTasks() {
   taskList = [];
   localStorage.removeItem("tasks");
   addElementsToPageFrom(taskList);
+  updateItemCount();
 }
 
 // 🔍 Search Tasks
@@ -227,6 +234,7 @@ function filterTasks() {
   }
 
   addElementsToPageFrom(filteredTasks);
+  updateItemCount();
 }
 
 // ✏️ Edit Task
@@ -281,4 +289,9 @@ function toggleDarkMode() {
   const isDarkMode = body.classList.contains("dark-mode");
   localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
   darkMode.textContent = isDarkMode ? "☀ Light Mode" : "🌙 Dark Mode";
+}
+
+function updateItemCount() {
+  const remainingTasks = taskList.filter((task) => !task.completed).length;
+  itemCount.textContent = `${remainingTasks} items left`;
 }

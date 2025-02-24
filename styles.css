@@ -156,16 +156,10 @@ button:hover {
   padding: 0.75em 1.5em;
   order: 4;
 }
-.dark-mode #clear {
-  color: #e0e0e0;
-}
 
 #add {
   background-color: #a4e5ba;
   color: white;
-}
-.dark-mode #add {
-  color: #e0e0e0;
 }
 
 /* 📝 9. Add Task Section */
@@ -334,6 +328,9 @@ hr {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+#filter-tasks .items-count {
+  color: gray;
 }
 #filter-tasks #filters button {
   padding: 0.7em 1.5em;

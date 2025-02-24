@@ -1,4 +1,5 @@
-/* 🌍 1. Global Variables */
+/* 🎨 1. Global Variables
+   Define the main color palette and common values used throughout the application */
 $primary-color: white;
 $secondary-color: #f7fbfc;
 $add-button: #34c66c;
@@ -7,14 +8,16 @@ $edit-button: #f5c00d;
 $accent-color: #3894df;
 $border-radius: 0.5em;
 
-/* In dark mode */
+/* 🌙 Dark Mode Colors
+   Color scheme used when dark mode is enabled */
 $dark-primary: #121212;
 $dark-secondary: #1d1d1d;
 $dark-accent: #e0e0e0;
 $highlight-color: #bb86fc;
 $border-color: #333;
 
-/* 🛠️ 2. Mixins */
+/* 🧰 2. Mixins
+   Reusable style patterns to maintain consistency and reduce code duplication */
 @mixin flex-container {
   display: flex;
   flex-wrap: wrap;
@@ -26,14 +29,16 @@ $border-color: #333;
   border: 1px solid #ccc;
 }
 
-/* 🔹 3. Reset Default Styles */
+/* 🔄 3. Reset Default Styles
+   Remove browser default styles for consistent cross-browser rendering */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* 📄 4. General Page Layout */
+/* 📐 4. General Page Layout
+   Core layout structure and container styling */
 body {
   font-family: sans-serif;
   height: 100vh;
@@ -69,7 +74,8 @@ main {
   flex-grow: 1;
 }
 
-/* 🔹 5. Header Section */
+/* 📝 5. Header Section
+   App title, logo and description styling */
 header {
   display: flex;
   flex-direction: column;
@@ -99,7 +105,8 @@ header {
   }
 }
 
-/* ✏️ 6. Form Elements Styling */
+/* 🎛️ 6. Form Elements
+   Shared styles for interactive elements like inputs, buttons and selects */
 input,
 button,
 select {
@@ -163,7 +170,8 @@ input {
   }
 }
 
-/* 🔍 7. Search Section */
+/* 🔍 7. Search Section
+   Search input and filter dropdown styling */
 #search-tasks {
   @include flex-container;
 
@@ -187,7 +195,8 @@ input {
   }
 }
 
-/* ✅ 8. Buttons Styling Using SCSS Map */
+/* 🎯 8. Action Buttons
+   Styling for primary action buttons using SCSS Map */
 $buttons: (
   clear: $clear-button,
   add: #a4e5ba,
@@ -205,7 +214,8 @@ $buttons: (
   }
 }
 
-/* 📝 9. Add Task Section */
+/* ➕ 9. Task Creation
+   New task input and add button container */
 #add-task {
   @include flex-container;
 
@@ -219,7 +229,8 @@ $buttons: (
   }
 }
 
-/* 📋 10. Task List Section */
+/* 📋 10. Task List
+   Container and individual task item styling */
 #task-list {
   display: flex;
   flex-direction: column;
@@ -469,7 +480,8 @@ hr {
   }
 }
 
-/* 📱 11. Responsive Design */
+/* 📱 11. Responsive Design
+   Mobile-first approach with breakpoints for different screen sizes */
 @media screen and (max-width: 400px) {
   #search-tasks,
   #add-task {
@@ -477,7 +489,6 @@ hr {
   }
 }
 
-/* For devices up to 528px */
 @media screen and (max-width: 528px) {
   body {
     height: auto;
@@ -486,5 +497,18 @@ hr {
 
   #add-task button {
     padding: 0.75em 1.5em;
+  }
+}
+
+@media screen and (max-width: 352px) {
+  header h1 {
+    /* Scale down the header font size */
+    font-size: 2.25em;
+  }
+}
+
+@media screen and (max-width: 332px) {
+  #filters {
+    flex-direction: column;
   }
 }

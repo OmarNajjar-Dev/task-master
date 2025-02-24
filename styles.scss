@@ -209,7 +209,8 @@ $buttons: (
 #add-task {
   @include flex-container;
 
-  button, input {
+  button,
+  input {
     padding: 1em;
   }
 
@@ -395,13 +396,12 @@ hr {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+
   .items-count {
     color: gray;
   }
 
   #filters {
-
     button {
       padding: 0.7em 1.5em;
       border: none;
@@ -439,6 +439,26 @@ hr {
   }
 }
 
+#dark-mode {
+  background-color: #333;
+  color: #e0e0e0;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.1s ease-in-out;
+  width: 5em;
+  height: 5em;
+  position: absolute;
+  font-size: 14px;
+  top: 1em;
+  right: 1em;
+
+  &:hover {
+     background-color: #555;
+  }
+}
+
 /* 📱 11. Responsive Design */
 @media screen and (max-width: 400px) {
   #search-tasks,
@@ -451,4 +471,35 @@ hr {
   #add-task button {
     padding: 0.75em 1.5em;
   }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    /* Reduce vertical padding to free up space */
+    padding: 10% 5%;
+  }
+  main {
+    /* Allow main container to take full available width */
+    width: 100%;
+    padding: 1em;
+  }
+  header h1 {
+    /* Scale down the header font size */
+    font-size: 2em;
+  }
+}
+
+/* For very small devices */
+@media screen and (max-width: 400px) {
+  #search-tasks,
+  #add-task {
+    flex-direction: column;
+  }
+}
+
+/* For devices up to 528px */
+@media screen and (max-width: 528px) {
+  #add-task button {
+    padding: 0.75em 1.5em;
+ }
 }

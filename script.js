@@ -1,7 +1,7 @@
 /**
  * 🎯 Task Manager Application
  * A feature-rich task management system with filtering, searching, and dark mode
- * 
+ *
  * Features:
  * - ✨ Add, edit and delete tasks
  * - 🔍 Search tasks
@@ -19,7 +19,7 @@ const searchInput = document.getElementById("search");
 const addButton = document.getElementById("add");
 const clearButton = document.getElementById("clear");
 const selectStatus = document.getElementById("select");
-const itemCount = document.querySelector(".items-count")
+const itemCount = document.querySelector(".items-count");
 const hr = document.querySelector("hr");
 const filterButtons = document.querySelectorAll("#filters button");
 const darkMode = document.getElementById("dark-mode");
@@ -117,7 +117,9 @@ function handleTaskContainerClick(e) {
 
 // 🎨 Update Add Button Color
 function updateAddButtonColor() {
-  addButton.style.backgroundColor = inputField.value ? colors.active : colors.inactive;
+  addButton.style.backgroundColor = inputField.value
+    ? colors.active
+    : colors.inactive;
 }
 
 // ➕ Add New Task
@@ -137,15 +139,16 @@ function addTaskToArray(input) {
   addElementsToPageFrom(taskList);
   addDataToLocalStorageFrom(taskList);
   updateItemCount();
-  hideItemAndButton();
+  toggleElementsVisibility();
 }
 
 // 🔄 Render Tasks to Page
 function addElementsToPageFrom(tasks) {
-  taskContainer.innerHTML = tasks.length === 0 
-    ? `<span class="icon">📝</span>
+  taskContainer.innerHTML =
+    tasks.length === 0
+      ? `<span class="icon">📝</span>
        <p class="empty-message">No tasks found. Add some tasks to get started!</p>`
-    : tasks.map(task => createTaskElement(task)).join("");
+      : tasks.map((task) => createTaskElement(task)).join("");
 }
 
 // 🏗️ Create Task Element HTML
@@ -153,7 +156,9 @@ function createTaskElement(task) {
   return `
     <div class="task ${task.completed ? "done" : ""}" data-id="${task.id}">
       <span class="left-side">
-        <input type="checkbox" name="task-completed" ${task.completed ? "checked" : ""}>
+        <input type="checkbox" name="task-completed" ${
+          task.completed ? "checked" : ""
+        }>
         <span class="text">${task.title}</span>
       </span>
       <span class="right-side">
@@ -177,26 +182,26 @@ function getDataFromLocalStorage() {
     addElementsToPageFrom(taskList);
     updateItemCount();
   }
-  
+
   if (localStorage.getItem("darkMode") === "enabled") {
     body.classList.add("dark-mode");
     darkMode.textContent = "☀ Light Mode";
   }
-  hideItemAndButton();
+  toggleElementsVisibility();
 }
 
 // 🗑️ Delete Task
 function deleteTaskWith(taskId) {
-  taskList = taskList.filter(task => task.id !== Number(taskId));
+  taskList = taskList.filter((task) => task.id !== Number(taskId));
   addDataToLocalStorageFrom(taskList);
   addElementsToPageFrom(taskList);
   updateItemCount();
-  hideItemAndButton();
+  toggleElementsVisibility();
 }
 
 // ✅ Toggle Task Status
 function toggleTaskStatusWith(taskId) {
-  const task = taskList.find(task => task.id === Number(taskId));
+  const task = taskList.find((task) => task.id === Number(taskId));
   if (task) {
     task.completed = !task.completed;
     addDataToLocalStorageFrom(taskList);
@@ -210,7 +215,7 @@ function clearAllTasks() {
   localStorage.removeItem("tasks");
   addElementsToPageFrom(taskList);
   updateItemCount();
-  hideItemAndButton();
+  toggleElementsVisibility();
 }
 
 // 🔍 Search Tasks
@@ -227,13 +232,13 @@ function filterTasks() {
   let filteredTasks = taskList;
 
   if (currentFilter === "active") {
-    filteredTasks = filteredTasks.filter(task => !task.completed);
+    filteredTasks = filteredTasks.filter((task) => !task.completed);
   } else if (currentFilter === "completed") {
-    filteredTasks = filteredTasks.filter(task => task.completed);
+    filteredTasks = filteredTasks.filter((task) => task.completed);
   }
 
   if (searchQuery) {
-    filteredTasks = filteredTasks.filter(task => 
+    filteredTasks = filteredTasks.filter((task) =>
       task.title.toLowerCase().includes(searchQuery)
     );
   }
@@ -252,7 +257,7 @@ function editTask(taskId) {
   const rightSide = taskElement.querySelector(".right-side");
 
   checkbox.style.display = "none";
-  
+
   const input = document.createElement("input");
   input.type = "text";
   input.className = "edit-input";
@@ -267,7 +272,7 @@ function editTask(taskId) {
   const saveChanges = () => {
     const newTitle = input.value.trim();
     if (newTitle) {
-      const task = taskList.find(t => t.id === Number(taskId));
+      const task = taskList.find((t) => t.id === Number(taskId));
       if (task) {
         task.title = newTitle;
         addDataToLocalStorageFrom(taskList);
@@ -301,7 +306,7 @@ function updateItemCount() {
   itemCount.textContent = `${remainingTasks} items left`;
 }
 
-function hideItemAndButton() {
+function toggleElementsVisibility() {
   if (taskList.length === 0) {
     hr.style.display = "none";
     itemCount.style.display = "none";

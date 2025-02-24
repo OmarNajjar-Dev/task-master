@@ -15,12 +15,13 @@
 // 🎛️ DOM Elements
 const inputField = document.getElementById("task-text");
 const taskContainer = document.getElementById("task-list");
+const searchInput = document.getElementById("search");
 const addButton = document.getElementById("add");
 const clearButton = document.getElementById("clear");
 const selectStatus = document.getElementById("select");
 const itemCount = document.querySelector(".items-count")
+const hr = document.querySelector("hr");
 const filterButtons = document.querySelectorAll("#filters button");
-const searchInput = document.getElementById("search");
 const darkMode = document.getElementById("dark-mode");
 const body = document.body;
 
@@ -302,9 +303,11 @@ function updateItemCount() {
 
 function hideItemAndButton() {
   if (taskList.length === 0) {
+    hr.style.display = "none";
     itemCount.style.display = "none";
     filterButtons.forEach((btn) => (btn.style.display = "none"));
   } else {
+    hr.style.display = "inline";
     itemCount.style.display = "inline";
     filterButtons.forEach((btn) => (btn.style.display = "inline"));
   }

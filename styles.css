@@ -33,7 +33,6 @@ main {
   flex-direction: column;
   gap: 2em;
   transition: background-color 0.3s ease;
-  position: relative;
 }
 .dark-mode main {
   background-color: #121212;
@@ -121,13 +120,8 @@ button:hover {
   border: none;
   padding: 10px 20px;
   cursor: pointer;
-  border-radius: 50%;
+  border-radius: 5px;
   transition: background 0.1s ease-in-out;
-  width: 5em;
-  height: 5em;
-  position: absolute;
-  top: 1em;
-  right: 1em;
 }
 #dark-mode:hover {
   background-color: #555;
@@ -174,7 +168,8 @@ button:hover {
   flex-wrap: wrap;
   gap: 0.8em;
 }
-#add-task button, #add-task input {
+#add-task button,
+#add-task input {
   padding: 1em;
 }
 #add-task input {
@@ -366,6 +361,23 @@ hr {
 .dark-mode #filter-tasks #filters button.active {
   background-color: #bb86fc;
   box-shadow: 0 0 5px #bb86fc;
+}
+
+#dark-mode {
+  background-color: #333;
+  color: #e0e0e0;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.1s ease-in-out;
+  width: 5em;
+  height: 5em;
+  position: absolute;
+  font-size: 14px;
+}
+#dark-mode:hover {
+  background-color: #555;
 }
 
 /* 📱 11. Responsive Design */

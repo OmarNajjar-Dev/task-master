@@ -209,7 +209,8 @@ $buttons: (
 #add-task {
   @include flex-container;
 
-  button, input {
+  button,
+  input {
     padding: 1em;
   }
 
@@ -395,13 +396,12 @@ hr {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+
   .items-count {
     color: gray;
   }
 
   #filters {
-
     button {
       padding: 0.7em 1.5em;
       border: none;
@@ -436,6 +436,24 @@ hr {
         }
       }
     }
+  }
+}
+
+#dark-mode {
+  background-color: #333;
+  color: #e0e0e0;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.1s ease-in-out;
+  width: 5em;
+  height: 5em;
+  position: absolute;
+  font-size: 14px;
+
+  &:hover {
+     background-color: #555;
   }
 }
 

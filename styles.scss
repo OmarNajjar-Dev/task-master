@@ -286,6 +286,11 @@ $buttons: (
       color: $dark-accent;
     }
 
+    &:hover {
+      transform: translateY(-3px);
+      transition: transform 0.3s ease;
+    }
+
     .left-side,
     .right-side {
       display: flex;

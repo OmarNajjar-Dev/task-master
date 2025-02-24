@@ -184,18 +184,26 @@ button:hover {
 #task-list .task .edit {
   background-color: #f5c00d;
 }
+#task-list .task .save,
+#task-list .task .cancel {
+  box-sizing: content-box;
+  padding: 0.5em 0.75em;
+}
+#task-list .task .save {
+  background-color: #34c66c;
+  color: white;
+}
+#task-list .task .cancel {
+  background-color: #c3c3c3;
+  color: white;
+}
 #task-list .task .edit-input {
   padding: 1em;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 0.5em;
   font-size: 1em;
   width: 15em;
   margin-right: 0.5em;
-}
-#task-list .task .edit-input:focus {
-  outline: none;
-  border-color: #f5c00d;
-  box-shadow: 0 0 3px rgba(245, 192, 13, 0.5);
 }
 #task-list .task input[type=checkbox] {
   width: 20px;

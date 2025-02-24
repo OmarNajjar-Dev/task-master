@@ -136,6 +136,7 @@ function addTaskToArray(input) {
   addElementsToPageFrom(taskList);
   addDataToLocalStorageFrom(taskList);
   updateItemCount();
+  hideItemAndButton();
 }
 
 // 🔄 Render Tasks to Page
@@ -180,6 +181,7 @@ function getDataFromLocalStorage() {
     body.classList.add("dark-mode");
     darkMode.textContent = "☀ Light Mode";
   }
+  hideItemAndButton();
 }
 
 // 🗑️ Delete Task
@@ -188,6 +190,7 @@ function deleteTaskWith(taskId) {
   addDataToLocalStorageFrom(taskList);
   addElementsToPageFrom(taskList);
   updateItemCount();
+  hideItemAndButton();
 }
 
 // ✅ Toggle Task Status
@@ -206,6 +209,7 @@ function clearAllTasks() {
   localStorage.removeItem("tasks");
   addElementsToPageFrom(taskList);
   updateItemCount();
+  hideItemAndButton();
 }
 
 // 🔍 Search Tasks
@@ -294,4 +298,14 @@ function toggleDarkMode() {
 function updateItemCount() {
   const remainingTasks = taskList.filter((task) => !task.completed).length;
   itemCount.textContent = `${remainingTasks} items left`;
+}
+
+function hideItemAndButton() {
+  if (taskList.length === 0) {
+    itemCount.style.display = "none";
+    filterButtons.forEach((btn) => (btn.style.display = "none"));
+  } else {
+    itemCount.style.display = "inline";
+    filterButtons.forEach((btn) => (btn.style.display = "inline"));
+  }
 }

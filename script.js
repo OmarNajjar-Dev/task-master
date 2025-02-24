@@ -1,4 +1,18 @@
-// DOM Elements
+/**
+ * 🎯 Task Manager Application
+ * A feature-rich task management system with filtering, searching, and dark mode
+ * 
+ * Features:
+ * - ✨ Add, edit and delete tasks
+ * - 🔍 Search tasks
+ * - 🏷️ Filter tasks by status
+ * - 🌓 Dark/Light mode toggle
+ * - 💾 Local storage persistence
+ * - ⌨️ Keyboard shortcuts
+ * - 🎨 SVG icons and animations
+ */
+
+// 🎛️ DOM Elements
 const inputField = document.getElementById("task-text");
 const taskContainer = document.getElementById("task-list");
 const addButton = document.getElementById("add");
@@ -6,8 +20,10 @@ const clearButton = document.getElementById("clear");
 const selectStatus = document.getElementById("select");
 const filterButtons = document.querySelectorAll("#filters button");
 const searchInput = document.getElementById("search");
+const darkMode = document.getElementById("dark-mode");
+const body = document.body;
 
-// SVG Icons for task buttons
+// 🎨 SVG Icons for task buttons
 const icons = {
   edit: `
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -22,306 +38,247 @@ const icons = {
     </svg>`,
 };
 
-// Colors for button states
+// 🎨 Colors for button states
 const colors = {
   active: "#34c66c",
   inactive: "#a4e5ba",
 };
 
-// Array for storing the tasks
-var taskList = [];
+// 📦 Array for storing the tasks
+let taskList = [];
 
-// Initialize the current status as all
-var currentFilter = "all";
+// 🏷️ Initialize the current status as all
+let currentFilter = "all";
 
-var debounceTimeout;
+// ⏲️ Debounce timer
+let debounceTimeout;
 
-// Retrieve data from local storage
+// 🚀 Initialize app
 getDataFromLocalStorage();
+initializeEventListeners();
 
-// Initialize all event listeners
-addButton.addEventListener("click", () => addTaskToArray(inputField.value));
-inputField.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") addTaskToArray(inputField.value);
-});
-inputField.addEventListener("input", updateAddButtonColor);
-inputField.addEventListener("input", search);
-clearButton.addEventListener("click", clearAllTasks);
-searchInput.addEventListener("input", (e) => searchTasks(e.target.value));
+// 🎮 Event Listeners Setup
+function initializeEventListeners() {
+  addButton.addEventListener("click", () => addTaskToArray(inputField.value));
+  inputField.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") addTaskToArray(inputField.value);
+  });
+  inputField.addEventListener("input", () => {
+    updateAddButtonColor();
+  });
+  clearButton.addEventListener("click", clearAllTasks);
+  searchInput.addEventListener("input", (e) => searchTasks(e.target.value));
 
-// 🔘 Filter Button Clicks
-filterButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    filterButtons.forEach((btn) => btn.classList.remove("active"));
-    button.classList.add("active");
-    currentFilter = button.dataset.filter;
-    // Synchronize select element with the button filter
-    selectStatus.value = currentFilter;
+  // 🔘 Filter Button Clicks
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      filterButtons.forEach((btn) => btn.classList.remove("active"));
+      button.classList.add("active");
+      currentFilter = button.dataset.filter;
+      selectStatus.value = currentFilter;
+      filterTasks();
+    });
+  });
+
+  // 📑 Select Filter Change
+  selectStatus.addEventListener("change", () => {
+    currentFilter = selectStatus.value;
+    filterButtons.forEach((btn) => {
+      btn.classList.toggle("active", btn.dataset.filter === currentFilter);
+    });
     filterTasks();
   });
-});
 
-// 🔽 Select Filter Change
-selectStatus.addEventListener("change", () => {
-  currentFilter = selectStatus.value;
-  // Update filter buttons to match the select value
-  filterButtons.forEach((btn) => {
-    if (btn.dataset.filter === currentFilter) {
-      btn.classList.add("active");
-    } else {
-      btn.classList.remove("active");
-    }
-  });
-  filterTasks();
-});
+  // 📋 Task Container Click Events
+  taskContainer.addEventListener("click", handleTaskContainerClick);
 
-// Handle click events on task elements
-taskContainer.addEventListener("click", (e) => {
-  // Find the closest task element
-  const taskElement = e.target.closest(".task");
-  if (e.target.closest(".clear")) {
-    // Remove the task from the page
-    taskElement.remove();
-    // Remove the task from local storage
-    deleteTaskWith(taskElement.getAttribute("data-id"));
-  }
-
-  if (e.target.type === "checkbox") {
-    // Toggle done class
-    taskElement.classList.toggle("done");
-
-    // Toggle completed for the task
-    toggleTaskStatusWith(taskElement.getAttribute("data-id"));
-  }
-
-  if (e.target.classList.contains("edit")) {
-    editTask(taskElement.getAttribute("data-id"));
-  }
-});
-
-// Function to update the add button color
-function updateAddButtonColor() {
-  addButton.style.backgroundColor = inputField.value
-    ? colors.active
-    : colors.inactive;
+  // 🌓 Dark Mode Toggle
+  darkMode.addEventListener("click", toggleDarkMode);
 }
 
-// Function to add a task to the initial array
+// 🖱️ Handle Task Container Click Events
+function handleTaskContainerClick(e) {
+  const taskElement = e.target.closest(".task");
+  if (!taskElement) return;
+
+  const taskId = taskElement.getAttribute("data-id");
+
+  if (e.target.closest(".clear")) {
+    deleteTaskWith(taskId);
+  } else if (e.target.type === "checkbox") {
+    taskElement.classList.toggle("done");
+    toggleTaskStatusWith(taskId);
+  } else if (e.target.closest(".edit")) {
+    editTask(taskId);
+  }
+}
+
+// 🎨 Update Add Button Color
+function updateAddButtonColor() {
+  addButton.style.backgroundColor = inputField.value ? colors.active : colors.inactive;
+}
+
+// ➕ Add New Task
 function addTaskToArray(input) {
+  const trimmedInput = input.trim();
+  if (!trimmedInput) return;
+
   const task = {
     id: Date.now(),
-    title: input,
+    title: trimmedInput,
     completed: false,
   };
 
-  // Clear the input field
-  inputField.value = "";
-
-  // Push the task into the array
   taskList.push(task);
-
-  // Update the color of the add button
+  inputField.value = "";
   updateAddButtonColor();
-
-  // Display tasks on the page
   addElementsToPageFrom(taskList);
-
-  // Add the task to local storage
   addDataToLocalStorageFrom(taskList);
 }
 
-function addElementsToPageFrom(taskList) {
-  // Empty the task container to avoid duplication
-  taskContainer.innerHTML = "";
-
-  // Display an empty state if there are no tasks
-  if (taskList.length === 0) {
-    taskContainer.innerHTML = `
-        <span class="icon">📝</span>
-        <p class="empty-message">
-          No tasks found. Add some tasks to get started!
-        </p>
-      `;
-    return;
-  }
-
-  taskList.forEach((task) => {
-    // Initialize the main div
-    const div = document.createElement("div");
-    div.setAttribute("data-id", task.id);
-    div.className = "task";
-    if (task.completed) div.classList.add("done");
-
-    // The left side contains the checkbox and task title
-    const leftSide = document.createElement("span");
-    leftSide.className = "left-side";
-
-    // Initialize the checkbox
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.name = "task-completed";
-    checkbox.checked = task.completed;
-
-    // Initialize a span for the task title
-    const span = document.createElement("span");
-    span.innerHTML = task.title;
-    span.className = "text";
-
-    // Add the checkbox and the title to the left side span
-    leftSide.append(checkbox, span);
-
-    // The right side contains the edit and delete buttons
-    const rightSide = document.createElement("span");
-    rightSide.className = "right-side";
-
-    // Initialize the edit button
-    const editButton = document.createElement("button");
-    editButton.className = "edit";
-    editButton.innerHTML = icons.edit;
-
-    // Initialize the delete button
-    const removeButton = document.createElement("button");
-    removeButton.className = "clear";
-    removeButton.innerHTML = icons.clear;
-
-    // Add the edit and delete buttons to the right side span
-    rightSide.append(editButton, removeButton);
-
-    // Add the left and right sides to the main div
-    div.append(leftSide, rightSide);
-
-    // Finally, append the main div to the task container
-    taskContainer.appendChild(div);
-  });
+// 🔄 Render Tasks to Page
+function addElementsToPageFrom(tasks) {
+  taskContainer.innerHTML = tasks.length === 0 
+    ? `<span class="icon">📝</span>
+       <p class="empty-message">No tasks found. Add some tasks to get started!</p>`
+    : tasks.map(task => createTaskElement(task)).join("");
 }
 
-// Function to store tasks in local storage
-function addDataToLocalStorageFrom(taskList) {
-  window.localStorage.setItem("tasks", JSON.stringify(taskList));
+// 🏗️ Create Task Element HTML
+function createTaskElement(task) {
+  return `
+    <div class="task ${task.completed ? "done" : ""}" data-id="${task.id}">
+      <span class="left-side">
+        <input type="checkbox" name="task-completed" ${task.completed ? "checked" : ""}>
+        <span class="text">${task.title}</span>
+      </span>
+      <span class="right-side">
+        <button class="edit">${icons.edit}</button>
+        <button class="clear">${icons.clear}</button>
+      </span>
+    </div>
+  `;
 }
 
-// Function to retrieve tasks from local storage
+// 💾 Local Storage Operations
+function addDataToLocalStorageFrom(tasks) {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
 function getDataFromLocalStorage() {
-  const data = window.localStorage.getItem("tasks");
+  const data = localStorage.getItem("tasks");
   if (data) {
     taskList = JSON.parse(data);
     addElementsToPageFrom(taskList);
   }
+  
+  if (localStorage.getItem("darkMode") === "enabled") {
+    body.classList.add("dark-mode");
+    darkMode.textContent = "☀ Light Mode";
+  }
 }
 
+// 🗑️ Delete Task
 function deleteTaskWith(taskId) {
-  taskList = taskList.filter((task) => task.id !== Number(taskId));
+  taskList = taskList.filter(task => task.id !== Number(taskId));
   addDataToLocalStorageFrom(taskList);
   addElementsToPageFrom(taskList);
 }
 
+// ✅ Toggle Task Status
 function toggleTaskStatusWith(taskId) {
-  for (let i = 0; i < taskList.length; i++) {
-    if (taskList[i].id === Number(taskId)) {
-      taskList[i].completed = !taskList[i].completed;
-    }
+  const task = taskList.find(task => task.id === Number(taskId));
+  if (task) {
+    task.completed = !task.completed;
+    addDataToLocalStorageFrom(taskList);
   }
-  addDataToLocalStorageFrom(taskList);
 }
 
+// 🧹 Clear All Tasks
 function clearAllTasks() {
   taskList = [];
-  taskContainer.innerHTML = "";
-  window.localStorage.removeItem("tasks");
+  localStorage.removeItem("tasks");
   addElementsToPageFrom(taskList);
 }
 
+// 🔍 Search Tasks
 function searchTasks(query) {
-  const filteredTasks = taskList.filter((task) =>
-    task.title.toLowerCase().includes(query.toLowerCase())
-  );
-  addElementsToPageFrom(filteredTasks);
+  clearTimeout(debounceTimeout);
+  debounceTimeout = setTimeout(() => {
+    filterTasks(query);
+  }, 300);
 }
 
-// 🔍 Filter Tasks
+// 🏷️ Filter Tasks
 function filterTasks() {
+  const searchQuery = searchInput.value.trim().toLowerCase();
   let filteredTasks = taskList;
+
   if (currentFilter === "active") {
-    filteredTasks = filteredTasks.filter((task) => !task.completed);
+    filteredTasks = filteredTasks.filter(task => !task.completed);
   } else if (currentFilter === "completed") {
-    filteredTasks = filteredTasks.filter((task) => task.completed);
+    filteredTasks = filteredTasks.filter(task => task.completed);
   }
-  const query = searchInput.value.trim().toLowerCase();
-  if (query !== "") {
-    filteredTasks = filteredTasks.filter((task) =>
-      task.title.toLowerCase().includes(query)
+
+  if (searchQuery) {
+    filteredTasks = filteredTasks.filter(task => 
+      task.title.toLowerCase().includes(searchQuery)
     );
   }
+
   addElementsToPageFrom(filteredTasks);
 }
 
-// ⏳ Debounce Search Input
-function debounceFilterTasks() {
-  clearTimeout(debounceTimeout);
-  debounceTimeout = setTimeout(filterTasks, 300);
-}
-
+// ✏️ Edit Task
 function editTask(taskId) {
-  const task = taskList.find((task) => task.id === Number(taskId));
-  if (!task) return;
-
   const taskElement = document.querySelector(`[data-id="${taskId}"]`);
   if (!taskElement) return;
 
   const textSpan = taskElement.querySelector(".text");
-  if (!textSpan) return;
-
   const checkbox = taskElement.querySelector('input[type="checkbox"]');
-  if (checkbox) checkbox.style.display = "none";
+  const rightSide = taskElement.querySelector(".right-side");
 
+  checkbox.style.display = "none";
+  
   const input = document.createElement("input");
   input.type = "text";
   input.className = "edit-input";
   input.value = textSpan.textContent;
-  
   textSpan.replaceWith(input);
 
-  // Replace edit and delete buttons with save and cancel
-  const rightSide = taskElement.querySelector(".right-side");
-  const oldButtons = rightSide.querySelectorAll("button");
-  
-  const saveButton = document.createElement("button");
-  saveButton.className = "save";
-  saveButton.innerHTML = "Save";
+  rightSide.innerHTML = `
+    <button class="save">Save</button>
+    <button class="cancel">Cancel</button>
+  `;
 
-  const cancelButton = document.createElement("button");
-  cancelButton.className = "cancel";
-  cancelButton.innerHTML = "Cancel";
-
-  oldButtons.forEach(button => button.remove());
-  rightSide.append(saveButton, cancelButton);
-
-  function handleSave() {
+  const saveChanges = () => {
     const newTitle = input.value.trim();
     if (newTitle) {
-      task.title = newTitle;
-      addDataToLocalStorageFrom(taskList);
+      const task = taskList.find(t => t.id === Number(taskId));
+      if (task) {
+        task.title = newTitle;
+        addDataToLocalStorageFrom(taskList);
+      }
     }
-    if (checkbox) checkbox.style.display = "";
     filterTasks();
-  }
+  };
 
-  function handleCancel() {
-    if (checkbox) checkbox.style.display = "";
-    filterTasks();
-  }
-
-  saveButton.addEventListener("click", handleSave);
-  cancelButton.addEventListener("click", handleCancel);
+  rightSide.querySelector(".save").addEventListener("click", saveChanges);
+  rightSide.querySelector(".cancel").addEventListener("click", filterTasks);
 
   input.addEventListener("keyup", (e) => {
-    if (e.key === "Enter") {
-      handleSave();
-    } else if (e.key === "Escape") {
-      handleCancel();
-    }
+    if (e.key === "Enter") saveChanges();
+    if (e.key === "Escape") filterTasks();
   });
 
   input.focus();
   input.select();
+}
+
+// 🌓 Toggle Dark Mode
+function toggleDarkMode() {
+  body.classList.toggle("dark-mode");
+  const isDarkMode = body.classList.contains("dark-mode");
+  localStorage.setItem("darkMode", isDarkMode ? "enabled" : "disabled");
+  darkMode.textContent = isDarkMode ? "☀ Light Mode" : "🌙 Dark Mode";
 }

@@ -7,6 +7,13 @@ $edit-button: #f5c00d;
 $accent-color: #3894df;
 $border-radius: 0.5em;
 
+/* In dark mode */
+$dark-primary: #121212;
+$dark-secondary: #1d1d1d;
+$dark-accent: #e0e0e0;
+$highlight-color: #bb86fc;
+$border-color: #333;
+
 /* 🛠️ 2. Mixins */
 @mixin flex-container {
   display: flex;
@@ -28,13 +35,18 @@ $border-radius: 0.5em;
 
 /* 📄 4. General Page Layout */
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: sans-serif;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background: linear-gradient(135deg, #677ce7, #724da4);
   padding: 20% 5%;
+  transition: background 0.3s ease;
+
+  &.dark-mode {
+    background: linear-gradient(135deg, #4a56e2, #5b3f96);
+  }
 }
 
 main {
@@ -45,6 +57,11 @@ main {
   display: flex;
   flex-direction: column;
   gap: 2em;
+  transition: background-color 0.3s ease;
+
+  .dark-mode & {
+    background-color: $dark-primary;
+  }
 }
 
 #search-tasks *,
@@ -63,10 +80,18 @@ header {
   h1 {
     color: $accent-color;
     font-size: 2.5em;
+
+    .dark-mode & {
+      color: $dark-accent;
+    }
   }
 
   path {
     stroke: $accent-color;
+
+    .dark-mode & {
+      stroke: $dark-accent;
+    }
   }
 
   p {
@@ -86,6 +111,17 @@ select {
     border-color: $accent-color;
     box-shadow: 0 0 10px $accent-color;
   }
+
+  .dark-mode & {
+    background-color: $dark-secondary;
+    color: $dark-accent;
+    border-color: $border-color;
+
+    &:focus {
+      border-color: $highlight-color;
+      box-shadow: 0 0 10px $highlight-color;
+    }
+  }
 }
 
 button {
@@ -94,6 +130,36 @@ button {
 
   &:hover {
     opacity: 0.9;
+  }
+
+  .dark-mode & {
+    &:hover {
+      background-color: $highlight-color;
+      color: $dark-accent;
+    }
+  }
+}
+
+input {
+  .dark-mode & {
+    &:focus {
+      border-color: $highlight-color;
+      box-shadow: 0 0 10px $highlight-color;
+    }
+  }
+}
+
+#dark-mode {
+  background-color: #333;
+  color: $dark-accent;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.1s ease-in-out;
+
+  &:hover {
+    background-color: #555;
   }
 }
 
@@ -136,6 +202,10 @@ $buttons: (
       padding: 0.75em 1.5em;
       order: 4;
     }
+
+    .dark-mode & {
+      color: $dark-accent;
+    }
   }
 }
 
@@ -143,8 +213,7 @@ $buttons: (
 #add-task {
   @include flex-container;
 
-  input,
-  button {
+  button, input {
     padding: 1em;
   }
 
@@ -164,6 +233,11 @@ $buttons: (
   height: 13em;
   padding: 0.8em;
   gap: 0.5em;
+  transition: background-color 0.3s ease;
+
+  .dark-mode & {
+    background-color: $dark-secondary;
+  }
 
   span.icon {
     font-size: 40px;
@@ -175,6 +249,16 @@ $buttons: (
     margin-top: 20px;
   }
 
+  .task.done {
+    opacity: 0.7;
+    color: #aaa;
+
+    .dark-mode & {
+      background-color: $dark-secondary;
+      color: $dark-accent;
+    }
+  }
+
   .task {
     display: flex;
     align-items: center;
@@ -182,6 +266,15 @@ $buttons: (
     border-radius: $border-radius;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 0.75em;
+    background-color: $primary-color;
+    transition: background-color 0.3s ease;
+    color: black;
+
+    .dark-mode & {
+      background-color: $dark-primary;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      color: $dark-accent;
+    }
 
     .left-side,
     .right-side {
@@ -213,10 +306,12 @@ $buttons: (
 
     .clear {
       background-color: #e54c3c;
+      color: $dark-accent;
     }
 
     .edit {
       background-color: #f5c00d;
+      color: $dark-accent;
     }
 
     .save,
@@ -227,12 +322,12 @@ $buttons: (
 
     .save {
       background-color: $add-button;
-      color: white;
+      color: $dark-accent;
     }
 
     .cancel {
       background-color: #c3c3c3;
-      color: white
+      color: $dark-accent;
     }
 
     .edit-input {
@@ -242,6 +337,12 @@ $buttons: (
       font-size: 1em;
       width: 15em;
       margin-right: 0.5em;
+
+      .dark-mode & {
+        background-color: $dark-secondary;
+        color: $dark-accent;
+        border-color: $border-color;
+      }
     }
 
     input[type="checkbox"] {
@@ -256,6 +357,10 @@ $buttons: (
       position: relative;
       margin-right: 1.5em;
 
+      .dark-mode & {
+        background-color: $dark-secondary;
+      }
+
       &:hover {
         background-color: #ccc;
       }
@@ -266,7 +371,7 @@ $buttons: (
 
         &::after {
           content: "✔";
-          color: white;
+          color: $dark-accent;
           font-size: 16px;
           position: absolute;
           top: 50%;
@@ -284,6 +389,10 @@ hr {
   background-color: #eeeeee;
   border: none;
   height: 1px;
+
+  .dark-mode & {
+    background-color: $border-color;
+  }
 }
 
 #filter-tasks {
@@ -300,15 +409,30 @@ hr {
       cursor: pointer;
       transition: 0.2s ease-in-out;
 
+      .dark-mode & {
+        background-color: $dark-primary;
+        color: $dark-accent;
+      }
+
       &:hover {
         background-color: $accent-color;
+        color: $dark-accent;
+
+        .dark-mode & {
+          background-color: $highlight-color;
+        }
       }
 
       &.active {
         background-color: $accent-color;
-        color: $primary-color;
+        color: $dark-accent;
         outline: none;
         box-shadow: 0 0 5px $accent-color;
+
+        .dark-mode & {
+          background-color: $highlight-color;
+          box-shadow: 0 0 5px $highlight-color;
+        }
       }
     }
   }

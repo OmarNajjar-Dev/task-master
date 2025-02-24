@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>To Do List</title>
+    <meta name="description" content="Task Master - A feature-rich task management application" />
+    <title>Task Master | Organize Your Tasks Efficiently</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -17,8 +21,9 @@
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
             style="vertical-align: middle"
+            aria-hidden="true"
           >
-            <path d="M20 6L9 17l-5-5" stroke-width="4" fill="none" />
+            <path d="M20 6L9 17l-5-5" stroke-width="4" fill="none" stroke="currentColor" />
           </svg>
           Task Master
         </h1>
@@ -26,49 +31,57 @@
       </header>
 
       <!-- 🔍 Search Section -->
-      <section id="search-tasks">
+      <section id="search-tasks" aria-label="Search and filter tasks">
         <div class="input-container">
-          <span class="icon">🔍</span>
-          <input type="search" id="search" placeholder="Search tasks..." />
+          <span class="icon" aria-hidden="true">🔍</span>
+          <input 
+            type="search" 
+            id="search" 
+            placeholder="Search tasks..." 
+            aria-label="Search tasks"
+          />
         </div>
-        <select id="select" name="status">
-          <option value="all">📋All Tasks</option>
-          <option value="completed">✅Completed</option>
-          <option value="active">⏳Pending</option>
+        <select id="select" name="status" aria-label="Filter tasks by status">
+          <option value="all">📋 All Tasks</option>
+          <option value="completed">✅ Completed</option>
+          <option value="active">⏳ Pending</option>
         </select>
-        <button id="clear">🗑️ Clear All</button>
+        <button id="clear" type="button">🗑️ Clear All</button>
       </section>
 
       <!-- 📝 Add Task Section -->
-      <section id="add-task">
+      <section id="add-task" aria-label="Add new task">
         <input
           type="text"
           id="task-text"
           placeholder="What needs to be done?"
+          aria-label="Enter task description"
         />
-        <button id="add" class="add">Add Task</button>
+        <button id="add" class="add" type="button">Add Task</button>
       </section>
 
       <!-- 📋 Task List Section -->
-      <section id="task-list">
-        <span class="icon">📝</span>
-        <p class="empty-message">
+      <section id="task-list" aria-label="Task list">
+        <span class="icon" aria-hidden="true">📝</span>
+        <p class="empty-message" role="status">
           No tasks found. Add some tasks to get started!
         </p>
       </section>
 
-      <hr />
+      <hr aria-hidden="true" />
 
       <!-- 🔘 Filters Section -->
-      <section id="filter-tasks">
-        <div class="items-count"></div>
-        <div id="filters">
-          <button data-filter="all" class="active">All</button>
-          <button data-filter="active">Active</button>
-          <button data-filter="completed">Completed</button>
+      <section id="filter-tasks" aria-label="Filter options">
+        <div class="items-count" role="status" aria-live="polite"></div>
+        <div id="filters" role="group" aria-label="Filter tasks">
+          <button data-filter="all" class="active" type="button">All</button>
+          <button data-filter="active" type="button">Active</button>
+          <button data-filter="completed" type="button">Completed</button>
         </div>
       </section>
+
+      <button id="dark-mode" type="button">🌙 Dark Mode</button>
     </main>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
   </body>
 </html>

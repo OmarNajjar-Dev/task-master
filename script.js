@@ -106,7 +106,10 @@ function handleTaskContainerClick(e) {
   const taskId = taskElement.getAttribute("data-id");
 
   if (e.target.closest(".clear")) {
-    deleteTaskWith(taskId);
+    taskElement.classList.add("delete");
+    setTimeout(() => {
+      deleteTaskWith(taskId);
+    }, 300);
   } else if (e.target.type === "checkbox") {
     taskElement.classList.toggle("done");
     toggleTaskStatusWith(taskId);
@@ -137,6 +140,16 @@ function addTaskToArray(input) {
   inputField.value = "";
   updateAddButtonColor();
   addElementsToPageFrom(taskList);
+  
+  // Add animation class to new task
+  const newTaskElement = document.querySelector(`[data-id="${task.id}"]`);
+  if (newTaskElement) {
+    newTaskElement.classList.add("new");
+    setTimeout(() => {
+      newTaskElement.classList.remove("new");
+    }, 300);
+  }
+  
   addDataToLocalStorageFrom(taskList);
   updateItemCount();
   toggleElementsVisibility();
@@ -211,11 +224,18 @@ function toggleTaskStatusWith(taskId) {
 
 // 🧹 Clear All Tasks
 function clearAllTasks() {
-  taskList = [];
-  localStorage.removeItem("tasks");
-  addElementsToPageFrom(taskList);
-  updateItemCount();
-  toggleElementsVisibility();
+  const tasks = document.querySelectorAll('.task');
+  tasks.forEach(task => {
+    task.classList.add('delete');
+  });
+  
+  setTimeout(() => {
+    taskList = [];
+    localStorage.removeItem("tasks");
+    addElementsToPageFrom(taskList);
+    updateItemCount();
+    toggleElementsVisibility();
+  }, 300);
 }
 
 // 🔍 Search Tasks

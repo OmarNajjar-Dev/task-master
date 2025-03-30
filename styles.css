@@ -2,11 +2,11 @@
 /* 🎨 1. Global Variables
    Define the main color palette and common values used throughout the application */
 /* 🌙 Dark Mode Colors
-   Color scheme used when dark mode is enabled */
+      Color scheme used when dark mode is enabled */
 /* 🧰 2. Mixins
-   Reusable style patterns to maintain consistency and reduce code duplication */
+      Reusable style patterns to maintain consistency and reduce code duplication */
 /* 🔄 3. Reset Default Styles
-   Remove browser default styles for consistent cross-browser rendering */
+      Remove browser default styles for consistent cross-browser rendering */
 * {
   margin: 0;
   padding: 0;
@@ -14,7 +14,7 @@
 }
 
 /* 📐 4. General Page Layout
-   Core layout structure and container styling */
+      Core layout structure and container styling */
 body {
   font-family: sans-serif;
   height: 100vh;
@@ -49,7 +49,7 @@ main {
 }
 
 /* 📝 5. Header Section
-   App title, logo and description styling */
+      App title, logo and description styling */
 header {
   display: flex;
   flex-direction: column;
@@ -75,7 +75,7 @@ header p {
 }
 
 /* 🎛️ 6. Form Elements
-   Shared styles for interactive elements like inputs, buttons and selects */
+      Shared styles for interactive elements like inputs, buttons and selects */
 input,
 button,
 select {
@@ -111,6 +111,12 @@ button {
 button:hover {
   opacity: 0.9;
 }
+button:disabled {
+  cursor: not-allowed;
+}
+button:disabled:hover {
+  opacity: 1;
+}
 .dark-mode button:hover {
   background-color: #bb86fc;
   color: #e0e0e0;
@@ -121,21 +127,8 @@ button:hover {
   box-shadow: 0 0 10px #bb86fc;
 }
 
-#dark-mode {
-  background-color: #333;
-  color: #e0e0e0;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background 0.1s ease-in-out;
-}
-#dark-mode:hover {
-  background-color: #555;
-}
-
 /* 🔍 7. Search Section
-   Search input and filter dropdown styling */
+      Search input and filter dropdown styling */
 #search-tasks {
   display: flex;
   flex-wrap: wrap;
@@ -158,10 +151,11 @@ button:hover {
 }
 
 /* 🎯 8. Action Buttons
-   Styling for primary action buttons using SCSS Map */
+      Styling for primary action buttons using SCSS Map */
 #clear {
   background-color: #e54c3c;
   color: white;
+  transition: background 0.3s ease-in-out;
   padding: 0.75em 1.5em;
   order: 4;
 }
@@ -169,10 +163,11 @@ button:hover {
 #add {
   background-color: #a4e5ba;
   color: white;
+  transition: background 0.3s ease-in-out;
 }
 
 /* ➕ 9. Task Creation
-   New task input and add button container */
+      New task input and add button container */
 #add-task {
   display: flex;
   flex-wrap: wrap;
@@ -187,7 +182,7 @@ button:hover {
 }
 
 /* 📋 10. Task List
-   Container and individual task item styling */
+      Container and individual task item styling */
 #task-list {
   display: flex;
   flex-direction: column;
@@ -420,16 +415,15 @@ hr {
 
 #dark-mode {
   background-color: #333;
-  color: #e0e0e0;
-  border: none;
-  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   border-radius: 50%;
   transition: background 0.1s ease-in-out;
   width: 5em;
   height: 5em;
   position: absolute;
-  font-size: 14px;
   top: 1em;
   right: 1em;
 }
@@ -438,7 +432,7 @@ hr {
 }
 
 /* 📱 11. Responsive Design
-   Mobile-first approach with breakpoints for different screen sizes */
+      Mobile-first approach with breakpoints for different screen sizes */
 @media screen and (max-width: 400px) {
   #search-tasks,
   #add-task {

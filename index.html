@@ -1,84 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Task Master - A feature-rich task management application" />
-    <title>Task Master | Organize Your Tasks Efficiently</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <main>
-      <!-- 🔹 Header Section -->
-      <header>
-        <h1>
-          <svg
-            width="30"
-            height="30"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-            style="vertical-align: middle"
-            aria-hidden="true"
-          >
-            <path d="M20 6L9 17l-5-5" stroke-width="4" fill="none" stroke="currentColor" />
-          </svg>
-          Task Master
-        </h1>
-        <p>Organize your tasks efficiently</p>
-      </header>
 
-      <!-- 🔍 Search Section -->
-      <section id="search-tasks" aria-label="Search and filter tasks">
-        <div class="input-container">
-          <span class="icon" aria-hidden="true">🔍</span>
-          <input 
-            type="search" 
-            id="search" 
-            placeholder="Search tasks..." 
-            aria-label="Search tasks"
-          />
-        </div>
-        <select id="select" name="status" aria-label="Filter tasks by status">
-          <option value="all">📋 All Tasks</option>
-          <option value="completed">✅ Completed</option>
-          <option value="active">⏳ Pending</option>
-        </select>
-        <button id="clear" type="button">🗑️ Clear All</button>
-      </section>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Task Master - A feature-rich task management application" />
+  <title>Task Master | Organize Your Tasks Efficiently</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
 
-      <!-- 📝 Add Task Section -->
-      <section id="add-task" aria-label="Add new task">
-        <input
-          type="text"
-          id="task-text"
-          placeholder="What needs to be done?"
-          aria-label="Enter task description"
-        />
-        <button id="add" class="add" type="button">Add Task</button>
-      </section>
+<body>
+  <main>
+    <!-- 🔹 Header Section -->
+    <header>
+      <h1>
+        <svg width="30" height="30" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+          style="vertical-align: middle" aria-hidden="true">
+          <path d="M20 6L9 17l-5-5" stroke-width="4" fill="none" stroke="currentColor" />
+        </svg>
+        Task Master
+      </h1>
+      <p>Organize your tasks efficiently</p>
+    </header>
 
-      <!-- 📋 Task List Section -->
-      <section id="task-list" aria-label="Task list">
-        <span class="icon" aria-hidden="true">📝</span>
-        <p class="empty-message" role="status">
-          No tasks found. Add some tasks to get started!
-        </p>
-      </section>
+    <!-- 🔍 Search Section -->
+    <section id="search-tasks" aria-label="Search and filter tasks">
+      <div class="input-container">
+        <span class="icon" aria-hidden="true">🔍</span>
+        <input type="search" id="search" placeholder="Search tasks..." aria-label="Search tasks" />
+      </div>
+      <select id="select" name="status" aria-label="Filter tasks by status">
+        <option value="all">📋 All Tasks</option>
+        <option value="completed">✅ Completed</option>
+        <option value="active">⏳ Pending</option>
+      </select>
+      <button id="clear" type="button">🗑️ Clear All</button>
+    </section>
 
-      <hr aria-hidden="true" />
+    <!-- 📝 Add Task Section -->
+    <section id="add-task" aria-label="Add new task">
+      <input type="text" id="task-text" placeholder="What needs to be done?" aria-label="Enter task description" />
+      <button id="add" class="add" type="button" disabled>Add Task</button>
+    </section>
 
-      <!-- 🔘 Filters Section -->
-      <section id="filter-tasks" aria-label="Filter options">
-        <div class="items-count"></div>
-        <div id="filters" role="group" aria-label="Filter tasks">
-          <button data-filter="all" class="active" type="button">All</button>
-          <button data-filter="active" type="button">Active</button>
-          <button data-filter="completed" type="button">Completed</button>
-        </div>
-      </section>
+    <!-- 📋 Task List Section -->
+    <section id="task-list" aria-label="Task list">
+      <span class="icon" aria-hidden="true">📝</span>
+      <p class="empty-message" role="status">
+        No tasks found. Add some tasks to get started!
+      </p>
+    </section>
 
-      <button id="dark-mode" type="button">🌙 Dark Mode</button>
-    </main>
-    <script src="script.js" defer></script>
-  </body>
+    <hr aria-hidden="true" />
+
+    <!-- 🔘 Filters Section -->
+    <section id="filter-tasks" aria-label="Filter options">
+      <div class="items-count"></div>
+      <div id="filters" role="group" aria-label="Filter tasks">
+        <button data-filter="all" class="active" type="button">All</button>
+        <button data-filter="active" type="button">Active</button>
+        <button data-filter="completed" type="button">Completed</button>
+      </div>
+    </section>
+
+    <button id="dark-mode" type="button">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="36px" height="36px">
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            d="M12 22C17.5228 22 22 17.5228 22 12C22 11.5373 21.3065 11.4608 21.0672 11.8568C19.9289 13.7406 17.8615 15 15.5 15C11.9101 15 9 12.0899 9 8.5C9 6.13845 10.2594 4.07105 12.1432 2.93276C12.5392 2.69347 12.4627 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+            fill="#FFD700">
+          </path>
+        </g>
+      </svg>
+    </button>
+  </main>
+  <script src="script.js" defer></script>
+</body>
+
 </html>

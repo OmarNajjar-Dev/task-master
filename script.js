@@ -29,14 +29,14 @@ const body = document.body;
 const icons = {
   edit: `<i class="fa-solid fa-pen"></i>`,
   clear: `<i class="fa-solid fa-xmark"></i>`,
-  light: `<i class="fas fa-sun fa-3x fa-gold"></i> `,
+  light: `<i class="fas fa-sun fa-3x fa-gold"></i>`,
   dark: `<i class="fas fa-moon fa-3x fa-gold"></i>`,
 };
 
 // 🎨 Colors for button states
 const colors = {
-  active: "#34c66c",
-  inactive: "#a4e5ba",
+  active: "var(--add-button)",
+  inactive: "var(--disabled-button)",
 };
 
 // 📦 Array for storing the tasks

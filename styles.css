@@ -3,6 +3,11 @@
    Define the main color palette and common values used throughout the application */
 /* 🌙 Dark Mode Colors
       Color scheme used when dark mode is enabled */
+:root {
+  --add-button: #34c66c;
+  --disabled-button: #a4e5ba;
+}
+
 /* 🧰 2. Mixins
       Reusable style patterns to maintain consistency and reduce code duplication */
 /* 🔄 3. Reset Default Styles
@@ -109,7 +114,7 @@ button {
   cursor: pointer;
 }
 button:hover {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 button:disabled {
   cursor: not-allowed;
@@ -140,6 +145,7 @@ button:disabled:hover {
 }
 #search-tasks #select {
   padding: 0.75em;
+  cursor: pointer;
 }
 #search-tasks .input-container {
   display: flex;
@@ -222,7 +228,6 @@ button:disabled:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 0.75em;
   background-color: white;
-  transition: background-color 0.3s ease;
   color: black;
   flex-wrap: wrap;
   gap: 0.5em;
@@ -263,7 +268,6 @@ button:disabled:hover {
 }
 #task-list .task:hover {
   transform: translateY(-3px);
-  transition: transform 0.3s ease;
 }
 #task-list .task .left-side,
 #task-list .task .right-side {
@@ -288,7 +292,6 @@ button:disabled:hover {
   justify-content: center;
   width: 34px;
   height: 34px;
-  cursor: pointer;
 }
 #task-list .task .clear {
   background-color: #e54c3c;
@@ -388,7 +391,6 @@ hr {
   border: none;
   background-color: white;
   color: #666;
-  cursor: pointer;
   transition: 0.2s ease-in-out;
 }
 .dark-mode #filter-tasks #filters button {
@@ -418,9 +420,8 @@ hr {
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
   border-radius: 50%;
-  transition: background 0.1s ease-in-out;
+  transition: background 0.3s ease-in-out;
   width: 5em;
   height: 5em;
   position: absolute;

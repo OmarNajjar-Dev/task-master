@@ -215,6 +215,7 @@ function toggleTaskStatusWith(taskId) {
     task.completed = !task.completed;
     addDataToLocalStorageFrom(taskList);
     updateItemCount();
+    document.querySelector(`[data-id="${taskId}"] .edit`).disabled = task.completed;
   }
 }
 

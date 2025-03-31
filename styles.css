@@ -28,7 +28,7 @@ body {
   align-items: center;
   background: linear-gradient(135deg, #677ce7, #724da4);
   padding: 20% 5%;
-  transition: background 0.3s ease;
+  transition: all 0.5s ease;
 }
 body.dark-mode {
   background: linear-gradient(135deg, #4a56e2, #5b3f96);
@@ -37,12 +37,13 @@ body.dark-mode {
 main {
   border-radius: 10px;
   background-color: white;
-  text-align: center;
   padding: 1.5em;
   display: flex;
   flex-direction: column;
+  text-align: center;
+  max-width: 550px;
   gap: 2em;
-  transition: background-color 0.3s ease;
+  transition: all 0.5s ease;
 }
 .dark-mode main {
   background-color: #121212;
@@ -84,7 +85,7 @@ header p {
 input,
 button,
 select {
-  transition: 0.1s ease-in-out;
+  transition: background-color 0.3s ease-in-out, box-shadow 0.1s ease-in-out;
   border-radius: 0.5em;
   border: 1px solid #ccc;
 }
@@ -161,7 +162,6 @@ button:disabled:hover {
 #clear {
   background-color: #e54c3c;
   color: white;
-  transition: background 0.3s ease-in-out;
   padding: 0.75em 1.5em;
   order: 4;
 }
@@ -169,7 +169,6 @@ button:disabled:hover {
 #add {
   background-color: #a4e5ba;
   color: white;
-  transition: background 0.3s ease-in-out;
 }
 
 /* ➕ 9. Task Creation
@@ -199,7 +198,7 @@ button:disabled:hover {
   height: 13em;
   padding: 0.8em;
   gap: 0.5em;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.5s ease;
 }
 .dark-mode #task-list {
   background-color: #1d1d1d;
@@ -229,7 +228,6 @@ button:disabled:hover {
   padding: 0.75em;
   background-color: white;
   color: black;
-  flex-wrap: wrap;
   gap: 0.5em;
   opacity: 1;
   transform: translateY(0);
@@ -272,12 +270,21 @@ button:disabled:hover {
 #task-list .task .left-side,
 #task-list .task .right-side {
   display: flex;
+  align-items: center;
   gap: 0.5em;
-  flex-wrap: wrap;
 }
 #task-list .task .left-side button,
 #task-list .task .right-side button {
   width: 3.5em;
+}
+#task-list .task .text {
+  text-align: left;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  word-break: break-all;
+  max-width: 75%;
+  transition: color 1s ease-in-out;
 }
 #task-list .task.done {
   color: #aaa;
@@ -391,7 +398,7 @@ hr {
   border: none;
   background-color: white;
   color: #666;
-  transition: 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 .dark-mode #filter-tasks #filters button {
   background-color: #121212;
@@ -421,7 +428,7 @@ hr {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  transition: background 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   width: 5em;
   height: 5em;
   position: absolute;
@@ -451,6 +458,12 @@ hr {
   }
   #add-task button {
     padding: 0.75em 1.5em;
+  }
+  .task {
+    flex-wrap: wrap;
+  }
+  .right-side {
+    margin-left: auto;
   }
 }
 @media screen and (max-width: 352px) {

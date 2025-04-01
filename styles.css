@@ -28,7 +28,6 @@ body {
   align-items: center;
   background: linear-gradient(135deg, #677ce7, #724da4);
   padding: 20% 5%;
-  transition: all 0.5s ease;
 }
 body.dark-mode {
   background: linear-gradient(135deg, #4a56e2, #5b3f96);
@@ -43,7 +42,6 @@ main {
   text-align: center;
   max-width: 550px;
   gap: 2em;
-  transition: all 0.5s ease;
 }
 .dark-mode main {
   background-color: #121212;
@@ -85,7 +83,6 @@ header p {
 input,
 button,
 select {
-  transition: background-color 0.3s ease-in-out, box-shadow 0.1s ease-in-out;
   border-radius: 0.5em;
   border: 1px solid #ccc;
 }
@@ -119,8 +116,6 @@ button:hover {
 }
 button:disabled {
   cursor: not-allowed;
-}
-button:disabled:hover {
   opacity: 1;
 }
 .dark-mode button:hover {
@@ -198,7 +193,6 @@ button:disabled:hover {
   height: 13em;
   padding: 0.8em;
   gap: 0.5em;
-  transition: background-color 0.5s ease;
 }
 .dark-mode #task-list {
   background-color: #1d1d1d;
@@ -229,35 +223,7 @@ button:disabled:hover {
   background-color: white;
   color: black;
   gap: 0.5em;
-  opacity: 1;
   transform: translateY(0);
-  transition: all 0.3s ease;
-}
-#task-list .task.new {
-  animation: slideIn 0.3s ease;
-}
-#task-list .task.delete {
-  animation: fadeOut 0.3s ease;
-}
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-    transform: scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: scale(0.8);
-  }
 }
 .dark-mode #task-list .task {
   background-color: #121212;
@@ -284,7 +250,6 @@ button:disabled:hover {
   white-space: normal;
   word-break: break-all;
   max-width: 75%;
-  transition: color 1s ease-in-out;
 }
 #task-list .task.done {
   color: #aaa;
@@ -398,7 +363,6 @@ hr {
   border: none;
   background-color: white;
   color: #666;
-  transition: all 0.3s ease-in-out;
 }
 .dark-mode #filter-tasks #filters button {
   background-color: #121212;
@@ -428,7 +392,6 @@ hr {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  transition: all 0.3s ease-in-out;
   width: 5em;
   height: 5em;
   position: absolute;

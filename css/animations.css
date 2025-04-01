@@ -1,0 +1,68 @@
+/* =======================
+   Animations
+======================= */
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+}
+
+.new {
+    animation: slideIn 0.3s ease forwards;
+}
+
+.delete {
+    animation: fadeOut 0.3s ease forwards;
+}
+
+/* =======================
+     Transitions
+  ======================= */
+
+body,
+main,
+#task-list {
+    transition: background-color 0.5s ease;
+}
+
+input,
+button,
+select {
+    transition: background-color 0.3s ease-in-out,
+        color 0.3s ease-in-out,
+        box-shadow 0.3s ease-in-out;
+}
+
+.task {
+    transition: background-color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        opacity 0.3s ease;
+}
+
+.text {
+    transition: color 0.7s ease-in-out;
+}
+
+#dark-mode {
+    transition: background-color 0.3s ease-in-out,
+}

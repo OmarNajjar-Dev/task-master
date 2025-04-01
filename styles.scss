@@ -53,7 +53,6 @@ body {
   align-items: center;
   background: linear-gradient(135deg, #677ce7, #724da4);
   padding: 20% 5%;
-  transition: all 0.5s ease;
 
   &.dark-mode {
     background: linear-gradient(135deg, #4a56e2, #5b3f96);
@@ -69,7 +68,6 @@ main {
   text-align: center;
   max-width: 550px;
   gap: 2em;
-  transition: all 0.5s ease;
 
   .dark-mode & {
     background-color: $dark-primary;
@@ -117,7 +115,6 @@ header {
 input,
 button,
 select {
-  transition: background-color 0.3s ease-in-out, box-shadow 0.1s ease-in-out;
   @include rounded-border;
 
   &:focus {
@@ -148,10 +145,7 @@ button {
 
   &:disabled {
     cursor: not-allowed;
-
-    &:hover {
-      opacity: 1;
-    }
+    opacity: 1;
   }
 
   .dark-mode & {
@@ -243,7 +237,6 @@ $buttons: (
   height: 13em;
   padding: 0.8em;
   gap: 0.5em;
-  transition: background-color 0.5s ease;
 
   .dark-mode & {
     background-color: $dark-secondary;
@@ -278,43 +271,8 @@ $buttons: (
     padding: 0.75em;
     background-color: $primary-color;
     color: black;
-    // flex-wrap: wrap;
     gap: 0.5em;
-    opacity: 1;
     transform: translateY(0);
-    transition: all 0.3s ease;
-
-    &.new {
-      animation: slideIn 0.3s ease;
-    }
-
-    &.delete {
-      animation: fadeOut 0.3s ease;
-    }
-
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeOut {
-      from {
-        opacity: 1;
-        transform: scale(1);
-      }
-
-      to {
-        opacity: 0;
-        transform: scale(0.8);
-      }
-    }
 
     .dark-mode & {
       background-color: $dark-primary;
@@ -344,7 +302,6 @@ $buttons: (
       white-space: normal;
       word-break: break-all;
       max-width: 75%;
-      transition: color 1s ease-in-out;
     }
 
     &.done {
@@ -477,7 +434,6 @@ hr {
       border: none;
       background-color: white;
       color: #666;
-      transition: all 0.3s ease-in-out;
 
       .dark-mode & {
         background-color: $dark-primary;
@@ -514,7 +470,6 @@ hr {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  transition: all 0.3s ease-in-out;
   width: 5em;
   height: 5em;
   position: absolute;

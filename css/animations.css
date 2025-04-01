@@ -44,6 +44,10 @@ main,
     transition: background-color 0.5s ease;
 }
 
+h1 {
+    transition: color 0.3s ease-in-out;
+}
+
 input,
 button,
 select {

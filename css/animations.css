@@ -31,7 +31,7 @@
 }
 
 .delete {
-    animation: fadeOut 0.3s ease-in forwards;
+    animation: fadeOut 0.4s ease-in forwards;
 }
 
 /* =======================
@@ -68,6 +68,7 @@ select {
     transition: color 0.5s ease-in-out;
 }
 
-#dark-mode {
+#dark-mode,
+hr {
     transition: background-color 0.3s ease-in-out,
 }

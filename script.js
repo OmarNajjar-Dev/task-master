@@ -102,7 +102,7 @@ function handleTaskContainerClick(e) {
     taskElement.classList.add("delete");
     setTimeout(() => {
       deleteTaskWith(taskId);
-    }, 300);
+    }, 400);
   } else if (e.target.type === "checkbox") {
     taskElement.classList.toggle("done");
     toggleTaskStatusWith(taskId);
@@ -144,7 +144,7 @@ function addTaskToArray(input) {
     newTaskElement.classList.add("new");
     setTimeout(() => {
       newTaskElement.classList.remove("new");
-    }, 300);
+    }, 400);
   }
 
   addDataToLocalStorageFrom(taskList);
@@ -233,7 +233,7 @@ function clearAllTasks() {
     addElementsToPageFrom(taskList);
     updateItemCount();
     toggleElementsVisibility();
-  }, 300);
+  }, 400);
 }
 
 // 🔍 Search Tasks
@@ -241,7 +241,7 @@ function searchTasks(query) {
   clearTimeout(debounceTimeout);
   debounceTimeout = setTimeout(() => {
     filterTasks(query);
-  }, 300);
+  }, 400);
 }
 
 // 🏷️ Filter Tasks

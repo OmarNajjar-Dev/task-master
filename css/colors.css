@@ -1,0 +1,296 @@
+/* ========================================
+   BASE VARIABLES (Primary Colors & Themes)
+   ======================================== */
+:root {
+    /* Background Gradient */
+    --background-gradient-start: #677ce7;
+    --background-gradient-end: #724da4;
+
+    /* Primary Colors */
+    --primary-color: #3894df;
+    --secondary-color: #724da4;
+    --text-color: #808080;
+
+    /* Shadows */
+    --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    --input-button-box-shadow: 0 0 10px var(--primary-color);
+    --filter-button-active-box-shadow: 0 0 5px var(--primary-color);
+
+    /* Borders */
+    --border-color: #dee2e6;
+    --divider-color: #eeeeee;
+
+    /* Icons */
+    --icon-color: #ffd700;
+
+    /* Dark Mode Toggle */
+    --dark-mode-button-background: #333333;
+
+    /* Completed Task */
+    --task-completed-text: #aaa;
+
+
+    /* ========================================
+       CONTAINERS & SECTIONS
+    ======================================== */
+    --card-background: #ffffff;
+    --task-background: #ffffff;
+    --task-list-background: #f7fbfc;
+    --task-title-color: #000000;
+
+
+    /* ========================================
+       INPUT FIELDS
+    ======================================== */
+    --input-background: #ffffff;
+    --input-text-color: #000000;
+    --input-border-color: #cccccc;
+
+
+    /* ========================================
+       BUTTONS
+    ======================================== */
+    --button-text-color: #ffffff;
+    --button-clear-background: #e54c3c;
+    --button-add-background: #a4e5ba;
+    --button-edit-background: #f5c00d;
+    --button-save-background: #34c66c;
+    --button-cancel-background: #c3c3c3;
+
+
+    /* ========================================
+       CHECKBOXES
+    ======================================== */
+    --checkbox-background: #eeeeee;
+    --checkbox-hover-background: #d6d6d6;
+    --checkbox-checked-text: #e0e0e0;
+
+
+    /* ========================================
+       FILTER BUTTONS
+    ======================================== */
+    --filter-button-text: #666666;
+}
+
+/* ========================================
+   DARK MODE
+   ======================================== */
+.dark-mode {
+    /* Background Gradient */
+    --background-gradient-start: #5368d3;
+    --background-gradient-end: #5e3990;
+
+    /* Primary Colors */
+    --primary-color: #bb86fc;
+    --text-color: #b0b0b0;
+
+    /* Shadows */
+    --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    --input-button-box-shadow: 0 0 10px var(--primary-color);
+    --filter-button-active-box-shadow: 0 0 5px var(--primary-color);
+
+    /* Borders */
+    --border-color: #555555;
+    --divider-color: #333333;
+
+    /* Icons */
+    --icon-color: #ffd700;
+
+    /* Dark Mode Toggle */
+    --dark-mode-button-background: #333333;
+
+    /* Completed Task */
+    --task-completed-text: #aaa;
+
+
+    /* ========================================
+       CONTAINERS & SECTIONS
+    ======================================== */
+    --card-background: #121212;
+    --task-background: #121212;
+    --task-list-background: #1d1d1d;
+    --task-title-color: #e0e0e0;
+
+
+    /* ========================================
+       INPUT FIELDS
+    ======================================== */
+    --input-background: #1d1d1d;
+    --input-text-color: #ffffff;
+    --input-border-color: #333333;
+
+
+    /* ========================================
+       BUTTONS
+    ======================================== */
+    --button-text-color: #ffffff;
+    --button-clear-background: #e54c3c;
+    --button-add-background: #a4e5ba;
+    --button-edit-background: #f5c00d;
+    --button-save-background: #34c66c;
+    --button-cancel-background: #c3c3c3;
+
+
+    /* ========================================
+       CHECKBOXES
+    ======================================== */
+    --checkbox-background: #1d1d1d;
+    --checkbox-hover-background: #bbbbbb;
+    --checkbox-checked-text: #e0e0e0;
+
+
+    /* ========================================
+       FILTER BUTTONS
+    ======================================== */
+    --filter-button-text: #666666;
+}
+
+/* ========================================
+   GLOBAL STYLES
+   ======================================== */
+body {
+    background: linear-gradient(135deg,
+            var(--background-gradient-start),
+            var(--background-gradient-end));
+}
+
+main {
+    background-color: var(--card-background);
+}
+
+/* Typography */
+h1 {
+    color: var(--primary-color);
+}
+
+p {
+    color: var(--text-color);
+}
+
+/* ========================================
+   INPUTS & BUTTONS
+   ======================================== */
+input,
+button,
+select {
+    background-color: var(--input-background);
+    border-color: var(--input-border-color);
+    color: var(--input-text-color);
+}
+
+input:focus,
+button:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: var(--input-button-box-shadow);
+}
+
+/* ========================================
+   TASK LIST & CONTROLS
+   ======================================== */
+#task-list {
+    background-color: var(--task-list-background);
+}
+
+#add,
+#clear,
+.edit,
+.clear,
+.save,
+.cancel {
+    color: var(--button-text-color);
+}
+
+#clear,
+.clear {
+    background-color: var(--button-clear-background);
+}
+
+#add {
+    background-color: var(--button-add-background);
+}
+
+.edit {
+    background-color: var(--button-edit-background);
+}
+
+.save {
+    background-color: var(--button-save-background);
+}
+
+.cancel {
+    background-color: var(--button-cancel-background);
+}
+
+#task-list .task {
+    color: var(--task-title-color);
+    background-color: var(--task-background);
+    box-shadow: var(--task-box-shadow);
+}
+
+#task-list .done {
+    color: var(--task-completed-text);
+}
+
+#task-list .task .edit-input {
+    border-color: var(--input-border-color);
+    box-shadow: var(--input-button-box-shadow);
+}
+
+/* ========================================
+   CHECKBOX (TASK STATUS)
+   ======================================== */
+.task-status {
+    background-color: var(--checkbox-background);
+}
+
+#task-list .task .task-status:hover {
+    background-color: var(--checkbox-hover-background);
+}
+
+#task-list .task .task-status:checked {
+    background-color: var(--button-save-background);
+    border-color: var(--button-save-background);
+}
+
+#task-list .task .task-status:checked:after {
+    color: var(--checkbox-checked-text);
+}
+
+/* ========================================
+   DIVIDERS & FILTER BUTTONS
+   ======================================== */
+hr {
+    background-color: var(--divider-color);
+}
+
+#filters button {
+    color: var(--filter-button-text);
+    background-color: inherit;
+}
+
+#filters button:hover {
+    background-color: var(--primary-color);
+    color: var(--button-text-color);
+}
+
+#filters button.active {
+    background-color: var(--primary-color);
+    color: var(--button-text-color);
+    box-shadow: var(----filter-button-active-box-shadow);
+}
+
+/* ========================================
+   DARK MODE TOGGLE BUTTON
+   ======================================== */
+#dark-mode {
+    background-color: var(--dark-mode-button-background);
+}
+
+/* ========================================
+   ICONS
+   ======================================== */
+.fa-gold {
+    color: var(--icon-color);
+}

@@ -50,18 +50,26 @@ let debounceTimeout;
 
 // 🚀 Initialize app
 getDataFromLocalStorage();
+updateUI();
 initializeEventListeners();
 
 // 🎮 Event Listeners Setup
 function initializeEventListeners() {
-  addButton.addEventListener("click", () => addTaskToArray(inputField.value));
+  // ➕ Add Task on Click
+  addButton.addEventListener("click", handleAddTask);
+
+  // ⌨️ Add Task on Enter Key Press
   inputField.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") addTaskToArray(inputField.value);
+    if (e.key === "Enter") handleAddTask();
   });
-  inputField.addEventListener("input", () => {
-    updateAddButtonState();
-  });
+
+  // 🔄 Update Add Button State on Input
+  inputField.addEventListener("input", updateAddButtonState);
+
+  // 🗑️ Clear All Tasks
   clearButton.addEventListener("click", clearAllTasks);
+
+  // 🔍 Search Tasks
   searchInput.addEventListener("input", (e) => searchTasks(e.target.value));
 
   // 🔘 Filter Button Clicks
@@ -99,16 +107,25 @@ function handleTaskContainerClick(e) {
   const taskId = taskElement.getAttribute("data-id");
 
   if (e.target.closest(".clear")) {
-    taskElement.classList.add("delete");
-    setTimeout(() => {
+    applyDeleteTaskAnimation(taskElement, () => {
       deleteTaskWith(taskId);
-    }, 400);
+      updateUI();
+    });
   } else if (e.target.type === "checkbox") {
     taskElement.classList.toggle("done");
     toggleTaskStatusWith(taskId);
+    updateUI();
   } else if (e.target.closest(".edit")) {
     editTask(taskId);
   }
+}
+
+// ✍️ Handle Task Addition
+function handleAddTask() {
+  if (!inputField.value.trim()) return;
+  addTaskAndUpdateUI(inputField.value);
+  updateAddButtonState();
+  updateUI();
 }
 
 // 🎨 Update Add Button Color
@@ -123,9 +140,8 @@ function updateAddButtonState() {
 }
 
 // ➕ Add New Task
-function addTaskToArray(input) {
+function addTaskAndUpdateUI(input) {
   const trimmedInput = input.trim();
-  if (!trimmedInput) return;
 
   const task = {
     id: Date.now(),
@@ -135,21 +151,13 @@ function addTaskToArray(input) {
 
   taskList.push(task);
   inputField.value = "";
-  updateAddButtonState();
   addElementsToPageFrom(taskList);
 
   // Add animation class to new task
   const newTaskElement = document.querySelector(`[data-id="${task.id}"]`);
-  if (newTaskElement) {
-    newTaskElement.classList.add("new");
-    setTimeout(() => {
-      newTaskElement.classList.remove("new");
-    }, 400);
-  }
+  applyNewTaskAnimation(newTaskElement);
 
   addDataToLocalStorageFrom(taskList);
-  updateItemCount();
-  toggleElementsVisibility();
 }
 
 // 🔄 Render Tasks to Page
@@ -157,7 +165,7 @@ function addElementsToPageFrom(tasks) {
   taskContainer.innerHTML =
     tasks.length === 0
       ? `<span class="icon">📝</span>
-       <p class="empty-message">No tasks found. Add some tasks to get started!</p>`
+         <p class="empty-message">No tasks found. Add some tasks to get started!</p>`
       : tasks.map((task) => createTaskElement(task)).join("");
 }
 
@@ -189,14 +197,12 @@ function getDataFromLocalStorage() {
   if (data) {
     taskList = JSON.parse(data);
     addElementsToPageFrom(taskList);
-    updateItemCount();
   }
 
   if (localStorage.getItem("darkMode") === "enabled") {
     body.classList.add("dark-mode");
     darkMode.innerHTML = icons.light;
   }
-  toggleElementsVisibility();
 }
 
 // 🗑️ Delete Task
@@ -204,8 +210,6 @@ function deleteTaskWith(taskId) {
   taskList = taskList.filter((task) => task.id !== Number(taskId));
   addDataToLocalStorageFrom(taskList);
   addElementsToPageFrom(taskList);
-  updateItemCount();
-  toggleElementsVisibility();
 }
 
 // ✅ Toggle Task Status
@@ -214,7 +218,6 @@ function toggleTaskStatusWith(taskId) {
   if (task) {
     task.completed = !task.completed;
     addDataToLocalStorageFrom(taskList);
-    updateItemCount();
     document.querySelector(`[data-id="${taskId}"] .edit`).disabled =
       task.completed;
   }
@@ -222,18 +225,12 @@ function toggleTaskStatusWith(taskId) {
 
 // 🧹 Clear All Tasks
 function clearAllTasks() {
-  const tasks = document.querySelectorAll(".task");
-  tasks.forEach((task) => {
-    task.classList.add("delete");
-  });
-
-  setTimeout(() => {
-    taskList = [];
+  taskList = [];
+  applyClearAllTasksAnimation(() => {
     localStorage.removeItem("tasks");
     addElementsToPageFrom(taskList);
-    updateItemCount();
-    toggleElementsVisibility();
-  }, 400);
+    updateUI();
+  });
 }
 
 // 🔍 Search Tasks
@@ -262,7 +259,6 @@ function filterTasks() {
   }
 
   addElementsToPageFrom(filteredTasks);
-  updateItemCount();
 }
 
 // ✏️ Edit Task
@@ -294,7 +290,6 @@ function editTask(taskId) {
       if (task) {
         task.title = newTitle;
         addDataToLocalStorageFrom(taskList);
-        updateItemCount();
       }
     }
     filterTasks();
@@ -320,6 +315,10 @@ function toggleDarkMode() {
   darkMode.innerHTML = isDarkMode ? icons.light : icons.dark;
 }
 
+// ──────────────────────────────────────────────────────────────
+// 🖥️ UI Update Helpers
+// ──────────────────────────────────────────────────────────────
+
 function updateItemCount() {
   const remainingTasks = taskList.filter((task) => !task.completed).length;
   itemCount.textContent =
@@ -327,7 +326,7 @@ function updateItemCount() {
 }
 
 function toggleElementsVisibility() {
-  if (taskList.length === 0) {
+  if (taskList.filter((task) => !task.completed).length === 0) {
     hr.style.display = "none";
     itemCount.style.display = "none";
     filterButtons.forEach((btn) => (btn.style.display = "none"));
@@ -336,4 +335,31 @@ function toggleElementsVisibility() {
     itemCount.style.display = "inline";
     filterButtons.forEach((btn) => (btn.style.display = "inline"));
   }
+}
+
+function updateUI() {
+  updateItemCount();
+  toggleElementsVisibility();
+}
+
+// ──────────────────────────────────────────────────────────────
+// 🎬 Task Animations
+// ──────────────────────────────────────────────────────────────
+
+function applyNewTaskAnimation(taskElement) {
+  taskElement.classList.add("new");
+  setTimeout(() => {
+    taskElement.classList.remove("new");
+  }, 400);
+}
+
+function applyDeleteTaskAnimation(taskElement, callback) {
+  taskElement.classList.add("delete");
+  setTimeout(callback, 400);
+}
+
+function applyClearAllTasksAnimation(callback) {
+  const taskElements = document.querySelectorAll(".task");
+  taskElements.forEach((task) => task.classList.add("delete"));
+  setTimeout(callback, 400);
 }

@@ -226,8 +226,8 @@ function toggleTaskStatusWith(taskId) {
 // 🧹 Clear All Tasks
 function clearAllTasks() {
   taskList = [];
+  localStorage.removeItem("tasks");
   applyClearAllTasksAnimation(() => {
-    localStorage.removeItem("tasks");
     addElementsToPageFrom(taskList);
     updateUI();
   });

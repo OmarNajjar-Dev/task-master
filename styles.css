@@ -195,7 +195,7 @@ button:disabled {
 #task-list .task .save,
 #task-list .task .cancel {
   box-sizing: content-box;
-  padding: 0.5em 0.75em;
+  padding: 1.25em 0.75em;
   width: auto;
 }
 #task-list .task .edit-input {

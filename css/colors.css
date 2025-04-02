@@ -12,7 +12,7 @@
     --text-color: #808080;
 
     /* Shadows */
-    --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    --task-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     --input-button-box-shadow: 0 0 10px var(--primary-color);
     --filter-button-active-box-shadow: 0 0 5px var(--primary-color);
 
@@ -85,7 +85,7 @@
     --text-color: #b0b0b0;
 
     /* Shadows */
-    --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    --task-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     --input-button-box-shadow: 0 0 10px var(--primary-color);
     --filter-button-active-box-shadow: 0 0 5px var(--primary-color);
 

@@ -241,7 +241,7 @@ function searchTasks(query) {
   clearTimeout(debounceTimeout);
   debounceTimeout = setTimeout(() => {
     filterTasks(query);
-  }, 400);
+  }, 300);
 }
 
 // 🏷️ Filter Tasks

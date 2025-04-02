@@ -172,7 +172,7 @@ function createTaskElement(task) {
         <span class="text">${task.title}</span>
       </span>
       <span class="right-side">
-        <button class="edit">${icons.edit}</button>
+        <button class="edit" ${task.completed ? "disabled" : ""}>${icons.edit}</button>
         <button class="clear">${icons.clear}</button>
       </span>
     </div>

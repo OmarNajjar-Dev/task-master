@@ -17,7 +17,6 @@
     --filter-button-active-box-shadow: 0 0 5px var(--primary-color);
 
     /* Borders */
-    --border-color: #dee2e6;
     --divider-color: #eeeeee;
 
     /* Icons */
@@ -90,7 +89,6 @@
     --filter-button-active-box-shadow: 0 0 5px var(--primary-color);
 
     /* Borders */
-    --border-color: #555555;
     --divider-color: #333333;
 
     /* Icons */
@@ -278,7 +276,7 @@ hr {
 #filters button.active {
     background-color: var(--primary-color);
     color: var(--button-text-color);
-    box-shadow: var(----filter-button-active-box-shadow);
+    box-shadow: var(--filter-button-active-box-shadow);
 }
 
 /* ========================================

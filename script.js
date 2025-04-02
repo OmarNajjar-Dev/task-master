@@ -19,7 +19,7 @@ const searchInput = document.getElementById("search");
 const addButton = document.getElementById("add");
 const clearButton = document.getElementById("clear");
 const selectStatus = document.getElementById("select");
-const itemCount = document.querySelector(".items-count");
+const itemCount = document.getElementById("items-count");
 const hr = document.querySelector("hr");
 const filterButtons = document.querySelectorAll("#filters button");
 const darkMode = document.getElementById("dark-mode");
@@ -35,8 +35,8 @@ const icons = {
 
 // 🎨 Colors for button states
 const colors = {
-  active: "var(--add-button)",
-  inactive: "var(--disabled-button)",
+  active: "var(--button-save-background)",
+  inactive: "var(--button-add-background)",
 };
 
 // 📦 Array for storing the tasks
@@ -166,7 +166,7 @@ function createTaskElement(task) {
   return `
     <div class="task ${task.completed ? "done" : ""}" data-id="${task.id}">
       <span class="left-side">
-        <input type="checkbox" name="task-completed" ${
+        <input type="checkbox" name="task-completed" class="task-status"${
           task.completed ? "checked" : ""
         }>
         <span class="text">${task.title}</span>
@@ -215,7 +215,8 @@ function toggleTaskStatusWith(taskId) {
     task.completed = !task.completed;
     addDataToLocalStorageFrom(taskList);
     updateItemCount();
-    document.querySelector(`[data-id="${taskId}"] .edit`).disabled = task.completed;
+    document.querySelector(`[data-id="${taskId}"] .edit`).disabled =
+      task.completed;
   }
 }
 
@@ -322,9 +323,7 @@ function toggleDarkMode() {
 function updateItemCount() {
   const remainingTasks = taskList.filter((task) => !task.completed).length;
   itemCount.textContent =
-    remainingTasks === 1
-      ? `1 item left`
-      : `${remainingTasks} items left`;
+    remainingTasks === 1 ? `1 item left` : `${remainingTasks} items left`;
 }
 
 function toggleElementsVisibility() {

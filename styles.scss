@@ -1,86 +1,90 @@
-/* 🎨 1. Global Variables
-   Define the main color palette and common values used throughout the application */
-$primary-color: white;
-$secondary-color: #f7fbfc;
-$add-button: #34c66c;
-$disabled-button: #a4e5ba;
-$clear-button: #e54c3c;
-$edit-button: #f5c00d;
-$accent-color: #3894df;
-$border-radius: 0.5em;
+/* ========================================
+   GLOBAL VARIABLES
+   ======================================== */
+// Core Variables
+$font-family-base: sans-serif;           // Base font family
+$default-border-style: 1px solid;        // Standard border style
+$border-radius-base: 0.5em;              // Standard border radius
 
-/* 🌙 Dark Mode Colors
-      Color scheme used when dark mode is enabled */
-$dark-primary: #121212;
-$dark-secondary: #1d1d1d;
-$dark-accent: #e0e0e0;
-$highlight-color: #bb86fc;
-$border-color: #333;
+// Shared Form Element Variables
+$form-element-padding: 0.75em;           // Padding for form elements
+$form-element-margin: 0;                 // Margin for form elements
 
-:root {
-  --add-button: #{$add-button};
-  --disabled-button: #{$disabled-button};
-}
+// Button Variables
+$btn-clear-padding: 0.75em 1.5em;        // Padding for clear buttons
+$btn-add-task-padding: 1em;              // Padding for add-task buttons
+$btn-size: 34px;                         // Uniform size for buttons (width & height)
 
-/* 🧰 2. Mixins
-      Reusable style patterns to maintain consistency and reduce code duplication */
+// Input Variables
+$input-padding-left: 2.8em;              // Left padding for input fields
+$input-min-width: 78%;                   // Minimum width for input fields
+
+// Task List & Checkbox Variables
+$task-list-height: 13em;                 // Height for task list container
+$empty-message-margin-top: 20px;         // Top margin for empty message in task list
+$checkbox-size: 20px;                    // Size of checkboxes
+$checkbox-border-radius: 4px;            // Border radius for checkboxes
+$checkbox-check-font-size: 16px;         // Font size for checkbox checkmark
+
+// Miscellaneous Variables
+$hover-opacity: 0.8;                     // Opacity for hover effects
+$disabled-opacity: 1;                    // Opacity for disabled elements
+$flex-gap: 0.8em;                        // Gap between flex items
+$dark-mode-diameter: 5em;                // Diameter for the dark mode toggle button
+$dark-mode-offset: 1em;                  // Offset for dark mode toggle positioning
+
+
+/* ========================================
+   MIXINS
+   ======================================== */
 @mixin flex-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.8em;
+  gap: $flex-gap;
 }
 
 @mixin rounded-border {
-  border-radius: $border-radius;
-  border: 1px solid #ccc;
+  border-radius: $border-radius-base;
+  border: $default-border-style;
 }
 
-/* 🔄 3. Reset Default Styles
-      Remove browser default styles for consistent cross-browser rendering */
+
+/* ========================================
+   RESET STYLES
+   ======================================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* 📐 4. General Page Layout
-      Core layout structure and container styling */
+
+/* ========================================
+   PAGE LAYOUT
+   ======================================== */
 body {
-  font-family: sans-serif;
+  font-family: $font-family-base;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #677ce7, #724da4);
   padding: 20% 5%;
-
-  &.dark-mode {
-    background: linear-gradient(135deg, #4a56e2, #5b3f96);
-  }
 }
 
 main {
   border-radius: 10px;
-  background-color: $primary-color;
   padding: 1.5em;
   display: flex;
   flex-direction: column;
   text-align: center;
   max-width: 550px;
   gap: 2em;
-
-  .dark-mode & {
-    background-color: $dark-primary;
-  }
 }
 
-#search-tasks *,
-#add-task * {
-  flex-grow: 1;
-}
 
-/* 📝 5. Header Section
-      App title, logo and description styling */
+/* ========================================
+   HEADER
+   ======================================== */
 header {
   display: flex;
   flex-direction: column;
@@ -89,50 +93,19 @@ header {
   gap: 0.4em;
 
   h1 {
-    color: $accent-color;
     font-size: 2.5em;
-
-    .dark-mode & {
-      color: $dark-accent;
-    }
-  }
-
-  path {
-    stroke: $accent-color;
-
-    .dark-mode & {
-      stroke: $dark-accent;
-    }
-  }
-
-  p {
-    color: #808080;
   }
 }
 
-/* 🎛️ 6. Form Elements
-      Shared styles for interactive elements like inputs, buttons and selects */
+
+/* ========================================
+   FORM ELEMENTS (Inputs, Buttons, Selects)
+   ======================================== */
 input,
 button,
 select {
   @include rounded-border;
-
-  &:focus {
-    outline: none;
-    border-color: $accent-color;
-    box-shadow: 0 0 10px $accent-color;
-  }
-
-  .dark-mode & {
-    background-color: $dark-secondary;
-    color: $dark-accent;
-    border-color: $border-color;
-
-    &:focus {
-      border-color: $highlight-color;
-      box-shadow: 0 0 10px $highlight-color;
-    }
-  }
+  padding: $form-element-padding;
 }
 
 button {
@@ -140,33 +113,19 @@ button {
   cursor: pointer;
 
   &:hover {
-    opacity: 0.8;
+    opacity: $hover-opacity;
   }
 
   &:disabled {
     cursor: not-allowed;
-    opacity: 1;
-  }
-
-  .dark-mode & {
-    &:hover {
-      background-color: $highlight-color;
-      color: $dark-accent;
-    }
+    opacity: $disabled-opacity;
   }
 }
 
-input {
-  .dark-mode & {
-    &:focus {
-      border-color: $highlight-color;
-      box-shadow: 0 0 10px $highlight-color;
-    }
-  }
-}
 
-/* 🔍 7. Search Section
-      Search input and filter dropdown styling */
+/* ========================================
+   SEARCH SECTION
+   ======================================== */
 #search-tasks {
   @include flex-container;
 
@@ -176,7 +135,6 @@ input {
   }
 
   #select {
-    padding: 0.75em;
     cursor: pointer;
   }
 
@@ -185,62 +143,59 @@ input {
     align-items: center;
 
     input {
-      padding: 0.75em;
-      padding-left: 2.8em;
+      padding-left: $input-padding-left;
     }
   }
 }
 
-/* 🎯 8. Action Buttons
-      Styling for primary action buttons using SCSS Map */
-$buttons: (
-  clear: $clear-button,
-  add: $disabled-button,
-);
 
-@each $name, $color in $buttons {
-  ##{$name} {
-    background-color: $color;
-    color: $primary-color;
-
-    @if $name ==clear {
-      padding: 0.75em 1.5em;
-      order: 4;
-    }
-  }
+/* ========================================
+   ACTION BUTTONS
+   ======================================== */
+#clear {
+  padding: $btn-clear-padding;
+  order: 4;
 }
 
-/* ➕ 9. Task Creation
-      New task input and add button container */
+
+/* ========================================
+   FLEX GROW CHILD ELEMENTS
+   ======================================== */
+#search-tasks *,
+#add-task * {
+  flex-grow: 1;
+}
+
+
+/* ========================================
+   ADD TASK
+   ======================================== */
 #add-task {
   @include flex-container;
 
   button,
   input {
-    padding: 1em;
+    padding: $btn-add-task-padding;
   }
 
   input {
-    min-width: 78%;
+    min-width: $input-min-width;
   }
 }
 
-/* 📋 10. Task List
-      Container and individual task item styling */
+
+/* ========================================
+   TASK LIST
+   ======================================== */
 #task-list {
   display: flex;
   flex-direction: column;
-  background-color: $secondary-color;
-  border-radius: $border-radius;
+  border-radius: $border-radius-base;
   scrollbar-width: none;
   overflow-y: auto;
-  height: 13em;
+  height: $task-list-height;
   padding: 0.8em;
   gap: 0.5em;
-
-  .dark-mode & {
-    background-color: $dark-secondary;
-  }
 
   span.icon {
     font-size: 40px;
@@ -248,37 +203,21 @@ $buttons: (
   }
 
   .empty-message {
-    color: gray;
-    margin-top: 20px;
+    margin-top: $empty-message-margin-top;
   }
 
   .task.done {
     opacity: 0.7;
-    color: #aaa;
-
-    .dark-mode & {
-      background-color: $dark-secondary;
-      color: $dark-accent;
-    }
   }
 
   .task {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-radius: $border-radius;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 0.75em;
-    background-color: $primary-color;
-    color: black;
+    border-radius: $border-radius-base;
+    padding: $form-element-padding;
+    margin: $form-element-margin;
     gap: 0.5em;
-    transform: translateY(0);
-
-    .dark-mode & {
-      background-color: $dark-primary;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-      color: $dark-accent;
-    }
 
     &:hover {
       transform: translateY(-3px);
@@ -305,7 +244,6 @@ $buttons: (
     }
 
     &.done {
-      color: #aaa;
       opacity: 0.7;
 
       .text {
@@ -317,18 +255,6 @@ $buttons: (
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 34px;
-      height: 34px;
-    }
-
-    .clear {
-      background-color: #e54c3c;
-      color: $dark-accent;
-    }
-
-    .edit {
-      background-color: #f5c00d;
-      color: $dark-accent;
     }
 
     .save,
@@ -338,59 +264,30 @@ $buttons: (
       width: auto;
     }
 
-    .save {
-      background-color: $add-button;
-      color: $dark-accent;
-    }
-
-    .cancel {
-      background-color: #c3c3c3;
-      color: $dark-accent;
-    }
-
     .edit-input {
       padding: 1em;
-      border: 1px solid #ccc;
-      border-radius: $border-radius;
+      border: $default-border-style;
+      border-radius: $border-radius-base;
       font-size: 1em;
       width: 100%;
       margin-right: 0.5em;
-
-      .dark-mode & {
-        background-color: $dark-secondary;
-        color: $dark-accent;
-        border-color: $border-color;
-      }
     }
 
-    input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
+    .task-status {
       appearance: none;
-      background-color: #eeeeee;
+      width: $checkbox-size;
+      height: $checkbox-size;
+      cursor: pointer;
       border: none;
-      border-radius: 4px;
+      border-radius: $checkbox-border-radius;
       display: inline-block;
       position: relative;
       margin-right: 1.5em;
 
-      .dark-mode & {
-        background-color: $dark-secondary;
-      }
-
-      &:hover {
-        background-color: #ccc;
-      }
-
       &:checked {
-        background-color: $add-button;
-        border-color: $add-button;
-
         &::after {
           content: "✔";
-          color: $dark-accent;
-          font-size: 16px;
+          font-size: $checkbox-check-font-size;
           position: absolute;
           top: 50%;
           left: 50%;
@@ -402,27 +299,26 @@ $buttons: (
   }
 }
 
+
+/* ========================================
+   DIVIDERS & SEPARATORS
+   ======================================== */
 hr {
   margin: -1em 0;
-  background-color: #eeeeee;
   border: none;
   height: 1px;
-
-  .dark-mode & {
-    background-color: $border-color;
-  }
 }
 
+
+/* ========================================
+   TASK FILTERS
+   ======================================== */
 #filter-tasks {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 1em;
-
-  .items-count {
-    color: gray;
-  }
 
   #filters {
     display: flex;
@@ -432,55 +328,22 @@ hr {
     button {
       padding: 0.7em 1.5em;
       border: none;
-      background-color: white;
-      color: #666;
-
-      .dark-mode & {
-        background-color: $dark-primary;
-        color: $dark-accent;
-      }
-
-      &:hover {
-        background-color: $accent-color;
-        color: $dark-accent;
-
-        .dark-mode & {
-          background-color: $highlight-color;
-        }
-      }
-
-      &.active {
-        background-color: $accent-color;
-        color: $dark-accent;
-        outline: none;
-        box-shadow: 0 0 5px $accent-color;
-
-        .dark-mode & {
-          background-color: $highlight-color;
-          box-shadow: 0 0 5px $highlight-color;
-        }
-      }
     }
   }
 }
 
+
+/* ========================================
+   DARK MODE
+   ======================================== */
 #dark-mode {
-  background-color: #333;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  width: 5em;
-  height: 5em;
+  width: $dark-mode-diameter;
+  height: $dark-mode-diameter;
   position: absolute;
-  top: 1em;
-  right: 1em;
-
-  &:hover {
-    background-color: #555;
-  }
-}
-
-.fa-gold {
-  color: #FFD700;
-}
+  top: $dark-mode-offset;
+  right: $dark-mode-offset;
+} 

@@ -1,41 +1,33 @@
 @charset "UTF-8";
-/* 🎨 1. Global Variables
-   Define the main color palette and common values used throughout the application */
-/* 🌙 Dark Mode Colors
-      Color scheme used when dark mode is enabled */
-:root {
-  --add-button: #34c66c;
-  --disabled-button: #a4e5ba;
-}
-
-/* 🧰 2. Mixins
-      Reusable style patterns to maintain consistency and reduce code duplication */
-/* 🔄 3. Reset Default Styles
-      Remove browser default styles for consistent cross-browser rendering */
+/* ========================================
+   GLOBAL VARIABLES
+   ======================================== */
+/* ========================================
+   MIXINS
+   ======================================== */
+/* ========================================
+   RESET STYLES
+   ======================================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* 📐 4. General Page Layout
-      Core layout structure and container styling */
+/* ========================================
+   PAGE LAYOUT
+   ======================================== */
 body {
   font-family: sans-serif;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #677ce7, #724da4);
   padding: 20% 5%;
-}
-body.dark-mode {
-  background: linear-gradient(135deg, #4a56e2, #5b3f96);
 }
 
 main {
   border-radius: 10px;
-  background-color: white;
   padding: 1.5em;
   display: flex;
   flex-direction: column;
@@ -43,17 +35,10 @@ main {
   max-width: 550px;
   gap: 2em;
 }
-.dark-mode main {
-  background-color: #121212;
-}
 
-#search-tasks *,
-#add-task * {
-  flex-grow: 1;
-}
-
-/* 📝 5. Header Section
-      App title, logo and description styling */
+/* ========================================
+   HEADER
+   ======================================== */
 header {
   display: flex;
   flex-direction: column;
@@ -62,49 +47,18 @@ header {
   gap: 0.4em;
 }
 header h1 {
-  color: #3894df;
   font-size: 2.5em;
 }
-.dark-mode header h1 {
-  color: #e0e0e0;
-}
-header path {
-  stroke: #3894df;
-}
-.dark-mode header path {
-  stroke: #e0e0e0;
-}
-header p {
-  color: #808080;
-}
 
-/* 🎛️ 6. Form Elements
-      Shared styles for interactive elements like inputs, buttons and selects */
+/* ========================================
+   FORM ELEMENTS (Inputs, Buttons, Selects)
+   ======================================== */
 input,
 button,
 select {
   border-radius: 0.5em;
-  border: 1px solid #ccc;
-}
-input:focus,
-button:focus,
-select:focus {
-  outline: none;
-  border-color: #3894df;
-  box-shadow: 0 0 10px #3894df;
-}
-.dark-mode input,
-.dark-mode button,
-.dark-mode select {
-  background-color: #1d1d1d;
-  color: #e0e0e0;
-  border-color: #333;
-}
-.dark-mode input:focus,
-.dark-mode button:focus,
-.dark-mode select:focus {
-  border-color: #bb86fc;
-  box-shadow: 0 0 10px #bb86fc;
+  border: 1px solid;
+  padding: 0.75em;
 }
 
 button {
@@ -118,18 +72,10 @@ button:disabled {
   cursor: not-allowed;
   opacity: 1;
 }
-.dark-mode button:hover {
-  background-color: #bb86fc;
-  color: #e0e0e0;
-}
 
-.dark-mode input:focus {
-  border-color: #bb86fc;
-  box-shadow: 0 0 10px #bb86fc;
-}
-
-/* 🔍 7. Search Section
-      Search input and filter dropdown styling */
+/* ========================================
+   SEARCH SECTION
+   ======================================== */
 #search-tasks {
   display: flex;
   flex-wrap: wrap;
@@ -140,7 +86,6 @@ button:disabled {
   margin-left: 0.7em;
 }
 #search-tasks #select {
-  padding: 0.75em;
   cursor: pointer;
 }
 #search-tasks .input-container {
@@ -148,26 +93,28 @@ button:disabled {
   align-items: center;
 }
 #search-tasks .input-container input {
-  padding: 0.75em;
   padding-left: 2.8em;
 }
 
-/* 🎯 8. Action Buttons
-      Styling for primary action buttons using SCSS Map */
+/* ========================================
+   ACTION BUTTONS
+   ======================================== */
 #clear {
-  background-color: #e54c3c;
-  color: white;
   padding: 0.75em 1.5em;
   order: 4;
 }
 
-#add {
-  background-color: #a4e5ba;
-  color: white;
+/* ========================================
+   FLEX GROW CHILD ELEMENTS
+   ======================================== */
+#search-tasks *,
+#add-task * {
+  flex-grow: 1;
 }
 
-/* ➕ 9. Task Creation
-      New task input and add button container */
+/* ========================================
+   ADD TASK
+   ======================================== */
 #add-task {
   display: flex;
   flex-wrap: wrap;
@@ -181,12 +128,12 @@ button:disabled {
   min-width: 78%;
 }
 
-/* 📋 10. Task List
-      Container and individual task item styling */
+/* ========================================
+   TASK LIST
+   ======================================== */
 #task-list {
   display: flex;
   flex-direction: column;
-  background-color: #f7fbfc;
   border-radius: 0.5em;
   scrollbar-width: none;
   overflow-y: auto;
@@ -194,41 +141,24 @@ button:disabled {
   padding: 0.8em;
   gap: 0.5em;
 }
-.dark-mode #task-list {
-  background-color: #1d1d1d;
-}
 #task-list span.icon {
   font-size: 40px;
   margin-top: 40px;
 }
 #task-list .empty-message {
-  color: gray;
   margin-top: 20px;
 }
 #task-list .task.done {
   opacity: 0.7;
-  color: #aaa;
-}
-.dark-mode #task-list .task.done {
-  background-color: #1d1d1d;
-  color: #e0e0e0;
 }
 #task-list .task {
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-radius: 0.5em;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 0.75em;
-  background-color: white;
-  color: black;
+  margin: 0;
   gap: 0.5em;
-  transform: translateY(0);
-}
-.dark-mode #task-list .task {
-  background-color: #121212;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  color: #e0e0e0;
 }
 #task-list .task:hover {
   transform: translateY(-3px);
@@ -252,7 +182,6 @@ button:disabled {
   max-width: 75%;
 }
 #task-list .task.done {
-  color: #aaa;
   opacity: 0.7;
 }
 #task-list .task.done .text {
@@ -262,16 +191,6 @@ button:disabled {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
-}
-#task-list .task .clear {
-  background-color: #e54c3c;
-  color: #e0e0e0;
-}
-#task-list .task .edit {
-  background-color: #f5c00d;
-  color: #e0e0e0;
 }
 #task-list .task .save,
 #task-list .task .cancel {
@@ -279,52 +198,27 @@ button:disabled {
   padding: 0.5em 0.75em;
   width: auto;
 }
-#task-list .task .save {
-  background-color: #34c66c;
-  color: #e0e0e0;
-}
-#task-list .task .cancel {
-  background-color: #c3c3c3;
-  color: #e0e0e0;
-}
 #task-list .task .edit-input {
   padding: 1em;
-  border: 1px solid #ccc;
+  border: 1px solid;
   border-radius: 0.5em;
   font-size: 1em;
   width: 100%;
   margin-right: 0.5em;
 }
-.dark-mode #task-list .task .edit-input {
-  background-color: #1d1d1d;
-  color: #e0e0e0;
-  border-color: #333;
-}
-#task-list .task input[type=checkbox] {
+#task-list .task .task-status {
+  appearance: none;
   width: 20px;
   height: 20px;
   cursor: pointer;
-  appearance: none;
-  background-color: #eeeeee;
   border: none;
   border-radius: 4px;
   display: inline-block;
   position: relative;
   margin-right: 1.5em;
 }
-.dark-mode #task-list .task input[type=checkbox] {
-  background-color: #1d1d1d;
-}
-#task-list .task input[type=checkbox]:hover {
-  background-color: #ccc;
-}
-#task-list .task input[type=checkbox]:checked {
-  background-color: #34c66c;
-  border-color: #34c66c;
-}
-#task-list .task input[type=checkbox]:checked::after {
+#task-list .task .task-status:checked::after {
   content: "✔";
-  color: #e0e0e0;
   font-size: 16px;
   position: absolute;
   top: 50%;
@@ -333,25 +227,24 @@ button:disabled {
   font-weight: bold;
 }
 
+/* ========================================
+   DIVIDERS & SEPARATORS
+   ======================================== */
 hr {
   margin: -1em 0;
-  background-color: #eeeeee;
   border: none;
   height: 1px;
 }
-.dark-mode hr {
-  background-color: #333;
-}
 
+/* ========================================
+   TASK FILTERS
+   ======================================== */
 #filter-tasks {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 1em;
-}
-#filter-tasks .items-count {
-  color: gray;
 }
 #filter-tasks #filters {
   display: flex;
@@ -361,33 +254,12 @@ hr {
 #filter-tasks #filters button {
   padding: 0.7em 1.5em;
   border: none;
-  background-color: white;
-  color: #666;
-}
-.dark-mode #filter-tasks #filters button {
-  background-color: #121212;
-  color: #e0e0e0;
-}
-#filter-tasks #filters button:hover {
-  background-color: #3894df;
-  color: #e0e0e0;
-}
-.dark-mode #filter-tasks #filters button:hover {
-  background-color: #bb86fc;
-}
-#filter-tasks #filters button.active {
-  background-color: #3894df;
-  color: #e0e0e0;
-  outline: none;
-  box-shadow: 0 0 5px #3894df;
-}
-.dark-mode #filter-tasks #filters button.active {
-  background-color: #bb86fc;
-  box-shadow: 0 0 5px #bb86fc;
 }
 
+/* ========================================
+   DARK MODE
+   ======================================== */
 #dark-mode {
-  background-color: #333;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -397,13 +269,6 @@ hr {
   position: absolute;
   top: 1em;
   right: 1em;
-}
-#dark-mode:hover {
-  background-color: #555;
-}
-
-.fa-gold {
-  color: #FFD700;
 }
 
 /*# sourceMappingURL=styles.css.map */

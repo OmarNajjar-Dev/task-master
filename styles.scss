@@ -2,36 +2,36 @@
    GLOBAL VARIABLES
    ======================================== */
 // Core Variables
-$font-family-base: sans-serif;           // Base font family
-$default-border-style: 1px solid;        // Standard border style
-$border-radius-base: 0.5em;              // Standard border radius
+$font-family-base: "Tajawal", sans-serif;  // Base font family
+$default-border-style: 1px solid;          // Standard border style
+$border-radius-base: 0.5em;                // Standard border radius
 
 // Shared Form Element Variables
-$form-element-padding: 0.75em;           // Padding for form elements
-$form-element-margin: 0;                 // Margin for form elements
+$form-element-padding: 0.75em;             // Padding for form elements
+$form-element-margin: 0;                   // Margin for form elements
 
 // Button Variables
-$btn-clear-padding: 0.75em 1.5em;        // Padding for clear buttons
-$btn-add-task-padding: 1em;              // Padding for add-task buttons
-$btn-size: 34px;                         // Uniform size for buttons (width & height)
+$btn-clear-padding: 0.75em 1.5em;          // Padding for clear buttons
+$btn-add-task-padding: 1em;                // Padding for add-task buttons
+$btn-size: 34px;                           // Uniform size for buttons (width & height)
 
 // Input Variables
-$input-padding-left: 2.8em;              // Left padding for input fields
-$input-min-width: 78%;                   // Minimum width for input fields
+$input-padding-left: 2.8em;                // Left padding for input fields
+$input-min-width: 78%;                     // Minimum width for input fields
 
 // Task List & Checkbox Variables
-$task-list-height: 13em;                 // Height for task list container
-$empty-message-margin-top: 20px;         // Top margin for empty message in task list
-$checkbox-size: 20px;                    // Size of checkboxes
-$checkbox-border-radius: 4px;            // Border radius for checkboxes
-$checkbox-check-font-size: 16px;         // Font size for checkbox checkmark
+$task-list-height: 13em;                   // Height for task list container
+$empty-message-margin-top: 20px;           // Top margin for empty message in task list
+$checkbox-size: 20px;                      // Size of checkboxes
+$checkbox-border-radius: 4px;              // Border radius for checkboxes
+$checkbox-check-font-size: 16px;           // Font size for checkbox checkmark
 
 // Miscellaneous Variables
-$hover-opacity: 0.8;                     // Opacity for hover effects
-$disabled-opacity: 1;                    // Opacity for disabled elements
-$flex-gap: 0.8em;                        // Gap between flex items
-$dark-mode-diameter: 5em;                // Diameter for the dark mode toggle button
-$dark-mode-offset: 1em;                  // Offset for dark mode toggle positioning
+$hover-opacity: 0.8;                       // Opacity for hover effects
+$disabled-opacity: 1;                      // Opacity for disabled elements
+$flex-gap: 0.8em;                          // Gap between flex items
+$dark-mode-diameter: 5em;                  // Diameter for the dark mode toggle button
+$dark-mode-offset: 1em;                    // Offset for dark mode toggle positioning
 
 
 /* ========================================

@@ -1,8 +1,12 @@
 /* ========================================
    GLOBAL VARIABLES
    ======================================== */
-// Core Variables
-$font-family-base: "Tajawal", sans-serif;  // Base font family
+
+/* Typography Variables */
+$font-family-english: sans-serif;
+$font-family-arabic: "Tajawal", sans-serif; 
+
+// Global Variables
 $default-border-style: 1px solid;          // Standard border style
 $border-radius-base: 0.5em;                // Standard border radius
 
@@ -63,12 +67,16 @@ $dark-mode-offset: 1em;                    // Offset for dark mode toggle positi
    PAGE LAYOUT
    ======================================== */
 body {
-  font-family: $font-family-base;
+  font-family: $font-family-english;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20% 5%;
+}
+
+body[lang="ar"] {
+  font-family: $font-family-arabic;
 }
 
 main {

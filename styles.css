@@ -2,6 +2,7 @@
 /* ========================================
    GLOBAL VARIABLES
    ======================================== */
+/* Typography Variables */
 /* ========================================
    MIXINS
    ======================================== */
@@ -18,12 +19,16 @@
    PAGE LAYOUT
    ======================================== */
 body {
-  font-family: "Tajawal", sans-serif;
+  font-family: sans-serif;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20% 5%;
+}
+
+body[lang=ar] {
+  font-family: "Tajawal", sans-serif;
 }
 
 main {

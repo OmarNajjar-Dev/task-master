@@ -26,40 +26,45 @@
   <main>
     <!-- 🔹 Header Section -->
     <header>
-      <h1>
+      <h1 data-key="title">
         <svg width="30" height="30" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
           style="vertical-align: middle" aria-hidden="true">
           <path d="M20 6L9 17l-5-5" stroke-width="4" fill="none" stroke="currentColor" />
         </svg>
         Task Master
       </h1>
-      <p>Organize your tasks efficiently</p>
+      <p data-key="subtitle">Organize your tasks efficiently</p>
     </header>
+
+    <!-- 🌍 Language Toggle Button -->
+    <button id="lang-toggle">🌍 Change Language</button>
 
     <!-- 🔍 Search Section -->
     <section id="search-tasks" aria-label="Search and filter tasks">
       <div class="input-container">
         <span class="icon" aria-hidden="true">🔍</span>
-        <input type="search" id="search" placeholder="Search tasks..." aria-label="Search tasks" />
+        <input type="search" id="search" placeholder="Search tasks..." data-key="search_placeholder"
+          aria-label="Search tasks" />
       </div>
       <select id="select" name="status" aria-label="Filter tasks by status">
-        <option value="all">📋 All Tasks</option>
-        <option value="completed">✅ Completed</option>
-        <option value="active">⏳ Pending</option>
+        <option value="all" data-key="all_tasks">📋 All Tasks</option>
+        <option value="completed" data-key="completed">✅ Completed</option>
+        <option value="active" data-key="active">⏳ Pending</option>
       </select>
-      <button id="clear" type="button">🗑️ Clear All</button>
+      <button id="clear" type="button" data-key="clear">🗑️ Clear All</button>
     </section>
 
     <!-- 📝 Add Task Section -->
     <section id="add-task" aria-label="Add new task">
-      <input type="text" id="task-text" placeholder="What needs to be done?" aria-label="Enter task description" />
-      <button id="add" class="add" type="button" disabled>Add Task</button>
+      <input type="text" id="task-text" placeholder="What needs to be done?" data-key="add_task_placeholder"
+        aria-label="Enter task description" />
+      <button id="add" class="add" type="button" disabled data-key="add_task">Add Task</button>
     </section>
 
     <!-- 📋 Task List Section -->
     <section id="task-list" aria-label="Task list">
       <span class="icon" aria-hidden="true">📝</span>
-      <p class="empty-message" role="status">
+      <p class="empty-message" role="status" data-key="no_tasks">
         No tasks found. Add some tasks to get started!
       </p>
     </section>
@@ -68,11 +73,11 @@
 
     <!-- 🔘 Filters Section -->
     <section id="filter-tasks" aria-label="Filter options">
-      <p id="items-count"></p>
+      <p id="items-count" data-key="items_left"></p>
       <div id="filters" role="group" aria-label="Filter tasks">
-        <button data-filter="all" class="active" type="button">All</button>
-        <button data-filter="active" type="button">Active</button>
-        <button data-filter="completed" type="button">Completed</button>
+        <button data-filter="all" class="active" type="button" data-key="all">All</button>
+        <button data-filter="active" type="button" data-key="active_filter">Active</button>
+        <button data-filter="completed" type="button" data-key="completed_filter">Completed</button>
       </div>
     </section>
 

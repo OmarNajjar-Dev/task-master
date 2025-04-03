@@ -167,8 +167,10 @@ function addTaskAndUpdateUI(input) {
 function addElementsToPageFrom(tasks) {
   taskContainer.innerHTML =
     tasks.length === 0
-      ? `<span class="icon">📝</span>
-         <p class="empty-message">No tasks found. Add some tasks to get started!</p>`
+      ? `<div class="empty-container">
+          <span class="icon">📝</span>
+          <p class="empty-message">No tasks found. Add some tasks to get started!</p>
+         </div>`
       : tasks.map((task) => createTaskElement(task)).join("");
 }
 

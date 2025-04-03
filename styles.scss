@@ -41,7 +41,19 @@ $dark-mode-offset: 1em;                    // Offset for dark mode toggle positi
 /* ========================================
    MIXINS
    ======================================== */
-@mixin flex-container {
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-layout ($justify: start, $align: stretch) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin flex-wrap-gap {
   display: flex;
   flex-wrap: wrap;
   gap: $flex-gap;
@@ -69,9 +81,7 @@ $dark-mode-offset: 1em;                    // Offset for dark mode toggle positi
 body {
   font-family: $font-family-english;
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex-center;
   padding: 20% 5%;
 }
 
@@ -93,10 +103,8 @@ main {
    HEADER
    ======================================== */
 header {
-  display: flex;
+  @include flex-center;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   text-align: center;
   gap: 0.4em;
 
@@ -135,7 +143,7 @@ button {
    SEARCH SECTION
    ======================================== */
 #search-tasks {
-  @include flex-container;
+  @include flex-wrap-gap;
 
   .icon {
     position: absolute;
@@ -147,8 +155,7 @@ button {
   }
 
   .input-container {
-    display: flex;
-    align-items: center;
+    @include flex-layout($align: center);
 
     input {
       padding-left: $input-padding-left;
@@ -179,7 +186,7 @@ button {
    ADD TASK
    ======================================== */
 #add-task {
-  @include flex-container;
+  @include flex-wrap-gap;
 
   button,
   input {
@@ -210,6 +217,11 @@ button {
     margin-top: 40px;
   }
 
+  .empty-container {
+    @include flex-center;
+    flex-direction: column;
+  }
+
   .empty-message {
     margin-top: $empty-message-margin-top;
   }
@@ -219,9 +231,7 @@ button {
   }
 
   .task {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include flex-layout(space-between, center);
     border-radius: $border-radius-base;
     padding: $form-element-padding;
     margin: $form-element-margin;
@@ -233,8 +243,7 @@ button {
 
     .left-side,
     .right-side {
-      display: flex;
-      align-items: center;
+      @include flex-center;
       gap: 0.5em;
 
       button {
@@ -259,9 +268,7 @@ button {
     }
 
     button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include flex-center;
     }
 
     .save,
@@ -321,9 +328,7 @@ hr {
    TASK FILTERS
    ======================================== */
 #filter-tasks {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include flex-layout(space-between, center);
   flex-wrap: wrap;
   gap: 1em;
 
@@ -344,9 +349,7 @@ hr {
    DARK MODE
    ======================================== */
 #dark-mode {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex-center;
   border-radius: 50%;
   width: $dark-mode-diameter;
   height: $dark-mode-diameter;

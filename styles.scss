@@ -85,8 +85,10 @@ body {
   padding: 20% 5%;
 }
 
-body[lang="ar"] {
+body.ar {
   font-family: $font-family-arabic;
+  direction: rtl;
+  text-align: right;
 }
 
 main {

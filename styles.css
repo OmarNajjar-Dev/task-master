@@ -27,8 +27,10 @@ body {
   padding: 20% 5%;
 }
 
-body[lang=ar] {
+body.ar {
   font-family: "Tajawal", sans-serif;
+  direction: rtl;
+  text-align: right;
 }
 
 main {

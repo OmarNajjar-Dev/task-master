@@ -292,3 +292,8 @@ hr {
 .fa-gold {
     color: var(--icon-color);
 }
+
+.fa-primary {
+    fill: var(--primary-color);
+    stroke: var(--primary-color);
+}

@@ -180,7 +180,9 @@ function createTaskElement(task) {
         <span class="text">${task.title}</span>
       </span>
       <span class="right-side">
-        <button class="edit" ${task.completed ? "disabled" : ""}>${icons.edit}</button>
+        <button class="edit" ${task.completed ? "disabled" : ""}>${
+    icons.edit
+  } </button>
         <button class="clear">${icons.clear}</button>
       </span>
     </div>
@@ -264,24 +266,21 @@ function filterTasks() {
 // ✏️ Edit Task
 function editTask(taskId) {
   const taskElement = document.querySelector(`[data-id="${taskId}"]`);
-  if (!taskElement) return;
-
   const textSpan = taskElement.querySelector(".text");
+  const currentText = textSpan.textContent;
   const checkbox = taskElement.querySelector('input[type="checkbox"]');
   const rightSide = taskElement.querySelector(".right-side");
 
   checkbox.style.display = "none";
 
-  const input = document.createElement("input");
-  input.type = "text";
-  input.className = "edit-input";
-  input.value = textSpan.textContent;
-  textSpan.replaceWith(input);
+  textSpan.outerHTML = `<input type="text" class="edit-input" value="${currentText}">`;
 
   rightSide.innerHTML = `
     <button class="save">Save</button>
     <button class="cancel">Cancel</button>
   `;
+
+  const input = taskElement.querySelector(".edit-input");
 
   const saveChanges = () => {
     const newTitle = input.value.trim();

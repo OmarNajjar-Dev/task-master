@@ -157,6 +157,9 @@ function addTaskAndUpdateUI(input) {
   const newTaskElement = document.querySelector(`[data-id="${task.id}"]`);
   applyNewTaskAnimation(newTaskElement);
 
+  // Scroll to the new task
+  newTaskElement.scrollIntoView({ behavior: "smooth", block: "center" });
+
   addDataToLocalStorageFrom(taskList);
 }
 

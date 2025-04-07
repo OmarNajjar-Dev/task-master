@@ -20,8 +20,8 @@ const addButton = document.getElementById("add");
 const clearButton = document.getElementById("clear");
 const selectStatus = document.getElementById("select");
 const itemCount = document.getElementById("items-count");
-const hr = document.querySelector("hr");
 const filterButtons = document.querySelectorAll("#filters button");
+const footer = document.querySelector("footer");
 const darkMode = document.getElementById("dark-mode");
 const body = document.body;
 
@@ -331,13 +331,9 @@ function updateItemCount() {
 
 function toggleElementsVisibility() {
   if (taskList.filter((task) => !task.completed).length === 0) {
-    hr.style.display = "none";
-    itemCount.style.display = "none";
-    filterButtons.forEach((btn) => (btn.style.display = "none"));
+    footer.style.display = "none";
   } else {
-    hr.style.display = "inline";
-    itemCount.style.display = "inline";
-    filterButtons.forEach((btn) => (btn.style.display = "inline"));
+    footer.style.display = "flex";
   }
 }
 
@@ -354,7 +350,7 @@ function applyNewTaskAnimation(taskElement) {
   taskElement.classList.add("new");
   setTimeout(() => {
     taskElement.classList.remove("new");
-  }, 400);
+  }, 300);
 }
 
 function applyDeleteTaskAnimation(taskElement, callback) {

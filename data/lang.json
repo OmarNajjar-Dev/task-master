@@ -1,0 +1,34 @@
+{
+  "en": {
+    "title": "Task Master",
+    "subtitle": "Organize your tasks efficiently",
+    "search_placeholder": "Search tasks...",
+    "all_tasks": "📋 All Tasks",
+    "completed": "✅ Completed",
+    "active": "⏳ Pending",
+    "clear": "🗑️ Clear All",
+    "add_task_placeholder": "What needs to be done?",
+    "add_task": "Add Task",
+    "no_tasks": "No tasks found. Add some tasks to get started!",
+    "all": "All",
+    "active_filter": "Active",
+    "completed_filter": "Completed",
+    "items_left": "{count} items left"
+  },
+  "ar": {
+    "title": "مدير المهام",
+    "subtitle": "نظم مهامك بكفاءة",
+    "search_placeholder": "ابحث عن المهام...",
+    "all_tasks": "📋 كل المهام",
+    "completed": "✅ مكتملة",
+    "active": "⏳ قيد الانتظار",
+    "clear": "🗑️ مسح الكل",
+    "add_task_placeholder": "ما الذي تحتاج إلى فعله؟",
+    "add_task": "إضافة مهمة",
+    "no_tasks": "لا توجد مهام، أضف بعض المهام للبدء!",
+    "all": "الكل",
+    "active_filter": "نشطة",
+    "completed_filter": "مكتملة",
+    "items_left": "تبقّى {count} مهمة"
+  }
+}

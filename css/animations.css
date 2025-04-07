@@ -17,17 +17,17 @@
 @keyframes fadeOut {
     0% {
         opacity: 1;
-        transform: scale(1) rotate(0);
+        transform: scale(1);
     }
 
     100% {
         opacity: 0;
-        transform: scale(0.8) rotate(-10deg);
+        transform: scale(0.8);
     }
 }
 
 .new {
-    animation: slideIn 0.4s ease-out forwards;
+    animation: slideIn 0.3s ease-out forwards;
 }
 
 .delete {
@@ -40,7 +40,9 @@
 
 body,
 main,
-#task-list {
+#task-list,
+#dark-mode,
+#lang-toggle {
     transition: background-color 0.6s ease-in-out;
 }
 
@@ -69,6 +71,6 @@ select {
 }
 
 #dark-mode,
-hr {
-    transition: background-color 0.3s ease-in-out,
+#lang-toggle {
+    transition: box-shadow 0.3s ease-in-out,
 }

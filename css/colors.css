@@ -17,7 +17,7 @@
     --filter-button-active-box-shadow: 0 0 5px var(--primary-color);
 
     /* Borders */
-    --divider-color: #eeeeee;
+    --footer-divider-color: #eeeeee;
 
     /* Icons */
     --icon-color: #ffd700;
@@ -89,7 +89,7 @@
     --filter-button-active-box-shadow: 0 0 5px var(--primary-color);
 
     /* Borders */
-    --divider-color: #333333;
+    --footer-divider-color: #333333;
 
     /* Icons */
     --icon-color: #ffd700;
@@ -259,8 +259,8 @@ select:focus {
 /* ========================================
    DIVIDERS & FILTER BUTTONS
    ======================================== */
-hr {
-    background-color: var(--divider-color);
+footer {
+    border-color: var(--footer-divider-color);
 }
 
 #filters button {
@@ -286,6 +286,10 @@ hr {
     background-color: var(--dark-mode-button-background);
 }
 
+#lang-toggle {
+    background-color: var(--card-background);
+}
+
 /* ========================================
    ICONS
    ======================================== */
@@ -294,6 +298,10 @@ hr {
 }
 
 .fa-primary {
+    color: var(--primary-color);
+}
+
+.primary-icon {
     fill: var(--primary-color);
     stroke: var(--primary-color);
 }

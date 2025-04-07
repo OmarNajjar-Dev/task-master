@@ -4,39 +4,38 @@
 
 /* Typography Variables */
 $font-family-english: sans-serif;
-$font-family-arabic: "Tajawal", sans-serif; 
+$font-family-arabic: "Tajawal", sans-serif;
 
 // Global Variables
-$default-border-style: 1px solid;        // Standard border style
-$border-radius-base: 0.5em;              // Standard border radius
+$default-border-style: 1px solid; // Standard border style
+$border-radius-base: 0.5em; // Standard border radius
 
 // Shared Form Element Variables
-$form-element-padding: 0.75em;           // Padding for form elements
-$form-element-margin: 0;                 // Margin for form elements
+$form-element-padding: 0.75em; // Padding for form elements
+$form-element-margin: 0; // Margin for form elements
 
 // Button Variables
-$btn-clear-padding: 0.75em 1.5em;        // Padding for clear buttons
-$btn-add-task-padding: 1em;              // Padding for add-task buttons
-$btn-size: 34px;                         // Uniform size for buttons (width & height)
+$btn-clear-padding: 0.75em 1.5em; // Padding for clear buttons
+$btn-add-task-padding: 1em; // Padding for add-task buttons
+$btn-size: 34px; // Uniform size for buttons (width & height)
 
 // Input Variables
-$input-padding-left: 2.8em;              // Left padding for input fields
-$input-min-width: 78%;                   // Minimum width for input fields
+$input-padding-inline-start: 2.8em; // Left padding for input fields
+$input-min-width: 78%; // Minimum width for input fields
 
 // Task List & Checkbox Variables
-$task-list-height: 13em;                 // Height for task list container
-$empty-message-margin-top: 20px;         // Top margin for empty message in task list
-$checkbox-size: 20px;                    // Size of checkboxes
-$checkbox-border-radius: 4px;            // Border radius for checkboxes
-$checkbox-check-font-size: 16px;         // Font size for checkbox checkmark
+$task-list-height: 13em; // Height for task list container
+$empty-message-margin-top: 20px; // Top margin for empty message in task list
+$checkbox-size: 20px; // Size of checkboxes
+$checkbox-border-radius: 4px; // Border radius for checkboxes
+$checkbox-check-font-size: 16px; // Font size for checkbox checkmark
 
 // Miscellaneous Variables
-$hover-opacity: 0.8;                     // Opacity for hover effects
-$disabled-opacity: 1;                    // Opacity for disabled elements
-$flex-gap: 0.8em;                        // Gap between flex items
-$dark-mode-diameter: 5em;                // Diameter for the dark mode toggle button
-$dark-mode-offset: 1em;                  // Offset for dark mode toggle positioning
-
+$hover-opacity: 0.8; // Opacity for hover effects
+$disabled-opacity: 1; // Opacity for disabled elements
+$flex-gap: 0.8em; // Gap between flex items
+$dark-mode-diameter: 5em; // Diameter for the dark mode toggle button
+$dark-mode-offset: 1em; // Offset for dark mode toggle positioning
 
 /* ========================================
    MIXINS
@@ -47,7 +46,7 @@ $dark-mode-offset: 1em;                  // Offset for dark mode toggle position
   align-items: center;
 }
 
-@mixin flex-layout ($justify: start, $align: stretch) {
+@mixin flex-layout($justify: start, $align: stretch) {
   display: flex;
   justify-content: $justify;
   align-items: $align;
@@ -64,7 +63,6 @@ $dark-mode-offset: 1em;                  // Offset for dark mode toggle position
   border: $default-border-style;
 }
 
-
 /* ========================================
    RESET STYLES
    ======================================== */
@@ -74,6 +72,10 @@ $dark-mode-offset: 1em;                  // Offset for dark mode toggle position
   box-sizing: border-box;
 }
 
+button select,
+input {
+  font-family: inherit;
+}
 
 /* ========================================
    PAGE LAYOUT
@@ -96,10 +98,10 @@ main {
   padding: 1.5em;
   display: flex;
   flex-direction: column;
+  width: 100%;
   max-width: 550px;
   gap: 2em;
 }
-
 
 /* ========================================
    HEADER
@@ -108,15 +110,22 @@ header {
   @include flex-center;
   flex-direction: column;
   text-align: center;
+  line-height: 1.2;
   gap: 0.4em;
 
   h1 {
     @include flex-center;
+    direction: ltr;
     font-size: 2.5em;
     gap: 8px;
   }
-}
 
+  .check-icon {
+    .ar & {
+      transform: translateY(2px);
+    }
+  }
+}
 
 /* ========================================
    FORM ELEMENTS (Inputs, Buttons, Selects)
@@ -126,6 +135,7 @@ button,
 select {
   @include rounded-border;
   padding: $form-element-padding;
+  line-height: 1.2;
 }
 
 button {
@@ -142,7 +152,6 @@ button {
   }
 }
 
-
 /* ========================================
    SEARCH SECTION
    ======================================== */
@@ -151,7 +160,7 @@ button {
 
   .icon {
     position: absolute;
-    margin-left: 0.7em;
+    margin-inline-start: 0.7em;
   }
 
   #select {
@@ -162,11 +171,10 @@ button {
     @include flex-layout($align: center);
 
     input {
-      padding-left: $input-padding-left;
+      padding-inline-start: $input-padding-inline-start;
     }
   }
 }
-
 
 /* ========================================
    ACTION BUTTONS
@@ -176,7 +184,6 @@ button {
   order: 4;
 }
 
-
 /* ========================================
    FLEX GROW CHILD ELEMENTS
    ======================================== */
@@ -184,7 +191,6 @@ button {
 #add-task * {
   flex-grow: 1;
 }
-
 
 /* ========================================
    ADD TASK
@@ -201,7 +207,6 @@ button {
     min-width: $input-min-width;
   }
 }
-
 
 /* ========================================
    TASK LIST
@@ -256,12 +261,15 @@ button {
       }
     }
 
+    .left-side {
+      max-width: 70%;
+    }
+
     .text {
       word-wrap: break-word;
       overflow-wrap: break-word;
       white-space: normal;
       word-break: break-all;
-      max-width: 75%;
     }
 
     &.done {
@@ -289,7 +297,7 @@ button {
       border-radius: $border-radius-base;
       font-size: 1em;
       width: 100%;
-      margin-right: 0.5em;
+      margin-inline-end: 0.5em;
     }
 
     .task-status {
@@ -301,7 +309,7 @@ button {
       border-radius: $checkbox-border-radius;
       display: inline-block;
       position: relative;
-      margin-right: 1.5em;
+      margin-inline-end: 1.5em;
 
       &:checked {
         &::after {
@@ -318,7 +326,6 @@ button {
   }
 }
 
-
 /* ========================================
    DIVIDERS & SEPARATORS
    ======================================== */
@@ -328,14 +335,16 @@ hr {
   height: 1px;
 }
 
-
 /* ========================================
    TASK FILTERS
    ======================================== */
-#filter-tasks {
+footer {
   @include flex-layout(space-between, center);
   flex-wrap: wrap;
   gap: 1em;
+  padding-top: 1em;
+  margin-top: -1em;
+  border-top: 1px solid;
 
   #filters {
     display: flex;
@@ -349,7 +358,6 @@ hr {
   }
 }
 
-
 /* ========================================
    DARK MODE
    ======================================== */
@@ -361,4 +369,14 @@ hr {
   position: absolute;
   top: $dark-mode-offset;
   right: $dark-mode-offset;
-} 
+}
+
+#lang-toggle {
+  @include flex-center;
+  border-radius: 50%;
+  width: $dark-mode-diameter;
+  height: $dark-mode-diameter;
+  position: absolute;
+  top: $dark-mode-offset + $dark-mode-diameter + 1em;
+  right: $dark-mode-offset;
+}

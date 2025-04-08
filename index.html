@@ -73,7 +73,10 @@
 
     <!-- 🔘 Footer Section -->
     <footer aria-label="Filter options">
-      <p id="items-count" data-key="items_left">{count} items left</p>
+      <p>
+        <span id="items-count"></span>
+        <span id="items-left" data-key="items_left"></span>
+      </p>
       <div id="filters" role="group" aria-label="Filter tasks">
         <button data-filter="all" class="active" type="button" data-key="all">All</button>
         <button data-filter="active" type="button" data-key="active_filter">Active</button>
@@ -95,8 +98,8 @@
   </main>
 
   <!-- 📜 JavaScript Files -->
-  <script src="js/main.js" defer></script>
-  <script src="js/lang.js" defer></script>
+  <script src="js/lang.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>

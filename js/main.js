@@ -19,7 +19,8 @@ const searchInput = document.getElementById("search");
 const addButton = document.getElementById("add");
 const clearButton = document.getElementById("clear");
 const selectStatus = document.getElementById("select");
-const itemCount = document.getElementById("items-count");
+const itemsCount = document.getElementById("items-count");
+const itemsLeft = document.getElementById("items-left");
 const filterButtons = document.querySelectorAll("#filters button");
 const footer = document.querySelector("footer");
 const darkMode = document.getElementById("dark-mode");
@@ -323,10 +324,25 @@ function toggleDarkMode() {
 // 🖥️ UI Update Helpers
 // ──────────────────────────────────────────────────────────────
 
-function updateItemCount() {
+function updateItemsCount() {
   const remainingTasks = taskList.filter((task) => !task.completed).length;
-  itemCount.textContent =
-    remainingTasks === 1 ? `1 item left` : `${remainingTasks} items left`;
+
+  let key;
+  if (remainingTasks === 1) {
+    key =  "one_item_left";
+  } else if (remainingTasks === 2) {
+    key = "two_items_left";
+  } else if (remainingTasks > 2 && remainingTasks < 11) {
+    key = "few_items_left";
+  } else {
+    key = "items_left";
+  }
+  
+  itemsLeft.setAttribute("data-key", key);
+
+  itemsCount.textContent = (remainingTasks <= 2) ? "" : remainingTasks;
+
+  updateLanguage();
 }
 
 function toggleElementsVisibility() {
@@ -338,7 +354,7 @@ function toggleElementsVisibility() {
 }
 
 function updateUI() {
-  updateItemCount();
+  updateItemsCount();
   toggleElementsVisibility();
 }
 

@@ -13,7 +13,10 @@
     "all": "All",
     "active_filter": "Active",
     "completed_filter": "Completed",
-    "items_left": "{count} items left"
+    "one_item_left": "1 item left",
+    "two_items_left": "2 items left",
+    "few_items_left": " items left",
+    "items_left": " items left"
   },
   "ar": {
     "title": "مدير المهام",
@@ -29,6 +32,9 @@
     "all": "الكل",
     "active_filter": "نشطة",
     "completed_filter": "مكتملة",
-    "items_left": "تبقّى {count} مهمة"
+    "one_item_left": "مهمة واحدة متبقية",
+    "two_items_left": "مهمتان متبقيتان",
+    "few_items_left": " مهام متبقية",
+    "items_left": "مهمة متبقية "
   }
 }

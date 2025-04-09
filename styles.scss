@@ -377,6 +377,6 @@ footer {
   width: $dark-mode-diameter;
   height: $dark-mode-diameter;
   position: absolute;
-  top: $dark-mode-offset + $dark-mode-diameter + 1em;
-  right: $dark-mode-offset;
+  top: $dark-mode-offset;
+  right: $dark-mode-offset + $dark-mode-diameter + 1em;
 }

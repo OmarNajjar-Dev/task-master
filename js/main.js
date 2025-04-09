@@ -59,9 +59,11 @@ function initializeEventListeners() {
   // ➕ Add Task on Click
   addButton.addEventListener("click", handleAddTask);
 
-  // ⌨ Add Task on Enter Key Press
+  // ⌨ Add Task on Enter (ignore Shift)
   inputField.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") handleAddTask();
+    if (e.key === "Enter" && !e.shiftKey) {
+      handleAddTask();
+    }
   });
 
   // 🔄 Update Add Button State on Input
@@ -108,7 +110,7 @@ function handleTaskContainerClick(e) {
   const taskId = taskElement.getAttribute("data-id");
 
   if (e.target.closest(".clear")) {
-    applyDeleteTaskAnimation(taskElement, () => {
+    applyDeleteTasksAnimation(taskElement, () => {
       deleteTaskWith(taskId);
       updateUI();
     });
@@ -233,9 +235,11 @@ function toggleTaskCompletionById(taskId) {
 
 // 🧹 Clear All Tasks
 function clearAllTasks() {
-  taskList = [];
-  localStorage.removeItem("tasks");
-  applyClearAllTasksAnimation(() => {
+  const tasks = document.querySelectorAll(".task");
+
+  applyDeleteTasksAnimation(tasks, () => {
+    taskList = [];
+    localStorage.removeItem("tasks");
     addElementsToPageFrom(taskList);
     updateUI();
   });
@@ -369,13 +373,11 @@ function applyNewTaskAnimation(taskElement) {
   }, 300);
 }
 
-function applyDeleteTaskAnimation(taskElement, callback) {
-  taskElement.classList.add("delete");
-  setTimeout(callback, 400);
-}
-
-function applyClearAllTasksAnimation(callback) {
-  const taskElements = document.querySelectorAll(".task");
-  taskElements.forEach((task) => task.classList.add("delete"));
+function applyDeleteTasksAnimation(tasks, callback) {
+  if (tasks.length > 1) {
+    tasks.forEach((task) => task.classList.add("delete"));
+  } else {
+    tasks.classList.add("delete");
+  }
   setTimeout(callback, 400);
 }

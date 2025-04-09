@@ -5,14 +5,14 @@
  * Features:
  * - ✨ Add, edit and delete tasks
  * - 🔍 Search tasks
- * - 🏷️ Filter tasks by status
+ * - 🏷 Filter tasks by status
  * - 🌓 Dark/Light mode toggle
  * - 💾 Local storage persistence
- * - ⌨️ Keyboard shortcuts
+ * - ⌨ Keyboard shortcuts
  * - 🎨 SVG icons and animations
  */
 
-// 🎛️ DOM Elements
+// 🎛 DOM Elements
 const inputField = document.getElementById("task-text");
 const taskContainer = document.getElementById("task-list");
 const searchInput = document.getElementById("search");
@@ -43,10 +43,10 @@ const colors = {
 // 📦 Array for storing the tasks
 let taskList = [];
 
-// 🏷️ Initialize the current status as all
+// 🏷 Initialize the current status as all
 let currentFilter = "all";
 
-// ⏲️ Debounce timer
+// ⏲ Debounce timer
 let debounceTimeout;
 
 // 🚀 Initialize app
@@ -59,7 +59,7 @@ function initializeEventListeners() {
   // ➕ Add Task on Click
   addButton.addEventListener("click", handleAddTask);
 
-  // ⌨️ Add Task on Enter Key Press
+  // ⌨ Add Task on Enter Key Press
   inputField.addEventListener("keydown", (e) => {
     if (e.key === "Enter") handleAddTask();
   });
@@ -67,7 +67,7 @@ function initializeEventListeners() {
   // 🔄 Update Add Button State on Input
   inputField.addEventListener("input", updateAddButtonState);
 
-  // 🗑️ Clear All Tasks
+  // 🗑 Clear All Tasks
   clearButton.addEventListener("click", clearAllTasks);
 
   // 🔍 Search Tasks
@@ -100,7 +100,7 @@ function initializeEventListeners() {
   darkMode.addEventListener("click", toggleDarkMode);
 }
 
-// 🖱️ Handle Task Container Click Events
+// 🖱 Handle Task Container Click Events
 function handleTaskContainerClick(e) {
   const taskElement = e.target.closest(".task");
   if (!taskElement) return;
@@ -114,14 +114,14 @@ function handleTaskContainerClick(e) {
     });
   } else if (e.target.type === "checkbox") {
     taskElement.classList.toggle("done");
-    toggleTaskStatusWith(taskId);
+    toggleTaskCompletionById(taskId);
     updateUI();
   } else if (e.target.closest(".edit")) {
     editTask(taskId);
   }
 }
 
-// ✍️ Handle Task Addition
+// ✍ Handle Task Addition
 function handleAddTask() {
   if (!inputField.value.trim()) return;
   addTaskAndUpdateUI(inputField.value);
@@ -155,7 +155,7 @@ function addTaskAndUpdateUI(input) {
   addElementsToPageFrom(taskList);
 
   // Add animation class to new task
-  const newTaskElement = document.querySelector(`[data-id="${task.id}"]`);
+  const newTaskElement = document.querySelector([`data-id="${task.id}"`]);
   applyNewTaskAnimation(newTaskElement);
 
   // Scroll to the new task
@@ -170,12 +170,12 @@ function addElementsToPageFrom(tasks) {
     tasks.length === 0
       ? `<div class="empty-container">
           <span class="icon">📝</span>
-          <p class="empty-message">No tasks found. Add some tasks to get started!</p>
+          <p class="empty-message" data-key="no_tasks">No tasks found. Add some tasks to get started!</p>
          </div>`
       : tasks.map((task) => createTaskElement(task)).join("");
 }
 
-// 🏗️ Create Task Element HTML
+// 🏗 Create Task Element HTML
 function createTaskElement(task) {
   return `
     <div class="task ${task.completed ? "done" : ""}" data-id="${task.id}">
@@ -213,7 +213,7 @@ function getDataFromLocalStorage() {
   }
 }
 
-// 🗑️ Delete Task
+// 🗑 Delete Task
 function deleteTaskWith(taskId) {
   taskList = taskList.filter((task) => task.id !== Number(taskId));
   addDataToLocalStorageFrom(taskList);
@@ -221,12 +221,12 @@ function deleteTaskWith(taskId) {
 }
 
 // ✅ Toggle Task Status
-function toggleTaskStatusWith(taskId) {
+function toggleTaskCompletionById(taskId) {
   const task = taskList.find((task) => task.id === Number(taskId));
   if (task) {
     task.completed = !task.completed;
     addDataToLocalStorageFrom(taskList);
-    document.querySelector(`[data-id="${taskId}"] .edit`).disabled =
+    document.querySelector([`data-id="${taskId}"`] .edit).disabled =
       task.completed;
   }
 }
@@ -249,7 +249,7 @@ function searchTasks(query) {
   }, 300);
 }
 
-// 🏷️ Filter Tasks
+// 🏷 Filter Tasks
 function filterTasks() {
   const searchQuery = searchInput.value.trim().toLowerCase();
   let filteredTasks = taskList;
@@ -269,9 +269,9 @@ function filterTasks() {
   addElementsToPageFrom(filteredTasks);
 }
 
-// ✏️ Edit Task
+// ✏ Edit Task
 function editTask(taskId) {
-  const taskElement = document.querySelector(`[data-id="${taskId}"]`);
+  const taskElement = document.querySelector([`data-id="${taskId}"`]);
   const textSpan = taskElement.querySelector(".text");
   const currentText = textSpan.textContent;
   const checkbox = taskElement.querySelector('input[type="checkbox"]');
@@ -321,7 +321,7 @@ function toggleDarkMode() {
 }
 
 // ──────────────────────────────────────────────────────────────
-// 🖥️ UI Update Helpers
+// 🖥 UI Update Helpers
 // ──────────────────────────────────────────────────────────────
 
 function updateItemsCount() {
@@ -329,7 +329,7 @@ function updateItemsCount() {
 
   let key;
   if (remainingTasks === 1) {
-    key =  "one_item_left";
+    key = "one_item_left";
   } else if (remainingTasks === 2) {
     key = "two_items_left";
   } else if (remainingTasks > 2 && remainingTasks < 11) {
@@ -337,15 +337,15 @@ function updateItemsCount() {
   } else {
     key = "items_left";
   }
-  
+
   itemsLeft.setAttribute("data-key", key);
 
-  itemsCount.textContent = (remainingTasks <= 2) ? "" : remainingTasks;
+  itemsCount.textContent = remainingTasks <= 2 ? "" : remainingTasks;
 
   updateLanguage();
 }
 
-function toggleElementsVisibility() {
+function toggleFooterVisibility() {
   if (taskList.filter((task) => !task.completed).length === 0) {
     footer.style.display = "none";
   } else {
@@ -355,7 +355,7 @@ function toggleElementsVisibility() {
 
 function updateUI() {
   updateItemsCount();
-  toggleElementsVisibility();
+  toggleFooterVisibility();
 }
 
 // ──────────────────────────────────────────────────────────────

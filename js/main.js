@@ -155,7 +155,7 @@ function addTaskAndUpdateUI(input) {
   addElementsToPageFrom(taskList);
 
   // Add animation class to new task
-  const newTaskElement = document.querySelector([`data-id="${task.id}"`]);
+  const newTaskElement = document.querySelector(`[data-id="${task.id}"]`);
   applyNewTaskAnimation(newTaskElement);
 
   // Scroll to the new task
@@ -226,7 +226,7 @@ function toggleTaskCompletionById(taskId) {
   if (task) {
     task.completed = !task.completed;
     addDataToLocalStorageFrom(taskList);
-    document.querySelector([`data-id="${taskId}"`] .edit).disabled =
+    document.querySelector(`[data-id="${taskId}"] .edit`).disabled =
       task.completed;
   }
 }
@@ -271,7 +271,7 @@ function filterTasks() {
 
 // ✏ Edit Task
 function editTask(taskId) {
-  const taskElement = document.querySelector([`data-id="${taskId}"`]);
+  const taskElement = document.querySelector(`[data-id="${taskId}"]`);
   const textSpan = taskElement.querySelector(".text");
   const currentText = textSpan.textContent;
   const checkbox = taskElement.querySelector('input[type="checkbox"]');

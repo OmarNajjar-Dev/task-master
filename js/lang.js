@@ -7,6 +7,7 @@
  * - Update UI texts based on the current language.
  * - Toggle between English and Arabic.
  * - Persist language setting using localStorage.
+ * - Toggle language using Alt + Shift + L shortcut.
  */
 
 // Variable to hold the language data from JSON.
@@ -66,6 +67,14 @@ langToggleBtn.addEventListener("click", () => {
   
   // Update the UI texts with the new language.
   updateLanguage();
+});
+
+// Listen for Alt + Shift + L keyboard shortcut to toggle language.
+window.addEventListener("keydown", (e) => {
+  // Check if Alt and Shift are pressed along with the "L" key.
+  if (e.altKey && e.shiftKey && (e.key === "l" || e.key === "L")) {
+    langToggleBtn.click(); // Trigger the language toggle
+  }
 });
 
 // Apply the stored language setting when the DOM content is loaded.

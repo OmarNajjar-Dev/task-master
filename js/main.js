@@ -100,6 +100,13 @@ function initializeEventListeners() {
 
   // 🌓 Dark Mode Toggle
   darkMode.addEventListener("click", toggleDarkMode);
+
+  // ⌨ Toggle Dark Mode with Alt + Shift + D Keyboard Shortcut
+  window.addEventListener("keydown", (e) => {
+    if (e.altKey && e.shiftKey && (e.key === "d" || e.key === "D")) {
+      toggleDarkMode();
+    }
+  });
 }
 
 // 🖱 Handle Task Container Click Events

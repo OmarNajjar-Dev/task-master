@@ -6,7 +6,7 @@ Built with HTML, CSS, and JavaScript, Task Master combines clean design with pra
 
 ## 🔗 Live Demo
 
-Access the app directly here: [Vercel Demo Link](#)
+Access the app directly here: [Vercel Demo Link](https://task-master-bice.vercel.app)
 
 ## ✨ Features
 

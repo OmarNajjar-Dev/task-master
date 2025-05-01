@@ -14,7 +14,7 @@
 let langData = {};
 
 // Fetch language data from the JSON file.
-fetch("../data/lang.json")
+fetch("../lang.json")
   .then((response) => response.json())
   .then((data) => {
     langData = data;

@@ -1,5 +1,14 @@
 @charset "UTF-8";
-
+/* ========================================
+   GLOBAL VARIABLES
+   ======================================== */
+/* Typography Variables */
+/* ========================================
+   MIXINS
+   ======================================== */
+/* ========================================
+   RESET STYLES
+   ======================================== */
 * {
   margin: 0;
   padding: 0;
@@ -51,7 +60,6 @@ header {
   line-height: 1.2;
   gap: 0.4em;
 }
-
 header h1 {
   display: flex;
   justify-content: center;
@@ -60,7 +68,6 @@ header h1 {
   font-size: 2.5em;
   gap: 8px;
 }
-
 .ar header .check-icon {
   transform: translateY(2px);
 }
@@ -81,11 +88,9 @@ button {
   border: none;
   cursor: pointer;
 }
-
 button:hover {
   opacity: 0.8;
 }
-
 button:disabled {
   cursor: not-allowed;
   opacity: 1;
@@ -99,22 +104,18 @@ button:disabled {
   flex-wrap: wrap;
   gap: 0.8em;
 }
-
 #search-tasks .icon {
   position: absolute;
   margin-inline-start: 0.7em;
 }
-
 #search-tasks #select {
   cursor: pointer;
 }
-
 #search-tasks .input-container {
   display: flex;
   justify-content: start;
   align-items: center;
 }
-
 #search-tasks .input-container input {
   padding-inline-start: 2.8em;
 }
@@ -143,12 +144,10 @@ button:disabled {
   flex-wrap: wrap;
   gap: 0.8em;
 }
-
 #add-task button,
 #add-task input {
   padding: 1em;
 }
-
 #add-task input {
   min-width: 78%;
 }
@@ -166,12 +165,10 @@ button:disabled {
   padding: 0.8em;
   gap: 0.5em;
 }
-
 #task-list span.icon {
   font-size: 40px;
   margin-top: 40px;
 }
-
 #task-list .empty-container {
   display: flex;
   justify-content: center;
@@ -179,15 +176,12 @@ button:disabled {
   flex-direction: column;
   text-align: center;
 }
-
 #task-list .empty-message {
   margin-top: 20px;
 }
-
 #task-list .task.done {
   opacity: 0.7;
 }
-
 #task-list .task {
   display: flex;
   justify-content: space-between;
@@ -197,11 +191,9 @@ button:disabled {
   margin: 0;
   gap: 0.5em;
 }
-
 #task-list .task:hover {
   transform: translateY(-3px);
 }
-
 #task-list .task .left-side,
 #task-list .task .right-side {
   display: flex;
@@ -209,44 +201,36 @@ button:disabled {
   align-items: center;
   gap: 0.5em;
 }
-
 #task-list .task .left-side button,
 #task-list .task .right-side button {
   width: 3.5em;
 }
-
 #task-list .task .left-side {
   max-width: 70%;
 }
-
 #task-list .task .text {
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
   word-break: break-all;
 }
-
 #task-list .task.done {
   opacity: 0.7;
 }
-
 #task-list .task.done .text {
   text-decoration: line-through;
 }
-
 #task-list .task button {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 #task-list .task .save,
 #task-list .task .cancel {
   box-sizing: content-box;
   padding: 1.25em 0.75em;
   width: auto;
 }
-
 #task-list .task .edit-input {
   padding: 1em;
   border: 1px solid;
@@ -255,11 +239,10 @@ button:disabled {
   width: 100%;
   margin-inline-end: 0.5em;
 }
-
 #task-list .task .task-status {
   -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   width: 20px;
   height: 20px;
   cursor: pointer;
@@ -269,7 +252,6 @@ button:disabled {
   position: relative;
   margin-inline-end: 1.5em;
 }
-
 #task-list .task .task-status:checked::after {
   content: "✔";
   font-size: 16px;
@@ -302,13 +284,11 @@ footer {
   margin-top: -1em;
   border-top: 1px solid;
 }
-
 footer #filters {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5em;
 }
-
 footer #filters button {
   padding: 0.7em 1.5em;
   border: none;
@@ -329,16 +309,41 @@ footer #filters button {
   right: 1em;
 }
 
-#lang-toggle {
+.toggle-checkbox {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-label {
+  position: absolute;
+  width: 60px;
+  height: 30px;
+  border-radius: 15px;
+  cursor: pointer;
+  z-index: 999;
+  top: 2em;
+  right: 6em;
+}
+
+.toggle-ball {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50%;
-  width: 5em;
-  height: 5em;
   position: absolute;
-  top: 1em;
-  right: 7em;
+  top: 2px;
+  left: 2px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+}
+
+.toggle-ball i {
+  font-size: 0.9rem;
+}
+
+.toggle-checkbox:checked + .toggle-label .toggle-ball {
+  transform: translateX(30px);
 }
 
 /*# sourceMappingURL=styles.css.map */

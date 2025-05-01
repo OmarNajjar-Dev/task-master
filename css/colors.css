@@ -69,6 +69,15 @@
        FILTER BUTTONS
     ======================================== */
     --filter-button-text: #666666;
+
+    /* ========================================
+     TOGGLE SWITCH COLORS
+     ======================================== */
+    --toggle-track-bg: #ccc;
+    --toggle-track-checked-bg: #3894df;
+    --toggle-ball-bg: #fff;
+    --toggle-ball-icon: #007acc;
+    --toggle-ball-checked-bg: #e6f4ff;
 }
 
 /* ========================================
@@ -141,6 +150,15 @@
        FILTER BUTTONS
     ======================================== */
     --filter-button-text: #666666;
+
+    /* ========================================
+     TOGGLE SWITCH COLORS (DARK MODE)
+     ======================================== */
+    --toggle-track-bg: #444;
+    --toggle-track-checked-bg: #bb86fc;
+    --toggle-ball-bg: #1d1d1d;
+    --toggle-ball-icon: #bb86fc;
+    --toggle-ball-checked-bg: #333;
 }
 
 /* ========================================
@@ -286,8 +304,24 @@ footer {
     background-color: var(--dark-mode-button-background);
 }
 
-#lang-toggle {
-    background-color: var(--card-background);
+.toggle-label {
+    background-color: var(--toggle-track-bg);
+}
+
+.toggle-ball {
+    background-color: var(--toggle-ball-bg);
+}
+
+.toggle-ball i {
+    color: var(--toggle-ball-icon);
+}
+
+.toggle-checkbox:checked+.toggle-label {
+    background-color: var(--toggle-track-checked-bg);
+}
+
+.toggle-checkbox:checked+.toggle-label .toggle-ball {
+    background-color: var(--toggle-ball-checked-bg);
 }
 
 /* ========================================
